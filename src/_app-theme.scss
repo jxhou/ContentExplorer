@@ -1,0 +1,11 @@
+@import 'app/_app.component-theme';
+// Styles for the app that are based on the current theme.
+@mixin app-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  @include app-component-theme($theme);
+}

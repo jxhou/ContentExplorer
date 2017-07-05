@@ -1,2 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import 'themes/deeppurple-amber.scss';
+@import 'themes/indigo-pink.scss';
+@import 'themes/purple-green.scss';
+@import 'themes/pink-bluegrey.scss';
+
+@import './app-theme';
+
+.deeppurple-theme {
+  @include angular-material-theme($deeppurple-theme);
+  @include app-theme($deeppurple-theme);
+}
+
+.indigo-theme {
+  @include angular-material-theme($indigo-theme);
+  @include app-theme($indigo-theme);
+}
+
+.pink-theme {
+  @include angular-material-theme($pink-theme);
+  @include app-theme($pink-theme);
+}
+
+.purple-theme {
+  @include angular-material-theme($purple-theme);
+  @include app-theme($purple-theme);
+}
