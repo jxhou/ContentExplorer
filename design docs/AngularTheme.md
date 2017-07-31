@@ -59,7 +59,7 @@ export class AppComponent {
 }
 ```
 
-In reference [4], there is a theme picker component where the theme switch is implemented by compiling local version of pre-built angular material themes first and the replacing css link in index.html dynamically.
+In reference [4], there is a theme picker component where the theme switch is implemented by compiling local version of pre-built angular material themes first and then replacing css link in index.html dynamically.
 
 ## Apply selected theme to custom components:
 Angular material theme allows you to apply the theme to your own components at sass level.  You cannot apply prebuilt theme, which is css file, to your own components. 
@@ -76,7 +76,7 @@ _app.component-theme.scss is the root theme style where all component based them
 }
 ```
 where app-theme is a mixin defined in app-theme.scss, where other mixins for custom components are included.
-That is how exactly how angular-material-theme mixin is implemented.
+That is exactly how angular-material-theme mixin is implemented.
 
 ## **References**:
 1. [The complete guide to Angular Material Themes ](https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1) by Tomas Trajan.  

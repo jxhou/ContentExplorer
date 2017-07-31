@@ -14,3 +14,6 @@ Angular component demo project with theme switch options
 A nontrivial real-world-application by anihalaney.   
 [The hosted site](https://rwa-trivia.firebaseapp.com).
 [material.angular.io site](https://material.angular.io/)
+5. [Introducing AngularSpree](https://medium.com/aviabird/introducing-angularspree-ad55bea64d6c)  
+[github project](https://github.com/aviabird/angularspree)  
+[project documentation](https://aviabird.github.io/angularspree/)
