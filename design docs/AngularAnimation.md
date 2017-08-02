@@ -1,3 +1,85 @@
+
+## The general animation meta data structure with possible combination of elements:
+```
+@Component({
+   selector: 'example-app',
+   styles: '...'
+   animations:                                                                    <--[1]--->
+            [
+               trigger(
+                  'my-trigger1',                                                  <--[2]--->
+                  [
+                        state('my-state1', style(...)),
+                        state('my-state2', style(...)),
+                        ...
+                        transition('my-state1 <=> my-state2',                     <--[3]--->
+                                    [
+                                          style(...),
+                                          animate(500, style({height: '250px'})), 
+                                          animate(500),
+                                          group([
+                                                style(...),
+                                                animate(...),
+                                                anmimate(...)
+                                          ]),
+                                          query(':enter', [                       <--[4]--->
+                                                style(...),
+                                                stagger(100, [
+                                                   animate('0.5s', style(...))
+                                                ])
+                                          ])
+                                    ]
+                              ),
+                        transition(...)
+                  ]
+               ),
+               ...
+               trigger(
+                  'my-trigger2',
+               ),
+               ....
+            ],
+   template: `
+       <div [@my-trigger1]="stateExpression"><div>
+   '
+})
+export class MyExpandoCmp {
+  stateExpression: string;
+  expand() { this.stateExpression = 'expanded'; }
+  collapse() { this.stateExpression = 'collapsed'; }
+}
+```
+
+1. The "animations" section of component decorator includes an array of trigger: [trigger:, trigger], as shown above: my-trigger1 and my-trigger2.
+2. Each trigger has its trigger name, which is used in template as trigger binding, and an array of AnimationMetadata: state(s) and transition(s).
+3. Each transition has its stateChangeExpr such as 'my-state1 <=> my-state2', along with a step, or an array of steps. A step could be just:
+transition("on <=> off", animate(500)),
+Or as complicated as the content in above animation structure.  
+When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequenc function. The step in the array could be a [group](https://angular.io/api/animations/group), which a list of animations run in parrallel.  
+A step could be a [query](https://angular.io/api/animations/query) function call.
+4. a [query](https://angular.io/api/animations/query) has a selector, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger), which can only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay
+
+
+## **state**
+## declared state using state function  
+```
+// user-defined states
+state("closed", style({ height: 0 }))
+state("open, visible", style({ height: "*" }))
+```
+Each state has its name and associated styles, which will persist on the element after animation.  
+## predefined states using 
+There are angular predefined states: "void" (dettached from DOM), and "*", which mean any states included any defined states.   
+
+Those two predefiend states make two popular state transitions: :enter and :leave values which are aliases for the void => * and * => void state changes. *=>* can also be used as catch-all transition.
+
+It is not neccessary to declare state. The good part of declaring state using state function is to assign peristent style to the element. This style in declared state are applied to entire element to which the animation bound to. In more advanced animation examples such as query operation, there is no need for declaring state. The animation styles are then defined in each animiation step.  
+
+Animation state transition (:leave/:enter) can be triggered by attach/detach element to/from DOM; or *=>* by updating trigger binding.
+
+## **style function**
+Style function can used in a variety places in 
+
 ## **References**:
 0. [Animations (angular doc)](https://angular.io/guide/animations)
 1. [ANGULAR ANIMATIONS - FOUNDATION CONCEPTS](https://blog.thoughtram.io/angular/2016/09/16/angular-2-animation-important-concepts.html) by Thomas Burleson   
