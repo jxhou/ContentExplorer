@@ -68,17 +68,28 @@ state("closed", style({ height: 0 }))
 state("open, visible", style({ height: "*" }))
 ```
 Each state has its name and associated styles, which will persist on the element after animation.  
-## predefined states using 
-There are angular predefined states: "void" (dettached from DOM), and "*", which mean any states included any defined states.   
+## predefined states
+There are angular predefined states: "void" (detached from DOM), and "*", which mean any states included any defined states.   
 
-Those two predefiend states make two popular state transitions: :enter and :leave values which are aliases for the void => * and * => void state changes. *=>* can also be used as catch-all transition.
+Those two predefined states make two popular state transitions: :enter and :leave values which are aliases for the void => * and * => void state changes. *=>* can also be used as catch-all transition.
 
-It is not neccessary to declare state. The good part of declaring state using state function is to assign peristent style to the element. This style in declared state are applied to entire element to which the animation bound to. In more advanced animation examples such as query operation, there is no need for declaring state. The animation styles are then defined in each animiation step.  
+It is not necessary to declare state using state function. The declared state using state function has associated style which is persistent with the element after the animation. In more advanced animation examples such as query operation, there is no need for declaring state. The animation styles are then defined in each animation step.  
 
 Animation state transition (:leave/:enter) can be triggered by attach/detach element to/from DOM; or *=>* by updating trigger binding.
 
 ## **style function**
-Style function can used in a variety places in 
+Style function can used in a variety of places as shown above.
+1. Used in state function such as: state('my-state1', style(...)), which defines styles for start/end states. Then a simple animate() can be applied to a transition between the start/end states without specifying any style info. This is mostly used when apply simple animation to targeted element. When apply sophisticated animation to target component such as coordinating animations among sub-elements of targeted component using query, group function etc., usually state function is not used at all. The animation style defining is delayed in other locations as below:
+2. Define style in transition as first step in sequence:  
+transition('my-state1 <=> my-state2',                     
+            [
+                style(...),
+                animate(500, style({height: '250px'}))
+            ])  
+where the 1st style is used as starting style during animation. 
+And similarly style defined in group, query function used as starting style.
+3. style used within animate function as above, which is used as ending style for animation.
+
 
 ## **References**:
 0. [Animations (angular doc)](https://angular.io/guide/animations)
