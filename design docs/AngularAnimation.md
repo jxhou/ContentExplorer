@@ -1,4 +1,6 @@
 
+# Angular animation summary[^1]
+[^1] This doc is currently based on angular 4.2.X
 ## The general animation meta data structure with possible combination of elements:
 ```
 @Component({
@@ -88,14 +90,34 @@ transition('my-state1 <=> my-state2',
             ])  
 where the 1st style is used as starting style during animation. 
 And similarly style defined in group, query function used as starting style.
-3. style used within animate function as above, which is used as ending style for animation.
+3. style used within animate function as above, which is used as ending style for animation. All the styles defined other than in state function are only used during animation. The style defined in state function will be persistent after animation ends. 
 
+## Binding animation to element
+1. Place an animation trigger on an element within the template in the form of [@triggerName]="expression", where "expression" is from the component definition.
+2. Binding to the host element of current component  
+export class MyComponent {
+  @HostBinding('@profileAnimation')
+  public animateProfile = true;
+  ...
+}  
+This is the case when we need to do sophisticated animation for elements on component template. Normally we handle ":enter/:leave" transitions to animate the sub elements of the component without defining any other states.  
+Good examples of using @HostBinding: a Component participating angular route, or *ngIf enable/hide component, which will all trigger ":enter/:leave" transitions. So one can configure sophisticated animation of containing elements when component show/hide.
+
+## Animation for route transition
+See references 2, 3, and 4.
+https://angular.io/guide/router
+use @HostBinding to animate route component.
+Maybe it is better to let parent to do routing animation (?).
+
+## Child Animation
 
 ## **References**:
 0. [Animations (angular doc)](https://angular.io/guide/animations)
 1. [ANGULAR ANIMATIONS - FOUNDATION CONCEPTS](https://blog.thoughtram.io/angular/2016/09/16/angular-2-animation-important-concepts.html) by Thomas Burleson   
 2. [A WEB ANIMATIONS DEEP DIVE WITH ANGULAR](https://blog.thoughtram.io/angular/2017/07/26/a-web-animations-deep-dive-with-angular.html) by Dominic Elm  
 3. [Angular — Supercharge your Router transitions using new animation features (v4.3+)](https://medium.com/google-developer-experts/angular-supercharge-your-router-transitions-using-new-animation-features-v4-3-3eb341ede6c8) by Gerard Sans  
-4. [A New Wave of Animation Features in Angular](https://www.yearofmoo.com/2017/06/new-wave-of-animation-features.html)    
+4. [A New Wave of Animation Features in Angular](https://www.yearofmoo.com/2017/06/new-wave-of-animation-features.html)  (The most comprehensive introduction)  
 5. [ng4-animations-preview, github project](https://github.com/matsko/ng4-animations-preview) used in 4.
-6. [Angular 2/4 Animations Example](http://www.concretepage.com/angular-2/angular-2-4-animations-example) by Arvind Rai  
+6. [ng4-animations-preview, demo site](http://slides.yearofmoo.com/ng4-animations-preview/demo/)
+7. [Angular 2/4 Animations Example](http://www.concretepage.com/angular-2/angular-2-4-animations-example) by Arvind Rai  
+
