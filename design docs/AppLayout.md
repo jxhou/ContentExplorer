@@ -17,3 +17,7 @@ A nontrivial real-world-application by anihalaney.
 5. [Introducing AngularSpree](https://medium.com/aviabird/introducing-angularspree-ad55bea64d6c)  
 [github project](https://github.com/aviabird/angularspree)  
 [project documentation](https://aviabird.github.io/angularspree/)
+6. [Shape Shifter github project](https://github.com/alexjlockwood/ShapeShifter)  
+[demo site](https://shapeshifter.design/)
+7. [destiny-dashboard github project](https://github.com/lax20attack/destiny-dashboard/blob/master/angular/src/app/nav/nav.component.html)  
+[demo site](https://www.destinydashboard.net/#/dashboard)
