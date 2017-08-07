@@ -110,6 +110,12 @@ use @HostBinding to animate route component.
 Maybe it is better to let parent to do routing animation (?).
 
 ## Child Animation
+[Angular Animation Code example](https://jxhou.wordpress.com/2017/08/05/angular-animation/)
+
+<code>
+foo = "bar";
+baz = "foz";
+</code>
 
 ## **References**:
 0. [Animations (angular doc)](https://angular.io/guide/animations)
