@@ -126,4 +126,5 @@ baz = "foz";
 5. [ng4-animations-preview, github project](https://github.com/matsko/ng4-animations-preview) used in 4.
 6. [ng4-animations-preview, demo site](http://slides.yearofmoo.com/ng4-animations-preview/demo/)
 7. [Angular 2/4 Animations Example](http://www.concretepage.com/angular-2/angular-2-4-animations-example) by Arvind Rai  
+8. [Angular — Applying Motion principles to a listing](https://medium.com/@gerard.sans/angular-applying-motion-principles-to-a-list-d5cdd35c899e) by Gerard Sans
 
