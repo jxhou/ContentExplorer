@@ -1,3 +1,5 @@
+reference 8: how to dynamically instantiate template, may be used in dynamic toolbar.  
+
 ## **References**:
 1. [The complete guide to Angular Material Themes ](https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1) by Tomas Trajan.  
 github project: [tomastrajan/angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter)  
@@ -21,3 +23,4 @@ A nontrivial real-world-application by anihalaney.
 [demo site](https://shapeshifter.design/)
 7. [destiny-dashboard github project](https://github.com/lax20attack/destiny-dashboard/blob/master/angular/src/app/nav/nav.component.html)  
 [demo site](https://www.destinydashboard.net/#/dashboard)
+8. [Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates](http://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/)
