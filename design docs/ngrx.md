@@ -1,0 +1,9 @@
+ngrx 4.*
+
+## **References**:
+1. [ngrx github](https://github.com/ngrx/platform)
+2. [ngrx example application](https://github.com/ngrx/platform/blob/master/example-app/README.md) and [live app](https://ngrx.github.io/platform/example-app/#/login).
+3. [angular-ngrx-socket-frontend](https://github.com/avatsaev/angular-ngrx-socket-frontend)
+4. [NgRx: Patterns and Techniques](https://blog.nrwl.io/ngrx-patterns-and-techniques-f46126e2b1e5) by Victor Savkin
+5. [Using NgRx 4 to Manage State in Angular Applications](https://blog.nrwl.io/using-ngrx-4-to-manage-state-in-angular-applications-64e7a1f84b7b) by Victor Savkin
+6. [Comprehensive Introduction to @ngrx/store](https://gist.github.com/btroncone/a6e4347326749f938510)

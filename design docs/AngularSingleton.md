@@ -112,6 +112,8 @@ The LIVE_ANNOUNCER_PROVIDER_FACTORY implementation is straight forward, which re
 
 There is still a shortcoming of this solution: if there are two lazy loading modules depending on a same service, while root module does not import the service, it will end up with each lazy loaded module resolved to its own instance of service, breaking the singleton usage.
 
+A similar trick is used to detect a undesired behavior of importing certain module such as CoreModule multiple times using @Optional() @SkipSelf() decorators. See more details in core.module.ts and module-import-guard.ts
+
 ## **References**:
 1. [My NgModule Summaries](https://jxhou.wordpress.com/2016/12/25/ngmodule/)
 2. [Avoiding common confusions with modules in Angular](https://blog.angularindepth.com/avoiding-common-confusions-with-modules-in-angular-ada070e6891f) by Maxim Koretskyi
