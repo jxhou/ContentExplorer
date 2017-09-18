@@ -1,5 +1,9 @@
 ngrx 4.*
 
+## Code structure
+1. The application state is divided by modules. Each module defines a sub-state from the root state object along with composite reducer of the module.
+2. All the sub-states of modules are stored in a flat tree structure no matter of the hierarchy of modules.
+
 ## **References**:
 1. [ngrx github](https://github.com/ngrx/platform)
 2. [ngrx example application](https://github.com/ngrx/platform/blob/master/example-app/README.md) and [live app](https://ngrx.github.io/platform/example-app/#/login).
