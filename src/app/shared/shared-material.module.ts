@@ -2,31 +2,31 @@
 // More components should be added, once it is needed.
 import { NgModule } from '@angular/core';
 import 'hammerjs';
-import { MdInputModule, MdButtonModule, MdButtonToggleModule, 
-         MdCheckboxModule, MdRadioModule, 
-         MdSelectModule, MdAutocompleteModule,
-         MdCardModule, MdListModule, MdTabsModule,
-         MdMenuModule, MdSidenavModule, MdToolbarModule,
-         MdIconModule, MdChipsModule,
-         MdDialogModule, MdSnackBarModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatButtonToggleModule, 
+         MatCheckboxModule, MatRadioModule, 
+         MatSelectModule, MatAutocompleteModule,
+         MatCardModule, MatListModule, MatTabsModule,
+         MatMenuModule, MatSidenavModule, MatToolbarModule,
+         MatIconModule, MatChipsModule,
+         MatDialogModule, MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   imports: [
     //Material
-    MdInputModule, MdButtonModule, MdButtonToggleModule, 
-    MdCheckboxModule, MdRadioModule, 
-    MdSelectModule, MdAutocompleteModule, 
-    MdCardModule, MdListModule, MdTabsModule,
-    MdMenuModule, MdSidenavModule, MdToolbarModule,
-    MdIconModule, MdChipsModule,
-    MdDialogModule, MdSnackBarModule
+    MatInputModule, MatButtonModule, MatButtonToggleModule, 
+    MatCheckboxModule, MatRadioModule, 
+    MatSelectModule, MatAutocompleteModule, 
+    MatCardModule, MatListModule, MatTabsModule,
+    MatMenuModule, MatSidenavModule, MatToolbarModule,
+    MatIconModule, MatChipsModule,
+    MatDialogModule, MatSnackBarModule
   ],
-  exports:  [ MdInputModule, MdButtonModule, MdButtonToggleModule, 
-              MdCheckboxModule, MdRadioModule, 
-              MdSelectModule, MdAutocompleteModule,
-              MdCardModule, MdListModule, MdTabsModule,
-              MdMenuModule, MdSidenavModule, MdToolbarModule,
-              MdIconModule, MdChipsModule,
-              MdDialogModule, MdSnackBarModule ]
+  exports:  [ MatInputModule, MatButtonModule, MatButtonToggleModule, 
+              MatCheckboxModule, MatRadioModule, 
+              MatSelectModule, MatAutocompleteModule,
+              MatCardModule, MatListModule, MatTabsModule,
+              MatMenuModule, MatSidenavModule, MatToolbarModule,
+              MatIconModule, MatChipsModule,
+              MatDialogModule, MatSnackBarModule ]
 })
 export class SharedMaterialModule { }
