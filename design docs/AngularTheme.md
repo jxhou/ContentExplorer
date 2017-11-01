@@ -84,7 +84,7 @@ github project: [tomastrajan/angular-ngrx-material-starter](https://github.com/t
 [Hosted site](https://tomastrajan.github.io/angular-ngrx-material-starter#/about)
 2. [CUSTOM THEMES WITH ANGULAR MATERIAL](https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html) by Pascal Precht  
 3. [Official Google theming guide](https://github.com/angular/material2/blob/master/guides/theming.md).
-4. [material.angular.io Github project](https://material.angular.io)  
+4. [material.angular.io Github project](https://github.com/angular/material.angular.io)  
 Angular material doc project created using angular cli with theme switch.  
 [material.angular.io site](https://material.angular.io/)
 5. [Angular Material demo github project](https://github.com/angular/material2/tree/master/src/demo-app)  
