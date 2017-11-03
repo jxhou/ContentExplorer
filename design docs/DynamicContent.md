@@ -1,3 +1,8 @@
+# **Dynamically update navigation pane (toolbar content) based on route selection **
+Basically I want to update toolbar content, when different route is selected. Each component of route will have its own menu item in ng-template which will be injected into toolbar when selected.
+
+Reference 2 discussed a solution to dynamically add route specific content to left navigation pane.
+
 # **How to create dynamic content**
 There are two types of views which can be created dynamically: 
 1. Embedded views created from ng-template;
@@ -26,9 +31,47 @@ tpl.createEmbeddedView() is the most fundamental way to create a view, which ret
 }
 
 ```
+There are some lower level api to dynamically create a component and insert into DOM as discussed in reference 5:
+```
+@Injectable()
+export class DomService {
+  
+  constructor(
+      private componentFactoryResolver: ComponentFactoryResolver,
+      private appRef: ApplicationRef,
+      private injector: Injector
+  ) { }
+  
+  appendComponentToBody(component: any) {
+    // 1. Create a component reference from the component 
+    const componentRef = this.componentFactoryResolver
+      .resolveComponentFactory(component)
+      .create(this.injector);
+    
+    // 2. Attach component to the appRef so that it's inside the ng component tree
+    this.appRef.attachView(componentRef.hostView);
+    
+    // 3. Get DOM element from component
+    const domElem = (componentRef.hostView as EmbeddedViewRef<any>)
+      .rootNodes[0] as HTMLElement;
+    
+    // 4. Append DOM element to the body
+    document.body.appendChild(domElem);
+    
+    // 5. Wait some time and remove it from the component tree and from the DOM
+    setTimeout(() => {
+        this.appRef.detachView(componentRef.hostView);
+        componentRef.destroy();
+    }, 3000);
+  }
+}
+
+```
+That is what really happening when dynamically create a component. There some higher level api to make the life a bit easier as below:
+
 ## ViewContainerRef
 Represents a container where one or more views can be attached. Any DOM element can be used as a view container. Angular doesn’t insert views inside the element, but appends them after the element bound to ViewContainer. Usually, a good candidate to mark a place where a ViewContainer should be created is ng-container element. It’s rendered as a comment and so it doesn’t introduce redundant html elements into DOM. ng-template can also be used as viewContainer as HostPortal directive attached to. To access a ViewContainerRef of an Element, you can either place a Directive injected with ViewContainerRef on the Element, or you obtain it via a ViewChild query.  
-Both host view and embeded view can be inserted into viewContainer manually as below:
+Both host view and embedded view can be inserted into viewContainer manually as below:
 ```
 @Component({
     selector: 'sample',
@@ -110,3 +153,5 @@ A common pattern developed in Angular Material (CDK) to ease the process of dyna
 4. [Implementing Dynamic Views in Angular](https://netbasal.com/implementing-dynamic-views-in-angular-20ae7c62fec3)  
 [demo](https://stackblitz.com/edit/angular-router-basic-example-7zmukc?file=app%2Fapp.routing.module.ts)
 5. [Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates](https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/)
+6. [Angular Pro Tip: How to dynamically create components in <body>](https://medium.com/@caroso1222/angular-pro-tip-how-to-dynamically-create-components-in-body-ba200cc289e6)
+7. [Create a dynamic tab component with Angular](https://juristr.com/blog/2017/07/ng2-dynamic-tab-component/)
