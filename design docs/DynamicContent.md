@@ -1,7 +1,8 @@
 # **Dynamically update navigation pane (toolbar content) based on route selection **
 Basically I want to update toolbar content, when different route is selected. Each component of route will have its own menu item in ng-template which will be injected into toolbar when selected.
 
-Reference 2 discussed a solution to dynamically add route specific content to left navigation pane.
+Reference 2 discussed a solution to dynamically add route specific content to left navigation pane.  
+ng-template, structural directive, ng-container @ViewChild selected ViewContainerRef, and Left.Nav.Service are the pieces of the solution. Low level dynamic api was used to achieve the dynamic content. N
 
 # **How to create dynamic content**
 There are two types of views which can be created dynamically: 
