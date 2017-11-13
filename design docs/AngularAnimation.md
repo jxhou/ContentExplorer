@@ -127,4 +127,7 @@ baz = "foz";
 6. [ng4-animations-preview, demo site](http://slides.yearofmoo.com/ng4-animations-preview/demo/)
 7. [Angular 2/4 Animations Example](http://www.concretepage.com/angular-2/angular-2-4-animations-example) by Arvind Rai  
 8. [Angular — Applying Motion principles to a listing](https://medium.com/@gerard.sans/angular-applying-motion-principles-to-a-list-d5cdd35c899e) by Gerard Sans
-
+9. [Angular Animations: motion makes meaning](https://youtu.be/JhNo3Wvj6UQ?t=2h46m38s) Angular connect 2017 video.  
+[AngularConnect Animation Demo link](http://animationsftw.in/#/)
+[matsko/AnimationMovieWebsite source code](https://github.com/matsko/AnimationMovieWebsite)  
+The most recent comprehensive animation demo code example using ng5.0.0 rc8 by Motias.
