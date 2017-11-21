@@ -46,7 +46,7 @@ export class MaterialModule {
 }
 ```
 
-## Special provider configuration
+## Special provider configuration (smart module)
 
 There is a new way to deal with the singleton issue of a service provider other than forRoot/child pattern.
 
