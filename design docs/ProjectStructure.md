@@ -14,7 +14,7 @@ In general, Angular's ngModel, imports, and exports are used on top of the ES6's
 
 The type of injected services always need to be ES6 import(ed) in the file where it is referenced, while the services are loaded indirectly via ngModule imports some where up along the component tree.
 
-Angular components are indirectly loaded via imports another ngModule in the host ngModule. However the loaded component type does not need to be ES import(ed) in the file where is referenced. The component is referenced using its html tag in ngTemplate, while angular compiler actually make the connection between the html tag and the component type.
+Angular components can be indirectly loaded via imports another ngModule in the host ngModule. However the loaded component type does not need to be ES import(ed) in the file where is referenced. The component is referenced using its html tag in ngTemplate, while angular compiler actually make the connection between the html tag and the component type.
 
 ## core and shared modules 
 By convention, a project has core and shared modules. In general, core module single used, while shared module is multiple used. With core, shared, and feature modules, the app.module should be clean and small.
@@ -22,8 +22,9 @@ By convention, a project has core and shared modules. In general, core module si
 Considerations for core module:
 1. Singleton services are hosted in core module.
 2. Core module should be only imports(ed) in root module (app.module).
-3. Singleton components can be also hosted in core module, which are used in app.component's template. Spinner, toaster, navigation components are good examples, if they are used as a global components.
-4. use singleton guard to prevent multiple core instances as discussed in angular.io style guide or reference 1, or any other singleton tricks as described above.
+3. Singleton components can be also hosted in core module, which are used in app.component's template [4]. Spinner, toaster, navigation components are good examples[2], if they are used as a global components. Also the components fired up by singleton services are also good candidates [5].
+4. use singleton guard to prevent multiple core instances [1, 2].
+5. Use forRoot pattern in Core [4]. Or smart ngModule used in Angular material implementation.
 
 Considerations for shared modules:
 1. shared module is designed to be imports(ed) in multiple ngModules.
@@ -35,8 +36,9 @@ Considerations for feature module:
 1. Try to create feature module which don’t depend on any other feature modules just on services provided by CoreModule and components provided by SharedModule. [1].
 2. if a feature module need service from another feature module consider move the service to core module.
 
-
 ## **References**
-
 1. [6 Best Practices & Pro Tips when using Angular CLI](https://medium.com/@tomastrajan/6-best-practices-pro-tips-for-angular-cli-better-developer-experience-7b328bc9db81)  
 2. [Angular.io style guide](https://angular.io/guide/styleguide)
+3. github project: [tomastrajan/angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter) 
+4. [ngrx open source and demo-example](https://github.com/ngrx/platform)
+5. [rwa-trivia github project](https://github.com/anihalaney/rwa-trivia) 
