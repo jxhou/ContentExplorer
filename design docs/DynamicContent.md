@@ -2,7 +2,9 @@
 Basically I want to update toolbar content, when different route is selected. Each component of route will have its own menu item in ng-template which will be injected into toolbar when selected.
 
 Reference 2 discussed a solution to dynamically add route specific content to left navigation pane.  
-ng-template, structural directive, ng-container @ViewChild selected ViewContainerRef, and Left.Nav.Service are the pieces of the solution. Low level dynamic api was used to achieve the dynamic content. N
+ng-template, structural directive, ng-container @ViewChild selected ViewContainerRef, and Left.Nav.Service are the pieces of the solution. Low level dynamic api was used to achieve the dynamic content. The LeftNavComponent has a LeftNav service injected to receive new content, and then dynamically render at specified ng-container location using ViewContainerRef.createEmbeddedView. In this case, the LeftNavComponent, the content receiver, is a smart component.
+
+Reference 1 is about a usage of Portal/PortalOutlet, and shows an example of sending a dynamic ng-template content from one of the ToolComponent (CropTool, DrawTool, or TextTool) upon selection, to ToolOptionsComponent, which is exact same idea as reference 1, but implemented using Portal/PortalOutlet. There is a ToolOptionsService which is injected into both source and receiving ends, as a bridge to pass content from any ToolComponent to ToolOptionsComponent.
 
 # **How to create dynamic content**
 There are two types of views which can be created dynamically: 
@@ -143,7 +145,24 @@ class NgTemplateOutletSimpleExample {
 
 ```
 ### Portal and PortalOutlet (PortalHost before)
-A common pattern developed in Angular Material (CDK) to ease the process of dynamically create views. Portal/PortalOutlet further abstract portal concept out of embedded view and host view. The PortalOutlet can attach any Portal, TemplatePortal or ComponentPortal. A PortalOutlet can be created out of any DOM element using query selector (DomPortalOutlent). Directive on ng-template to create a PortalHost.
+A common pattern developed in Angular Material (CDK) to ease the process of dynamically create views. Portal/PortalOutlet further abstract portal concept out of embedded view and host view. The PortalOutlet can attach any Portal, either TemplatePortal or ComponentPortal. A PortalOutlet can be created out of any DOM element using query selector (DomPortalOutlent). Directive on ng-template to create a PortalHost. cdkPortal and CdkPortalOutlet directives are the helpers to make port and portalOutlet declarative, and are Portal and PortalOutlet themselves respectively.
+
+```
+@Component({
+  selector: 'app-crop-tool',
+   template: `
+        <ng-content [CdkPortalOutlet]="optionsPortal"></ng-content>
+        <ng-template cdkPortal #optionsTmpl="cdkPortal">
+          <div class="option-label">Basic Crop</div>
+        </ng-template>
+    `
+})
+export class CropToolComponent { 
+  @ViewChild('optionsTmpl') optionsPortal: TemplatePortal<any>;
+
+```
+CdkPortalOutlet directive can create a PortalHost on the element applied, and accept an instance of portal. cdkPortal directive can be applied to a ng-template, which then can be queried using @ViewChild to return an instance of TemplatePortal.  
+cdkPortal/CdkPortalOutlet further abstracts template/component difference out, comparing with ngTemplateOutlet and ngComponentOutlet.
 
 ## **References**: 
 1. [Angular CDK Portals](https://blog.angularindepth.com/angular-cdk-portals-b02f66dd020c)  
