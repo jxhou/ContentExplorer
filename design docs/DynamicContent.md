@@ -1,12 +1,21 @@
-# **Dynamically update navigation pane (toolbar content) based on route selection **
+# **Dynamically update navigation pane (toolbar content) based on route selection**
 Basically I want to update toolbar content, when different route is selected. Each component of route will have its own menu item in ng-template which will be injected into toolbar when selected.
 
+## Reference implementations  
 Reference 2 discussed a solution to dynamically add route specific content to left navigation pane.  
 ng-template, structural directive, ng-container @ViewChild selected ViewContainerRef, and Left.Nav.Service are the pieces of the solution. Low level dynamic api was used to achieve the dynamic content. The LeftNavComponent has a LeftNav service injected to receive new content, and then dynamically render at specified ng-container location using ViewContainerRef.createEmbeddedView. In this case, the LeftNavComponent, the content receiver, is a smart component.
 
 Reference 1 is about a usage of Portal/PortalOutlet, and shows an example of sending a dynamic ng-template content from one of the ToolComponent (CropTool, DrawTool, or TextTool) upon selection, to ToolOptionsComponent, which is exact same idea as reference 1, but implemented using Portal/PortalOutlet. There is a ToolOptionsService which is injected into both source and receiving ends, as a bridge to pass content from any ToolComponent to ToolOptionsComponent.
 
-# **How to create dynamic content**
+Reference 5 shows an example of ngTemplateOutlet usage, where TabContainerComponent takes a headerTemplate of TemplateRef<any>, as @Input, and assign it to <ng-container *ngTemplateOutlet="headerTemplate"> </ng-container> directly. In this case, TabContainerComponent is a dumb component, and ngTemplateOutlet directive is used to dynamically accept content from outside of the component. 
+
+ngTemplateOutlet/ngComponentOutlet and Portal/PortalOutlet are equally terse in creating dynamic content. The former comes with angular, the later need extra dependency on material, but further abstract the difference between template and component.
+
+ngTemplateOutlet is the way I am going to use to implement my toolbar with dynamic content, to save extra dependency on material package compare to Portal/PortalOutlet.
+
+## My implementation details
+
+# **How to create dynamic content (literature survey and summery)**
 There are two types of views which can be created dynamically: 
 1. Embedded views created from ng-template;
 2. Hosted views created from Components;
