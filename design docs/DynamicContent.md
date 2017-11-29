@@ -184,3 +184,4 @@ cdkPortal/CdkPortalOutlet further abstracts template/component difference out, c
 5. [Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates](https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/)
 6. [Angular Pro Tip: How to dynamically create components in <body>](https://medium.com/@caroso1222/angular-pro-tip-how-to-dynamically-create-components-in-body-ba200cc289e6)
 7. [Create a dynamic tab component with Angular](https://juristr.com/blog/2017/07/ng2-dynamic-tab-component/)
+8. [Angular2: Binding an observable to an immutable child component input.](http://almerosteyn.com/2016/03/immutable-component-input-from-observable)
