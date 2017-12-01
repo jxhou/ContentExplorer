@@ -20,7 +20,7 @@ There are two types of views which can be created dynamically:
 1. Embedded views created from ng-template;
 2. Hosted views created from Components;
 
-There are also several ways of creating dynamic view from low to high levels.
+There are also several ways of creating dynamic view from using low to high level api.
 
 ## Creating embedded view
 A template reference can be retrieved using @ViewChild such as 
@@ -113,7 +113,7 @@ class ViewContainerRef {
     element: ElementRef
     length: number
 
-    createComponent(componentFactory...): ComponentRef<C>
+    createComponent(componentFactory, index, injector...): ComponentRef<C>
     createEmbeddedView(templateRef...): EmbeddedViewRef<C>
     ...
 }
@@ -173,6 +173,15 @@ export class CropToolComponent {
 CdkPortalOutlet directive can create a PortalHost on the element applied, and accept an instance of portal. cdkPortal directive can be applied to a ng-template, which then can be queried using @ViewChild to return an instance of TemplatePortal.  
 cdkPortal/CdkPortalOutlet further abstracts template/component difference out, comparing with ngTemplateOutlet and ngComponentOutlet.
 
+### Dynamic component and injector:
+When dynamically create a angular component, sometimes we need to pass some data to the component. Customized injector for the component is one of ways to pass data over to the component via DI.  
+The ComponentFactory.create(injector: Injector, ...) provides a way to pass a customized injector to the new component.  
+Normally the host component will have the injector injected, and then create a child injector from the host parent injector with customized providers using:    
+Injector.create(providers: StaticProvider[], parentInjector)  
+
+All the other higher level api(s) such as ViewContainerRef, ngComponentOutlet, and PortalOutlet for dynamic component creation expose the injector option.
+Reference 8 shows an overlay example using customized injector to pass data to dynamic created component via DI in Portal/PortalOutlet environment. Material dialog uses the same method passing data to component shown in dialog window, I believe.
+
 ## **References**: 
 1. [Angular CDK Portals](https://blog.angularindepth.com/angular-cdk-portals-b02f66dd020c)  
 [code demo](https://stackblitz.com/edit/angular-material2-portal-tools?embed=1&file=app/services/tool-options.service.ts)
@@ -184,3 +193,5 @@ cdkPortal/CdkPortalOutlet further abstracts template/component difference out, c
 5. [Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates](https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/)
 6. [Angular Pro Tip: How to dynamically create components in <body>](https://medium.com/@caroso1222/angular-pro-tip-how-to-dynamically-create-components-in-body-ba200cc289e6)
 7. [Create a dynamic tab component with Angular](https://juristr.com/blog/2017/07/ng2-dynamic-tab-component/)
+8. [CUSTOM OVERLAYS WITH ANGULAR'S CDK](https://blog.thoughtram.io/angular/2017/11/20/custom-overlays-with-angulars-cdk.html)
+9. [CUSTOM OVERLAYS WITH ANGULAR'S CDK - PART 2](https://blog.thoughtram.io/angular/2017/11/27/custom-overlays-with-angulars-cdk-part-two.html)
