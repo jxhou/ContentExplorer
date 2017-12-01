@@ -195,3 +195,4 @@ Reference 8 shows an overlay example using customized injector to pass data to d
 7. [Create a dynamic tab component with Angular](https://juristr.com/blog/2017/07/ng2-dynamic-tab-component/)
 8. [CUSTOM OVERLAYS WITH ANGULAR'S CDK](https://blog.thoughtram.io/angular/2017/11/20/custom-overlays-with-angulars-cdk.html)
 9. [CUSTOM OVERLAYS WITH ANGULAR'S CDK - PART 2](https://blog.thoughtram.io/angular/2017/11/27/custom-overlays-with-angulars-cdk-part-two.html)
+10. [Angular2: Binding an observable to an immutable child component input.](http://almerosteyn.com/2016/03/immutable-component-input-from-observable)
