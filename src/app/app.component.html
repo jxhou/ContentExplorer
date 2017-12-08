@@ -7,7 +7,12 @@
             about
           </button>
 </md-toolbar><!--The whole content below can be removed with the new code.-->
-<app-navbar></app-navbar>
+<ng-template #customContent>
+  <button mat-icon-button class="hidden-md-up">
+    <mat-icon>menu</mat-icon>
+  </button>
+</ng-template>
+<app-navbar [leftContentTemplate]="customContent"></app-navbar>
 <div style="text-align:center">
   <h1>
     Welcome to {{title}}!!

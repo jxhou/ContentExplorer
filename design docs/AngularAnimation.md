@@ -132,4 +132,4 @@ baz = "foz";
 [matsko/AnimationMovieWebsite source code](https://github.com/matsko/AnimationMovieWebsite)  
 The most recent comprehensive animation demo code example using ng5.0.0 rc8 by Motias.
 10. [How To Style Angular Application Loading With Angular CLI Like a Boss](https://medium.com/@tomastrajan/how-to-style-angular-application-loading-with-angular-cli-like-a-boss-cdd4f5358554)  
-About loading animation.
+About loading animation to be implemented.
