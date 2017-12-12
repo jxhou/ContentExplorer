@@ -57,7 +57,7 @@ export class MyExpandoCmp {
 3. Each transition has its stateChangeExpr such as 'my-state1 <=> my-state2', along with a step, or an array of steps. A step could be just:
 transition("on <=> off", animate(500)),
 Or as complicated as the content in above animation structure.  
-When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequenc function. The step in the array could be a [group](https://angular.io/api/animations/group), which a list of animations run in parrallel.  
+When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequence function. The step in the array could be a [group](https://angular.io/api/animations/group), which a list of animations run in parallel.  
 A step could be a [query](https://angular.io/api/animations/query) function call.
 4. a [query](https://angular.io/api/animations/query) has a selector, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger), which can only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay
 
@@ -101,7 +101,7 @@ export class MyComponent {
   ...
 }  
 This is the case when we need to do sophisticated animation for elements on component template. Normally we handle ":enter/:leave" transitions to animate the sub elements of the component without defining any other states.  
-Good examples of using @HostBinding: a Component participating angular route, or *ngIf enable/hide component, which will all trigger ":enter/:leave" transitions. So one can configure sophisticated animation of containing elements when component show/hide.
+Good examples of using @HostBinding: a Component participating angular route, or *ngIf enable/hide component, which will all trigger ":enter/:leave" transitions. So one can configure sophisticated animation of containing elements when component show/hide (more details in next section of route transition).
 
 ## Animation for route transition
 See references 2, 3, and 4.
@@ -133,3 +133,4 @@ baz = "foz";
 The most recent comprehensive animation demo code example using ng5.0.0 rc8 by Motias.
 10. [How To Style Angular Application Loading With Angular CLI Like a Boss](https://medium.com/@tomastrajan/how-to-style-angular-application-loading-with-angular-cli-like-a-boss-cdd4f5358554)  
 About loading animation to be implemented.
+11. [Angular & Animations: bring life to your apps](https://medium.com/@aleixsuau/angular-animations-bring-life-to-your-apps-ca122e5db647) The best explanation about the animation syntax.
