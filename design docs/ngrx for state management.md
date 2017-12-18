@@ -14,3 +14,4 @@ ngrx 4.*
 7. [Ultimate Angular’s new free NGRX store and effects course](https://ultimateangular.com/ngrx-store-effects?utm) The best online course on ngrx.  
 [UltimateAngular/redux-store, github project](https://github.com/UltimateAngular/redux-store/tree/05-actions-action-creators): a pure redux-store implementation without any dependency, worth of reading.
 [UltimateAngular/ngrx-store-effects-app, github project](https://github.com/UltimateAngular/ngrx-store-effects-app/tree/27-testing-effects). ngrx examples full of best practices, the best, so far.
+8. [Finally understand Redux by building your own Store](https://toddmotto.com/redux-typescript-store) by Todd
