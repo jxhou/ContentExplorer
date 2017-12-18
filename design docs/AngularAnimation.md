@@ -22,7 +22,7 @@
                                           group([
                                                 style(...),
                                                 animate(...),
-                                                anmimate(...)
+                                                animate(...)
                                           ]),
                                           query(':enter', [                       <--[4]--->
                                                 style(...),
@@ -63,7 +63,7 @@ A step could be a [query](https://angular.io/api/animations/query) function call
 
 
 ## **state**
-## declared state using state function  
+## Custom state, declared using state function  
 ```
 // user-defined states
 state("closed", style({ height: 0 }))
@@ -91,6 +91,32 @@ transition('my-state1 <=> my-state2',
 where the 1st style is used as starting style during animation. 
 And similarly style defined in group, query function used as starting style.
 3. style used within animate function as above, which is used as ending style for animation. All the styles defined other than in state function are only used during animation. The style defined in state function will be persistent after animation ends. 
+
+## More about styles
+There are two types of styles:
+* State styles:
+  Applied to the element while it is in the state, which is defined in state function. Removed when the state changes.
+* Transition styles:
+  Applied to the element while it is transitioning to its Final State, defined in transition function scope. Removed when the Final State is applied (with its State Styles) .
+  Inside Transition Styles, there are also two types:
+  * ‘From’ styles:
+    Placed at the beginning of the transition, they will be applied to the element right when it’s created.
+  * ‘To’ styles:
+    Placed inside animate(), they will be used to transition to it from the ‘from’ style, in this case ‘void’.
+```
+  trigger('enterLeave', [
+     transition('void => *', [
+       // 'From' Style
+       style({ opacity: 0.2, transform: 'translateX(-100%)' }),   
+       animate('1500ms ease-in',
+         // 'To' Style
+         style({ opacity: 1, transform: 'scale(1.5)' }),     
+       )
+     ])
+   ])
+```
+
+In order for animation to work, an initial and final states have to be defined. If we apply enter animation to an element, we’ll see that nothing happens. That is because in the ‘void’ state the element is not present in the view, so it doesn’t have any style to transition from. Therefore transition styles are needed for the void state. For other default state, by default, the Final State is the element naturally placed in the view, with the properties we have applied to it in CSS. Sometimes, you will see element animating between transition styles, and at the end abruptly show the state style.
 
 ## Binding animation to element
 1. Place an animation trigger on an element within the template in the form of [@triggerName]="expression", where "expression" is from the component definition.
