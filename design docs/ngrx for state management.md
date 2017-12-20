@@ -15,3 +15,4 @@ ngrx 4.*
 [UltimateAngular/redux-store, github project](https://github.com/UltimateAngular/redux-store/tree/05-actions-action-creators): a pure redux-store implementation without any dependency, worth of reading.
 [UltimateAngular/ngrx-store-effects-app, github project](https://github.com/UltimateAngular/ngrx-store-effects-app/tree/27-testing-effects). ngrx examples full of best practices, the best, so far.
 8. [Finally understand Redux by building your own Store](https://toddmotto.com/redux-typescript-store) by Todd
+9. [NGRX Store: Actions versus Action Creators](https://toddmotto.com/ngrx-store-actions-versus-action-creators)
