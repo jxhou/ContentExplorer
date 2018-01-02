@@ -27,3 +27,4 @@ A nontrivial real-world-application by anihalaney.
 8. [Angular ng-template, ng-container and ngTemplateOutlet - The Complete Guide To Angular Templates](http://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/)  
 9. [ngrx open source and demo-example](https://github.com/ngrx/platform)  
 [demo-app site](http://ngrx.github.io/example-app/#/)
+10. [Responsive Navbar with Angular Flex Layout](https://theinfogrid.com/tech/developers/angular/responsive-navbar-angular-flex-layout/)

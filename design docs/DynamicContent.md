@@ -15,6 +15,8 @@ ngTemplateOutlet is the way I am going to use to implement my toolbar with dynam
 
 ## My implementation details
 
+--------------------
+
 # **How to create dynamic content (literature survey and summery)**
 There are two types of views which can be created dynamically: 
 1. Embedded views created from ng-template;

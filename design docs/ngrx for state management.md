@@ -1,8 +1,77 @@
 ngrx 4.*
 
-## Code structure
-1. The application state is divided by modules. Each module defines a sub-state from the root state object along with composite reducer of the module.
-2. All the sub-states of modules are stored in a flat tree structure no matter of the hierarchy of modules.
+## Code folder structure
+1. The application state is divided by modules. Each module defines a sub-state of the root app state along with composite reducer of the module. Each module can has its own sub-states based on contained features to form a state tree of the module.
+2. Each module will register its own reducer/reducer map with the store using StoreModule.forFeature(moduleName, routerReducer); and select the sub-states using createFeatureSelector(moduleName). Make sure the moduleName used are same, when register and retrieve. 
+All the sub-states of modules are stored in a flat tree structure keyed by its module name, no matter of the hierarchy of modules in an app.
+3. Code structure for module:
+If a angular module participates ngrx state management, it should have a 'store' folder with following structure:
+```
+    store--
+      actions--
+        a.action.ts
+        b.action.ts
+        ...
+        index.ts
+      effects--
+        a.effect.ts
+        b.effect.ts
+        ...
+        index.ts
+      reducers--
+        a.reducer.ts
+        b.reducer.ts
+        ...
+        index.ts
+      selectors
+        a.selectors.ts
+        b.selectors.ts
+        ...
+        index.ts
+      index.ts
+
+```
+All modules including the root app.module, core.module, and feature modules can have this folder structure. The barrel index.ts files are used to roll up all the exports.  
+
+Each module can have multiple sub-module states.   
+
+The selectors can be defined in each *.reducer.ts, or in a separate *.selectors.ts file residing in selectors folder if complicated selector composition is needed. The basic selectors are still defined in *.selectors.ts, while composite selectors using createSelector() utility are defined in *.selectors.ts.
+
+4. reducer content:
+Each *.reducer.ts file define a sub-module state interface, and an initial state for the sub-module along with reducer function.  Basic element selectors of the state are also defined.
+
+The barrel store/reducers/index.ts will define a composite state interface and a composite reducers for the entire module, besides roll up the exports from children. The best practice for defining the composite reducers is to use ActionReducerMap with state interface to make sure the reducers matching with state interface. e.g.
+```
+
+export interface ProductsState {
+  pizzas: fromPizzas.PizzaState;
+  toppings: fromToppings.ToppingsState;
+}
+
+export interface State {
+  products: ProductsState
+}
+
+export const reducers: ActionReducerMap<ProductsState> = {
+  pizzas: fromPizzas.reducer,
+  toppings: fromToppings.reducer,
+};
+
+```
+Also a "State" interface can be defined to reflect a branch of state starting from store root.   
+However, In reference 2, 
+```
+interface State extends fromRoot.State 
+
+```
+is used instead, which make it dependent on root implementation.
+
+This state definition can then be used in any component constructor where the store with the specific state of the sub-module is injected.
+
+5. routerStore
+@ngrx/router-store supports router state in the store. With StoreRouterConnectingModule imported, this module will be able to update router state in store. But the app has to register pre-defined routerReducers, in order for router state to be available in store. One can define custom serializer for the router state, also define custom actions such as GO, BACK, FORWARD. All those can be wrapped in module. See details in router_store_ext module.
+
+6. Use action creator to define action as the best practice (see reference 9).
 
 ## **References**:
 1. [ngrx github](https://github.com/ngrx/platform)
@@ -16,3 +85,4 @@ ngrx 4.*
 [UltimateAngular/ngrx-store-effects-app, github project](https://github.com/UltimateAngular/ngrx-store-effects-app/tree/27-testing-effects). ngrx examples full of best practices, the best, so far.
 8. [Finally understand Redux by building your own Store](https://toddmotto.com/redux-typescript-store) by Todd
 9. [NGRX Store: Actions versus Action Creators](https://toddmotto.com/ngrx-store-actions-versus-action-creators)
+10. [Todd Motto - Angular Architecture: From Patterns to Implementation](https://www.youtube.com/watch?v=vGKRKDPGUSs) container component handles state, while presentational component use input/output to communicate state.
