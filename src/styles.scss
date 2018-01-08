@@ -2,15 +2,19 @@
 
 @include mat-core();
 
-@import 'themes/deeppurple-amber.scss';
-@import 'themes/indigo-pink.scss';
-@import 'themes/purple-green.scss';
-@import 'themes/pink-bluegrey.scss';
+@import 'themes/deeppurple-amber';
+@import 'themes/indigo-pink';
+@import 'themes/purple-green';
+@import 'themes/pink-bluegrey';
 
 @import './app-theme';
 
+// define gated theme styles.
+// Each theme can then be selected by modifying the class name of the root html tag.
 .deeppurple-theme {
+  // apply the theme to all meterial components
   @include angular-material-theme($deeppurple-theme);
+  // apply the theme to all the custom components in current app
   @include app-theme($deeppurple-theme);
 }
 

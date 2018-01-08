@@ -1,4 +1,9 @@
-@import 'app/_app.component-theme';
+// app level theming. 
+// All custom components should expose their minxin, and add an entry in the file to 
+// include its theme style.
+// This is equivalent to angular-material-theme mixin for all material components
+@import 'app/_app.component-theme';  // theme for app.component
+
 // Styles for the app that are based on the current theme.
 @mixin app-theme($theme) {
   $primary: map-get($theme, primary);
@@ -7,5 +12,6 @@
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
+  // invoke mixins for each custom component in current app
   @include app-component-theme($theme);
 }
