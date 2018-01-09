@@ -3,6 +3,8 @@
 3. Theming custom components
 4. angular flex-layout
 
-## **References**:
+## **References to be explored**:
 1. [Is Angular Flex (with Angular Material) Better than Bootstrap for Responsive Layout?](https://theinfogrid.com/tech/developers/angular/angular-flex-better-than-bootstrap/)
 2. [Components Comparison Between Angular Material and Bootstrap Framework](https://theinfogrid.com/tech/developers/angular-material-and-bootstrap-framework-components-comparison/)
+3. [Angular 5+ breadcrumb](https://medium.com/@bo.vandersteene/angular-5-breadcrumb-c225fd9df5cf)
+may build breadcrumb into ngrx's router state(?).

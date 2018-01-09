@@ -70,6 +70,7 @@ This state definition can then be used in any component constructor where the st
 
 5. routerStore
 @ngrx/router-store supports router state in the store. With StoreRouterConnectingModule imported, this module will be able to update router state in store. But the app has to register pre-defined routerReducers, in order for router state to be available in store. One can define custom serializer for the router state, also define custom actions such as GO, BACK, FORWARD. All those can be wrapped in module. See details in router_store_ext module.
+May add breadcrumb into router state (?).
 
 6. Use action creator to define action as the best practice (see reference 9).
 
