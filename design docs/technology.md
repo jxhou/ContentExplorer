@@ -8,3 +8,4 @@
 2. [Components Comparison Between Angular Material and Bootstrap Framework](https://theinfogrid.com/tech/developers/angular-material-and-bootstrap-framework-components-comparison/)
 3. [Angular 5+ breadcrumb](https://medium.com/@bo.vandersteene/angular-5-breadcrumb-c225fd9df5cf)
 may build breadcrumb into ngrx's router state(?).
+4. [Angular Material Data Table: A Complete Example (Server Pagination, Filtering, Sorting)](https://blog.angular-university.io/angular-material-data-table/?utm=ng2)
