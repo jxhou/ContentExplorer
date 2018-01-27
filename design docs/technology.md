@@ -9,3 +9,4 @@
 3. [Angular 5+ breadcrumb](https://medium.com/@bo.vandersteene/angular-5-breadcrumb-c225fd9df5cf)
 may build breadcrumb into ngrx's router state(?).
 4. [Authentication With Route Guards In Angular 5 Single Page Application](http://www.c-sharpcorner.com/article/authentication-with-route-guards-in-angular-5-single-page-application/)
+5. [Angular Material Data Table: A Complete Example (Server Pagination, Filtering, Sorting)](https://blog.angular-university.io/angular-material-data-table/?utm=ng2)
