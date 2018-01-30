@@ -1,6 +1,23 @@
 import { Routes, RouterModule }  from '@angular/router';
+import { SettingsComponent, DashboardComponent } from '../containers';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    data: {
+      title: 'Settings'
+    }
+  }
   /*
   {
     path: 'my-questions',

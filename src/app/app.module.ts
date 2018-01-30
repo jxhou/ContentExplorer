@@ -17,10 +17,14 @@ import { LayoutModule } from './layout/layout.module'
 import { reducers, metaReducers } from './store/reducers';
 import { RouteStoreExtModule } from './router_store_ext'
 import { environment } from '../environments/environment';
+import { SettingsComponent } from './containers/settings/settings.component';
+import { DashboardComponent } from './containers/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SettingsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

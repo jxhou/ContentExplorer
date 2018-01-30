@@ -5,6 +5,13 @@
         <button mat-icon-button class="hidden-md-up">
           <mat-icon>menu2</mat-icon>
         </button>
+        <span routerLink="" class="branding hidden-md-up text-center"><img [src]="logo" /> Angular Content</span>
+        <!-- This fills the remaining space of the current row -->
+        <span class="spacer"></span>
+        
+        <button mat-icon-button routerLink="settings" class="hidden-sm-down">
+          <mat-icon>settings</mat-icon>
+        </button>
         <!--ntity
         <span routerLink="" class="branding spacer hidden-md-up text-center"><img [src]="logo" /> Angular Starter</span>
         <span routerLink="" class="branding spacer hidden-sm-down"><img [src]="logo" /> Angular ngRx Material Starter</span>
