@@ -19,12 +19,16 @@ import { RouteStoreExtModule } from './router_store_ext'
 import { environment } from '../environments/environment';
 import { SettingsComponent } from './containers/settings/settings.component';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { ThemeSettingsComponent } from './components/theme-settings/theme-settings.component';
+import { TestSettingComponent } from './components/test-setting/test-setting.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
-    DashboardComponent
+    DashboardComponent,
+    ThemeSettingsComponent,
+    TestSettingComponent
   ],
   imports: [
     BrowserModule,

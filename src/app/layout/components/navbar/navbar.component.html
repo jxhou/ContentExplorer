@@ -1,11 +1,13 @@
  <mat-toolbar color="primary" class="toolbar mat-elevation-z2">
+   <!--
    <ng-container 
      *ngTemplateOutlet="leftContentTemplate">
    </ng-container>
+   -->
         <button mat-icon-button class="hidden-md-up">
           <mat-icon>menu2</mat-icon>
         </button>
-        <span routerLink="" class="branding hidden-md-up text-center"><img [src]="logo" /> Angular Content</span>
+        <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
         <!-- This fills the remaining space of the current row -->
         <span class="spacer"></span>
         

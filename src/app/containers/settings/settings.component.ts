@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  tabs: {label: string, link: string}[] =
+  [{label: 'theme', link: 'theme'},
+  {label: 'test', link: 'test'}];
 
   constructor() { }
 

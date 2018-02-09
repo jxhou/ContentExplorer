@@ -31,7 +31,7 @@ export class AppComponent implements OnInit{
       }
     );
     // do a test
-    this.store.dispatch(new fromStore.SetThemeAction('purple-theme'));
+    //this.store.dispatch(new fromStore.SetThemeAction('purple-theme'));
   }
 }
 
