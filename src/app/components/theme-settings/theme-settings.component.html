@@ -1,3 +1,19 @@
-<p>
-  theme-settings works!
-</p>
+<!--
+<div class="row">
+  <mat-select class="col-md-6" placeholder="Select theme" name="theme"
+             [ngModel]="theme" (change)="onThemeSelect($event)">
+    <mat-option *ngFor="let t of themes" [value]="t.value">
+      {{t.label}}
+    </mat-option>
+  </mat-select>
+</div>
+-->
+
+<mat-form-field>
+  <mat-select placeholder="Select theme" 
+  [ngModel]="theme" (change)="onThemeSelect($event)">
+    <mat-option *ngFor="let t of themes" [value]="t.value">
+      {{ t.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

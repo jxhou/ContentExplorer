@@ -160,3 +160,4 @@ The most recent comprehensive animation demo code example using ng5.0.0 rc8 by M
 10. [How To Style Angular Application Loading With Angular CLI Like a Boss](https://medium.com/@tomastrajan/how-to-style-angular-application-loading-with-angular-cli-like-a-boss-cdd4f5358554)  
 About loading animation to be implemented.
 11. [Angular & Animations: bring life to your apps](https://medium.com/@aleixsuau/angular-animations-bring-life-to-your-apps-ca122e5db647) The best explanation about the animation syntax.
+12. [Angular Animations — Stagger Over Static and Async Data](https://itnext.io/angular-animations-stagger-over-static-and-async-data-3907c4889479)

@@ -12,10 +12,10 @@ import { MatInputModule, MatButtonModule, MatButtonToggleModule,
 
 @NgModule({
   imports: [
-    //Material
-    MatInputModule, MatButtonModule, MatButtonToggleModule, 
-    MatCheckboxModule, MatRadioModule, 
-    MatSelectModule, MatAutocompleteModule, 
+    // Material
+    MatInputModule, MatButtonModule, MatButtonToggleModule,
+    MatCheckboxModule, MatRadioModule,
+    MatSelectModule, MatAutocompleteModule,
     MatCardModule, MatListModule, MatTabsModule,
     MatMenuModule, MatSidenavModule, MatToolbarModule,
     MatIconModule, MatChipsModule,
