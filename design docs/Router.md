@@ -1,5 +1,15 @@
 [How to list / output all routes in @Routes in my Angular2 App](https://stackoverflow.com/questions/37569936/how-to-list-output-all-routes-in-routes-in-my-angular2-app)
 
+example dynamically add routes
+https://embed.plnkr.co/wBorFvoG3hfD36iOcNqu/
+
+How to dynamically add components to NgModule in Angular 4 and @angular/cli?
+https://stackoverflow.com/questions/44587938/how-to-dynamically-add-components-to-ngmodule-in-angular-4-and-angular-cli
+add components to entryComponent
+
+Load NgModule entryComponents dynamically using service
+https://stackoverflow.com/questions/41200544/load-ngmodule-entrycomponents-dynamically-using-service?rq=1
+
 ## **References**:
 [Routing & Navigation official doc](https://angular.io/guide/router)  
 [Angular Router](https://vsavkin.com/angular-2-router-d9e30599f9ea) by savkin  
