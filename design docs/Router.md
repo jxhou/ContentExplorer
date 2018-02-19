@@ -10,6 +10,11 @@ add components to entryComponent
 Load NgModule entryComponents dynamically using service
 https://stackoverflow.com/questions/41200544/load-ngmodule-entrycomponents-dynamically-using-service?rq=1
 
+ANALYZE_FOR_ENTRY_COMPONENTS 
+
+Dynamically load components without breaking AoT - Angular2
+https://stackoverflow.com/questions/42482917/dynamically-load-components-without-breaking-aot-angular2
+
 ## **References**:
 [Routing & Navigation official doc](https://angular.io/guide/router)  
 [Angular Router](https://vsavkin.com/angular-2-router-d9e30599f9ea) by savkin  
