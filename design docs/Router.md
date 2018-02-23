@@ -25,3 +25,5 @@ https://stackoverflow.com/questions/42482917/dynamically-load-components-without
 [Access parent Route params with Angular's Router](https://toddmotto.com/angular-parent-routing-params) by Todd  
 [ Angular's Router: the Introduction](https://toddmotto.com/angular-component-router) by Todd
 [Angular Router: A Complete Example (build a Bootstrap Navigation Menu)](https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/)
+[The 7-step process of Angular router navigation](https://www.jvandemo.com/the-7-step-process-of-angular-router-navigation/?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more) The best discussion about router url composition. Good reference to go to when dissect/construct a route url.
+[Our solution for getting a previous route with Angular 5](https://blog.hackages.io/our-solution-to-get-a-previous-route-with-angular-5-601c16621cf0)
