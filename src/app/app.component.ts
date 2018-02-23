@@ -12,12 +12,13 @@ import * as fromStore from './store';
 })
 export class AppComponent implements OnInit{
   selectedTheme$: Observable<string>;
-
   title = 'ContentExplorer';
-  // Theme implementaion by binding/updating the host's class attribute.
+  lastTheme = '';
+  // Theme implementation by binding/updating the host's class attribute.
   @HostBinding('class') classes;
 
   constructor(
+    public overlayContainer: OverlayContainer,
     private store: Store<fromStore.State>,
   ) {}
 
@@ -28,6 +29,12 @@ export class AppComponent implements OnInit{
       value => {
         // update the theme
         this.classes = value;
+        const classList = this.overlayContainer.getContainerElement().classList;
+        if (this.lastTheme) {
+          classList.remove(this.lastTheme);
+        }
+        classList.add(value);
+        this.lastTheme = value;
       }
     );
     // do a test
