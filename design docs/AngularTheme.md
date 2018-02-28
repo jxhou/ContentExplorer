@@ -108,6 +108,16 @@ In reference [4], there is a theme picker component where the theme switch is im
 
 The pre-built angular material themes (.css file) shipped with material only apply to angular material components using angular-material-theme mixin. Therefore the predefined themes are recompiled in order to add theme for custom components for each themes. Instead of loading all themes always, it actually dynamically remove and add corresponding pre-built theme from index.html in order to switch theme.
 
+## Custom Theme implementation in this project
+This project fully take advantage of angular material theme capability. Multiple custom themes are built, and selectable in theme setting page. All the custom components in the application can be themed with selected theme.
+
+The theme selection is implemented using gated class. Theme class is added to the host tag of app.component. Theme is one of the app states in ngrx store. Theme-Settings.component.ts is the component allows user to select desired theme, where a SetThemeAction is fired. While app.component.ts subscribes the theme setting state and then add the corresponding theme class to the host html tag.
+
+Make sure to do following additional steps:
+1. Add class = "mat-app-background" to root, if content is not in \<mat-sidenav-container>. This ensures that the proper theme background is applied to your page.
+
+2. Add theme's css class to the global overlay container when switch theme for overlay-based components such as menu, select, dialog. See details in app.component.ts
+
 # Sass Basics
 1.  Preprocessing
 compile your Sass (.scss) to CSS using the sass command: sass input.scss output.css.
