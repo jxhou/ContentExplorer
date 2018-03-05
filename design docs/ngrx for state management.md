@@ -40,6 +40,8 @@ The selectors can be defined in each *.reducer.ts, or in a separate *.selectors.
 4. reducer content:
 Each *.reducer.ts file define a sub-module state interface, and an initial state for the sub-module along with reducer function.  Basic element selectors of the state are also defined.
 
+Best practice for reducer function: Each reducer function should have type definitions for each input parameters, and return type. When create new immutable states, using spread operator instead of Object.assign to enable strict type checking to prevent any invalid property of state (see reference 11) and example in \src\app\store\reducers\theme.ts. 
+
 The barrel store/reducers/index.ts will define a composite state interface and a composite reducers for the entire module, besides roll up the exports from children. The best practice for defining the composite reducers is to use ActionReducerMap with state interface to make sure the reducers matching with state interface. e.g.
 ```
 
@@ -72,7 +74,7 @@ This state definition can then be used in any component constructor where the st
 @ngrx/router-store supports router state in the store. With StoreRouterConnectingModule imported, this module will be able to update router state in store. But the app has to register pre-defined routerReducers, in order for router state to be available in store. One can define custom serializer for the router state, also define custom actions such as GO, BACK, FORWARD. All those can be wrapped in module. See details in router_store_ext module.
 May add breadcrumb into router state (?).
 
-6. Use action creator to define action as the best practice (see reference 9).
+6. Use a combination of Action Constant, Action Creator, TypeScript, and the Action interface to enable strict  type checking (see reference 9).
 
 ## **References**:
 1. [ngrx github](https://github.com/ngrx/platform)
@@ -87,3 +89,4 @@ May add breadcrumb into router state (?).
 8. [Finally understand Redux by building your own Store](https://toddmotto.com/redux-typescript-store) by Todd
 9. [NGRX Store: Actions versus Action Creators](https://toddmotto.com/ngrx-store-actions-versus-action-creators)
 10. [Todd Motto - Angular Architecture: From Patterns to Implementation](https://www.youtube.com/watch?v=vGKRKDPGUSs) container component handles state, while presentational component use input/output to communicate state.
+11. [Object.assign() vs Object Spread { … } In Angular Ngrx Reducers🥊](https://medium.com/@tomastrajan/object-assign-vs-object-spread-in-angular-ngrx-reducers-3d62ecb4a4b0)

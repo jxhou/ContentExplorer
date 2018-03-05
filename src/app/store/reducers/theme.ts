@@ -9,11 +9,12 @@ const initialState: State = {
   themeName: 'indigo-theme'
 };
 
+// Provide State as return of the reducer function and use spread operator enabling strict type checking by Typescript. 
 export function reducer(state = initialState, action: theme.Actions): State {
   switch (action.type) {
     case theme.SET_THEME:
       return {
-        themeName: action.payload,
+        ...state, themeName: action.payload,
       };
 
     default:
