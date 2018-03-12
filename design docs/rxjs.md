@@ -24,6 +24,12 @@ Higher order Observables: This is when items of an Observable are Observables th
 In many angular use cases, the inner observable, such as http service, will complete with only one item. In those simple cases, we can fire http requests concurrently (mergeMap), or sequentially (concatMap), or cancel previous request (exclude results from previous), after new request (switchMap). It is quite obviously which one to use in real application, once one know the difference. Search is one of scenarios in which switchMap can be used, where previous search results are not needed after new search term is generated.
 
 See ref 6 for some more discussion about the usage of the higher order observables.
+
+## ref 7, and 8
+HttpClient is a cold observable. Multiple subscriptions to a cold observable will trigger the observable multiple times. In the case of HttpClient, multiple requests will be fired against the backend. To avoid unnecessary requests, shareReplay(1) operator can be used to share same http result with multiple subscriptions.
+
+Ref 7 demonstrates a sophisticated way of using rxjs to achieve the caching implementation. switchMap, mergeMap, merge
+
 ## References:
 1. [Using the takeUntil RxJS Operator to Manage Subscriptions Declaratively](https://alligator.io/angular/takeuntil-rxjs-unsubscribe/)
 2. [Manage your observable subscriptions in Angular with help of rx.js](https://hackernoon.com/manage-your-observable-subscriptions-in-angular-with-help-of-rx-js-f574b590a5cb)  
@@ -31,3 +37,5 @@ See ref 6 for some more discussion about the usage of the higher order observabl
 4. [When to Unsubscribe in Angular](https://netbasal.com/when-to-unsubscribe-in-angular-d61c6b21bad3)  
 5. [mergeMap vs flatMap vs concatMap vs switchMap](https://tolikcode.github.io/post/rxjsMap/)
 6. [Your NGRX Effects are Probably Wrong](https://medium.com/@amcdnl/your-ngrx-effects-are-probably-wrong-574460868005)
+7. [ADVANCED CACHING WITH RXJS](https://blog.thoughtram.io/angular/2018/03/05/advanced-caching-with-rxjs.html)
+8. [COLD VS HOT OBSERVABLES](https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html)
