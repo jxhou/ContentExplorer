@@ -1,6 +1,6 @@
 [How to list / output all routes in @Routes in my Angular2 App](https://stackoverflow.com/questions/37569936/how-to-list-output-all-routes-in-routes-in-my-angular2-app)
 
-example dynamically add routes
+example dynamically add routes via activatedRoute, however the routed component has to be added in entryComponent statically.
 https://embed.plnkr.co/wBorFvoG3hfD36iOcNqu/
 
 How to dynamically add components to NgModule in Angular 4 and @angular/cli?
