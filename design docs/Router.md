@@ -15,6 +15,11 @@ ANALYZE_FOR_ENTRY_COMPONENTS
 Dynamically load components without breaking AoT - Angular2
 https://stackoverflow.com/questions/42482917/dynamically-load-components-without-breaking-aot-angular2
 
+How to provide routes dynamically at bootstrap?
+https://stackoverflow.com/questions/39588633/how-to-provide-routes-dynamically-at-bootstrap
+
+
+
 ## **References**:
 [Routing & Navigation official doc](https://angular.io/guide/router)  
 [Angular Router](https://vsavkin.com/angular-2-router-d9e30599f9ea) by savkin  
