@@ -18,7 +18,9 @@ https://stackoverflow.com/questions/42482917/dynamically-load-components-without
 How to provide routes dynamically at bootstrap?
 https://stackoverflow.com/questions/39588633/how-to-provide-routes-dynamically-at-bootstrap
 
-
+Understanding AOT and Dynamic Components
+http://tutorials.indianjobs.co.in/2017/01/understanding-aot-and-dynamic-components.html
+Example of how to use ANALYZE_FOR_ENTRY_COMPONENTS to add dynamic components to entryComponent property.
 
 ## **References**:
 [Routing & Navigation official doc](https://angular.io/guide/router)  
