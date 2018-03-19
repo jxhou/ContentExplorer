@@ -36,6 +36,7 @@ Ref 7 demonstrates a sophisticated way of using rxjs to achieve the caching impl
 3. [RxJS: Don’t Unsubscribe](https://medium.com/@benlesh/rxjs-dont-unsubscribe-6753ed4fda87) 
 4. [When to Unsubscribe in Angular](https://netbasal.com/when-to-unsubscribe-in-angular-d61c6b21bad3)  
 5. [mergeMap vs flatMap vs concatMap vs switchMap](https://tolikcode.github.io/post/rxjsMap/)
+5a. [RxJS: Avoiding switchMap-Related Bugs](https://blog.angularindepth.com/switchmap-bugs-b6de69155524)
 6. [Your NGRX Effects are Probably Wrong](https://medium.com/@amcdnl/your-ngrx-effects-are-probably-wrong-574460868005)
 7. [ADVANCED CACHING WITH RXJS](https://blog.thoughtram.io/angular/2018/03/05/advanced-caching-with-rxjs.html)
 8. [COLD VS HOT OBSERVABLES](https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html)

@@ -13,6 +13,7 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
+  /*
   {
     path: 'settings',
     component: SettingsComponent,
@@ -30,21 +31,5 @@ export const routes: Routes = [
       }
     ]
   }
-  /*
-  {
-    path: 'my-questions',
-    loadChildren: 'app/myQuestions/my-questions.module#MyQuestionsModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'game-play',
-    loadChildren: 'app/game-play/game-play.module#GamePlayModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin',
-    loadChildren: 'app/admin/admin.module#AdminModule',
-    canActivate: [AuthGuard],
-    canLoad: [AuthGuard]
-  }*/
+  */
 ];

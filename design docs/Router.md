@@ -1,6 +1,6 @@
 [How to list / output all routes in @Routes in my Angular2 App](https://stackoverflow.com/questions/37569936/how-to-list-output-all-routes-in-routes-in-my-angular2-app)
 
-example dynamically add routes via activatedRoute, however the routed component has to be added in entryComponent statically.
+example dynamically add routes via activatedRoute, however the routed component has to be added in entryComponent statically. plunker examples.
 https://embed.plnkr.co/wBorFvoG3hfD36iOcNqu/
 
 How to dynamically add components to NgModule in Angular 4 and @angular/cli?
@@ -21,6 +21,14 @@ https://stackoverflow.com/questions/39588633/how-to-provide-routes-dynamically-a
 Understanding AOT and Dynamic Components
 http://tutorials.indianjobs.co.in/2017/01/understanding-aot-and-dynamic-components.html
 Example of how to use ANALYZE_FOR_ENTRY_COMPONENTS to add dynamic components to entryComponent property.
+
+How to inject routes to external angular module
+https://stackoverflow.com/questions/43494678/how-to-inject-routes-to-external-angular-module
+Use provideRoutes to add routes.
+
+How to manually lazy load a module?
+https://stackoverflow.com/questions/40293240/how-to-manually-lazy-load-a-module
+link to provideRoutes implementation in angular router_module.ts
 
 ## **References**:
 [Routing & Navigation official doc](https://angular.io/guide/router)  
