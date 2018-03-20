@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -10,9 +11,18 @@ export class SettingsComponent implements OnInit {
   [{label: 'theme', link: 'theme'},
   {label: 'test', link: 'test'}];
 
-  constructor() { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    for (const child of activatedRoute.routeConfig.children) {
+      if (child.path) {
+      }
+    }
+  }
 
   ngOnInit() {
+    for (const child of this.activatedRoute.routeConfig.children) {
+      if (child.path) {
+      }
+    }
   }
 
 }

@@ -13,7 +13,7 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
-  /*
+ /*
   {
     path: 'settings',
     component: SettingsComponent,
@@ -31,5 +31,5 @@ export const routes: Routes = [
       }
     ]
   }
-  */
+*/
 ];
