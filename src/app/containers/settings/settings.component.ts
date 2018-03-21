@@ -7,15 +7,18 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  tabs: {label: string, link: string}[] =
-  [{label: 'theme', link: 'theme'},
-  {label: 'test', link: 'test'}];
+  tabs: {label: string, link: string}[];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    /*
     for (const child of activatedRoute.routeConfig.children) {
       if (child.path) {
       }
     }
+    */
+    this.tabs = activatedRoute.routeConfig.children.map(child => {
+      return {label: child.data.title, link: child.path};
+    });
   }
 
   ngOnInit() {

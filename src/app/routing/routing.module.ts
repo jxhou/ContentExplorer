@@ -19,10 +19,16 @@ const EXTRA_ROUTES: Routes =
       {
         path: 'theme',
         component: ThemeSettingsComponent,
+        data: {
+          title: 'theme'
+        },
       },
       {
         path: 'test',
         component: TestSettingComponent,
+        data: {
+          title: 'test'
+        },
       }
     ]
   }
