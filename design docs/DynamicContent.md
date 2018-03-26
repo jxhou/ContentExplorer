@@ -22,8 +22,40 @@ In angular, every component is created via component factory. The component fact
 Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
 This only works if both components are defined in the same module or if a module with a resolved component factory is imported.
 
-# How to dynamically declare EntryComponents
+# Use ANALYZE_FOR_ENTRY_COMPONENTS to dynamically declare EntryComponents
+Straight from angular.io, ANALYZE_FOR_ENTRY_COMPONENTS token can be used to create a virtual provider that will populate the entryComponents fields of components and ng modules based on its useValue. All components that are referenced in the useValue value (either directly or in a nested array or map) will be added to the entryComponents property.
 
+```
+// helper function inside the router
+function provideRoutes(routes) {
+  return [
+    {provide: ROUTES, useValue: routes},
+    {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: routes, multi: true}
+  ];
+}
+
+// user code
+let routes = [
+  {path: '/root', component: RootComp},
+  {path: '/teams', component: TeamsComp}
+];
+
+@NgModule({
+  providers: [provideRoutes(routes)]
+})
+class ModuleWithRoutes {}
+```
+
+The dynamic entry components declaration is actually in the format of providers. As the above code example shows how to use ANALYZE_FOR_ENTRY_COMPONENTS token, it is also the implementation of provideRoutes function of Angular, which uses ANALYZE_FOR_ENTRY_COMPONENTS trick internally.
+
+# Dynamically declare routes:
+As the example shown above, Angular has provideRoutes function using ANALYZE_FOR_ENTRY_COMPONENTS token to dynamically declare routes. The above code shows that routes are declared using two tokens: ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS. [RouterModule.forRoot()](https://github.com/angular/angular/blob/5298b2bda34a8766b28c8425e447f94598b23901/packages/router/src/router_module.ts#L142), and [RouterModule.forChild()](https://github.com/angular/angular/blob/5298b2bda34a8766b28c8425e447f94598b23901/packages/router/src/router_module.ts#L175) actually use above provideRoutes function to declare routes.  
+
+Therefore provideRoutes function is not much different from either RouterModule.forRoot() or RouterModule.forChild().
+
+Another approach to deal with routes: we could dynamically add route configuration into Router, which is equivalent to using ROUTES provider. However all the routable components have to be declared in entryComponent or using ANALYZE_FOR_ENTRY_COMPONENTS. See more details in Router.md.
+
+As shown above, the both ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS are tokens for provider declaration, which should get merged as root providers available for all application. However if it is declared in lazy loaded modules, it is only available within its module, as the behavior of any lazy loaded modules.
 
 # **How to create dynamic content (literature survey and summery)**
 There are two types of views which can be created dynamically: 
