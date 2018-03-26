@@ -1,3 +1,11 @@
+
+https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
+
+Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
+This only works if both components are defined in the same module or if a module with a resolved component factory is imported.
+
+[What you always wanted to know about Angular Dependency Injection tree](https://blog.angularindepth.com/angular-dependency-injection-and-tree-shakeable-tokens-4588a8f70d5d)
+
 [How to list / output all routes in @Routes in my Angular2 App](https://stackoverflow.com/questions/37569936/how-to-list-output-all-routes-in-routes-in-my-angular2-app)
 
 example dynamically add routes via activatedRoute, however the routed component has to be added in entryComponent statically. plunker examples.

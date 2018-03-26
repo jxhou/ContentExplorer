@@ -16,6 +16,14 @@ ngTemplateOutlet is the way I am going to use to implement my toolbar with dynam
 ## My implementation details
 
 --------------------
+# Dynamic component, ComponentFactory, and EntryComponents
+In angular, every component is created via component factory. The component factories are created by angular compiler by parsing the template in components, which are static and declarative. However the dynamic components are not declared in template. In order for angular to create components dynamically, the component has to be declared in NgModule's entryComponents. Angular can also implicitly declare entry Component, such as bootstrap component, components in route definition, to save extra task for user. So angular will also create component factories for all the components declared as entry component explicitly and implicitly.
+
+Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
+This only works if both components are defined in the same module or if a module with a resolved component factory is imported.
+
+# How to dynamically declare EntryComponents
+
 
 # **How to create dynamic content (literature survey and summery)**
 There are two types of views which can be created dynamically: 
