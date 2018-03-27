@@ -33,3 +33,32 @@ export const routes: Routes = [
   }
 */
 ];
+
+// This extra routes can be merged in routes above.
+// But just show another way to configure routes
+export const SETTING_ROUTES: Routes =
+[
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    data: {
+      title: 'Settings'
+    },
+    children: [
+      {
+        path: 'theme',
+        component: ThemeSettingsComponent,
+        data: {
+          title: 'theme'
+        },
+      },
+      {
+        path: 'test',
+        component: TestSettingComponent,
+        data: {
+          title: 'test'
+        },
+      }
+    ]
+  }
+]

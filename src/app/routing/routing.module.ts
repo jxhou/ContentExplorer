@@ -1,38 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, provideRoutes, Routes  } from '@angular/router';
 
-import { routes } from './app.route';
+import { routes, SETTING_ROUTES } from './app.route';
 import { SettingsComponent, DashboardComponent } from '../containers';
 import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
-
-
-const EXTRA_ROUTES: Routes =
-[
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    data: {
-      title: 'Settings'
-    },
-    children: [
-      {
-        path: 'theme',
-        component: ThemeSettingsComponent,
-        data: {
-          title: 'theme'
-        },
-      },
-      {
-        path: 'test',
-        component: TestSettingComponent,
-        data: {
-          title: 'test'
-        },
-      }
-    ]
-  }
-]
 
 @NgModule({
   imports: [
@@ -42,6 +14,7 @@ const EXTRA_ROUTES: Routes =
   exports: [
     RouterModule
   ],
-  providers: [provideRoutes(EXTRA_ROUTES)]
+  // simply show how to configure routes using provideRoutes function, not necessary at all.
+  providers: [provideRoutes(SETTING_ROUTES)]
 })
 export class RoutingModule { }
