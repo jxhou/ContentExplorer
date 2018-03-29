@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import { SettingsComponent, DashboardComponent } from '../containers';
+import { DashboardComponent } from '../containers';
+import { SettingsComponent } from '../settings/settings.component';
 import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
 

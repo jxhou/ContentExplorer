@@ -13,20 +13,20 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
 
     // Forms
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
 
-    //Material
+    // Material
     SharedMaterialModule,
 
-    //Flex
+    // Flex
     FlexLayoutModule,
 
     BrowserAnimationsModule
 
   ],
-  providers: [ 
-  ],                                                                      
+  providers: [
+  ],
   exports:  [
               CommonModule, ReactiveFormsModule, FormsModule,
               FlexLayoutModule, BrowserAnimationsModule,

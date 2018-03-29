@@ -1,21 +1,24 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { SettingsComponent } from './settings.component';
 import { Routes, provideRoutes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+
+import { SharedModule } from '@app/shared';
+import { SettingsComponent } from './settings.component';
 
 @NgModule({
+  declarations: [SettingsComponent],
   imports: [
-    CommonModule // we use ngFor
+    SharedModule,
+    RouterModule,
   ],
   exports: [
     SettingsComponent
   ],
-  declarations: [],
   providers: []
 })
 export class SettingsModule {
-  static withRoutes(routes: Routes) {
+  static withRoutes(routes: Routes): ModuleWithProviders {
     return {
         ngModule: SettingsModule,
         providers: [
