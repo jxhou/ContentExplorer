@@ -21,11 +21,13 @@ import { environment } from '../environments/environment';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ThemeSettingsComponent } from './components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from './components/test-setting/test-setting.component';
+import { PageNotFoundComponent } from './components/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // SettingsComponent,
+    PageNotFoundComponent,
     DashboardComponent,
     ThemeSettingsComponent,
     TestSettingComponent

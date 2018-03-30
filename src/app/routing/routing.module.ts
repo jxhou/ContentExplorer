@@ -9,9 +9,9 @@ import { SettingsModule } from '../settings/settings.module';
 
 @NgModule({
   imports: [
-    // Router
-    RouterModule.forRoot(routes),
+    // Router: any other routes have to go before RouterModule.forRoot(routes). Otherwise wiild card route will match.
     SettingsModule.withRoutes(SETTING_ROUTES),
+    RouterModule.forRoot(routes),
   ],
   exports: [
     RouterModule,
