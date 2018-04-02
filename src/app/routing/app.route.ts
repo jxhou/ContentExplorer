@@ -10,6 +10,13 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    data: {
+      title: 'Settings'
+    },
+  },
  /*
   {
     path: 'settings',
@@ -65,3 +72,24 @@ export const SETTING_ROUTES: Routes =
     ]
   }
 ]
+
+// This extra routes can be merged in routes above.
+// But just show another way to configure routes
+export const SETTING_CHILD_ROUTES: Routes =
+[
+  {
+    path: 'theme',
+    component: ThemeSettingsComponent,
+    data: {
+      title: 'theme'
+    },
+  },
+  {
+    path: 'test',
+    component: TestSettingComponent,
+    data: {
+      title: 'test'
+    },
+  }
+]
+

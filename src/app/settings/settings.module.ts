@@ -4,9 +4,8 @@ import { Routes, provideRoutes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '@app/shared';
-import { SettingsComponent } from './settings.component';
+import { SettingsComponent, SETTINGS_ROUTES } from './settings.component';
 
-export const SETTINGS_ROUTES = new InjectionToken<Routes>('settings.routes');
 
 @NgModule({
   declarations: [SettingsComponent],
