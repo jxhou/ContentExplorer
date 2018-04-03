@@ -22,7 +22,7 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ThemeSettingsComponent } from './components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from './components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from './components/not-found.component';
-
+import { TestModuleModule } from './test-module/test-module.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +38,7 @@ import { PageNotFoundComponent } from './components/not-found.component';
     SharedModule,
     RoutingModule,
     LayoutModule,
+    TestModuleModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of
