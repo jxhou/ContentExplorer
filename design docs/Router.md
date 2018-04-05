@@ -46,7 +46,16 @@ link to provideRoutes implementation in angular router_module.ts
 [Angular Router, Preloading Modules](https://vsavkin.com/angular-router-preloading-modules-ba3c75e424cb)  by savkin  
 [Angular Router: Declarative Lazy Loading](https://vsavkin.com/angular-router-declarative-lazy-loading-7071d1f203ee) by savkin  
 [Access parent Route params with Angular's Router](https://toddmotto.com/angular-parent-routing-params) by Todd  
-[ Angular's Router: the Introduction](https://toddmotto.com/angular-component-router) by Todd
-[Angular Router: A Complete Example (build a Bootstrap Navigation Menu)](https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/)
-[The 7-step process of Angular router navigation](https://www.jvandemo.com/the-7-step-process-of-angular-router-navigation/?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more) The best discussion about router url composition. Good reference to go to when dissect/construct a route url.
-[Our solution for getting a previous route with Angular 5](https://blog.hackages.io/our-solution-to-get-a-previous-route-with-angular-5-601c16621cf0)
+[ Angular's Router: the Introduction](https://toddmotto.com/angular-component-router) by Todd  
+[Angular Router: A Complete Example (build a Bootstrap Navigation Menu)](https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/)  
+[The 7-step process of Angular router navigation](https://www.jvandemo.com/the-7-step-process-of-angular-router-navigation/?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more)   
+The best discussion about router url composition. Good reference to go to when dissect/construct a route url.
+[Our solution for getting a previous route with Angular 5](https://blog.hackages.io/our-solution-to-get-a-previous-route-with-angular-5-601c16621cf0)  
+[Lazy Loading Angular - Code Splitting NgModules with Webpack](https://toddmotto.com/lazy-loading-angular-code-splitting-webpack)  
+Show example how to eagerly load module using lazy load method.
+[Angular: Understanding Modules and Services](https://medium.com/@michelestieven/organizing-angular-applications-f0510761d65a)  
+Point out eagerly load a module configured in lazy loading is a better way than just using eagerly load format.
+[Routing to sub routing module without lazy loading](https://stackoverflow.com/questions/45447069/routing-to-sub-routing-module-without-lazy-loading)  
+Stackoverflow issue about eagerly load module with lazy format.
+
+
