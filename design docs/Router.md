@@ -57,6 +57,7 @@ Show example how to eagerly load module using lazy load method.
 Point out eagerly load a module configured in lazy loading is a better way than just using eagerly load format.
 [Routing to sub routing module without lazy loading](https://stackoverflow.com/questions/45447069/routing-to-sub-routing-module-without-lazy-loading)  
 Stackoverflow issue about eagerly load module with lazy format.  
-[Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)
+[Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
+A toolbar example dynamically add components embedded in lazy loaded module.
 
 

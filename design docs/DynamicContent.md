@@ -238,3 +238,5 @@ Reference 8 shows an overlay example using customized injector to pass data to d
 8. [CUSTOM OVERLAYS WITH ANGULAR'S CDK](https://blog.thoughtram.io/angular/2017/11/20/custom-overlays-with-angulars-cdk.html)
 9. [CUSTOM OVERLAYS WITH ANGULAR'S CDK - PART 2](https://blog.thoughtram.io/angular/2017/11/27/custom-overlays-with-angulars-cdk-part-two.html)
 10. [Angular2: Binding an observable to an immutable child component input.](http://almerosteyn.com/2016/03/immutable-component-input-from-observable)
+11. [Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
+A toolbar example dynamically add components embedded in lazy loaded module. And also a feature request for angular.
