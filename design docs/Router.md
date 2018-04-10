@@ -1,4 +1,14 @@
 
+Angular routing is based on dynamic component creation (see more detailed discussion in DynamicContent.md). Any routed components are implicitly declared as entryComponent which will be compiled by Angular to generate componentFactory, which can then be used to dynamically create a component. The route declaration actually results in two provide declarations: ANALYZE_FOR_ENTRY_COMPONENTS, and ROUTES, the former of which is the provider for entryComponents, the later is the provider of routing tree.
+
+There are two types of routes: eagerly loaded or lazy loaded.
+
+1. Eagerly loaded modules are directly imported, while lazy loaded one is not imported at all, only referred using loadChildren.
+2. All the providers in all eagerly (direct/indirect) loaded modules are merged into root injector, so are available application wide. However all the providers declared or imported in lazy loaded modules are not available outside of the lazy module itself, although there is feature request mentioned in ref. 15 to address this issue. Therefore any entryComponent declared in lazy load modules is not available, and can not be dynamically created outside of its module.
+3. Eagerly loaded modules, RouteModule.forRoot, forChild(). routeProvide
+4. lazy load routs its own context.
+5. eagerly load module using loadChildren (lazy format).
+
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
 
 Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
@@ -39,25 +49,25 @@ https://stackoverflow.com/questions/40293240/how-to-manually-lazy-load-a-module
 link to provideRoutes implementation in angular router_module.ts
 
 ## **References**:
-[Routing & Navigation official doc](https://angular.io/guide/router)  
-[Angular Router](https://vsavkin.com/angular-2-router-d9e30599f9ea) by savkin  
-[Angular Router, Understanding Redirects](https://vsavkin.com/angular-router-understanding-redirects-2826177761fc) by savkin  
-[Angular Router, Understanding Router State](https://vsavkin.com/angular-router-understanding-router-state-7b5b95a12eab) by savkin  
-[Angular Router, Preloading Modules](https://vsavkin.com/angular-router-preloading-modules-ba3c75e424cb)  by savkin  
-[Angular Router: Declarative Lazy Loading](https://vsavkin.com/angular-router-declarative-lazy-loading-7071d1f203ee) by savkin  
-[Access parent Route params with Angular's Router](https://toddmotto.com/angular-parent-routing-params) by Todd  
-[ Angular's Router: the Introduction](https://toddmotto.com/angular-component-router) by Todd  
-[Angular Router: A Complete Example (build a Bootstrap Navigation Menu)](https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/)  
-[The 7-step process of Angular router navigation](https://www.jvandemo.com/the-7-step-process-of-angular-router-navigation/?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more)   
+1. [Routing & Navigation official doc](https://angular.io/guide/router)  
+2. [Angular Router](https://vsavkin.com/angular-2-router-d9e30599f9ea) by savkin  
+3. [Angular Router, Understanding Redirects](https://vsavkin.com/angular-router-understanding-redirects-2826177761fc) by savkin  
+4. [Angular Router, Understanding Router State](https://vsavkin.com/angular-router-understanding-router-state-7b5b95a12eab) by savkin  
+5. [Angular Router, Preloading Modules](https://vsavkin.com/angular-router-preloading-modules-ba3c75e424cb)  by savkin  
+6. [Angular Router: Declarative Lazy Loading](https://vsavkin.com/angular-router-declarative-lazy-loading-7071d1f203ee) by savkin  
+7. [Access parent Route params with Angular's Router](https://toddmotto.com/angular-parent-routing-params) by Todd  
+8. [Angular's Router: the Introduction](https://toddmotto.com/angular-component-router) by Todd  
+9. [Angular Router: A Complete Example (build a Bootstrap Navigation Menu)](https://blog.angular-university.io/angular-2-router-nested-routes-and-nested-auxiliary-routes-build-a-menu-navigation-system/)  
+10. [The 7-step process of Angular router navigation](https://www.jvandemo.com/the-7-step-process-of-angular-router-navigation/?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more)   
 The best discussion about router url composition. Good reference to go to when dissect/construct a route url.
-[Our solution for getting a previous route with Angular 5](https://blog.hackages.io/our-solution-to-get-a-previous-route-with-angular-5-601c16621cf0)  
-[Lazy Loading Angular - Code Splitting NgModules with Webpack](https://toddmotto.com/lazy-loading-angular-code-splitting-webpack)  
+11. [Our solution for getting a previous route with Angular 5](https://blog.hackages.io/our-solution-to-get-a-previous-route-with-angular-5-601c16621cf0)  
+12. [Lazy Loading Angular - Code Splitting NgModules with Webpack](https://toddmotto.com/lazy-loading-angular-code-splitting-webpack)  
 Show example how to eagerly load module using lazy load method.
-[Angular: Understanding Modules and Services](https://medium.com/@michelestieven/organizing-angular-applications-f0510761d65a)  
+13. [Angular: Understanding Modules and Services](https://medium.com/@michelestieven/organizing-angular-applications-f0510761d65a)  
 Point out eagerly load a module configured in lazy loading is a better way than just using eagerly load format.
-[Routing to sub routing module without lazy loading](https://stackoverflow.com/questions/45447069/routing-to-sub-routing-module-without-lazy-loading)  
+14. [Routing to sub routing module without lazy loading](https://stackoverflow.com/questions/45447069/routing-to-sub-routing-module-without-lazy-loading)  
 Stackoverflow issue about eagerly load module with lazy format.  
-[Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
+15. [Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
 A toolbar example dynamically add components embedded in lazy loaded module.
 
 
