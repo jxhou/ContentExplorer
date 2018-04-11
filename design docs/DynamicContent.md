@@ -29,7 +29,7 @@ Straight from angular.io, ANALYZE_FOR_ENTRY_COMPONENTS token can be used to crea
 // helper function inside the router
 function provideRoutes(routes) {
   return [
-    {provide: ROUTES, useValue: routes},
+    {provide: ROUTES, useValue: routes, multi: true,},
     {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: routes, multi: true}
   ];
 }

@@ -1,14 +1,49 @@
+# routing
 
+## Summery
 Angular routing is based on dynamic component creation (see more detailed discussion in DynamicContent.md). Any routed components are implicitly declared as entryComponent which will be compiled by Angular to generate componentFactory, which can then be used to dynamically create a component. The route declaration actually results in two provide declarations: ANALYZE_FOR_ENTRY_COMPONENTS, and ROUTES, the former of which is the provider for entryComponents, the later is the provider of routing tree.
 
 There are two types of routes: eagerly loaded or lazy loaded.
 
-1. Eagerly loaded modules are directly imported, while lazy loaded one is not imported at all, only referred using loadChildren.
-2. All the providers in all eagerly (direct/indirect) loaded modules are merged into root injector, so are available application wide. However all the providers declared or imported in lazy loaded modules are not available outside of the lazy module itself, although there is feature request mentioned in ref. 15 to address this issue. Therefore any entryComponent declared in lazy load modules is not available, and can not be dynamically created outside of its module.
-3. Eagerly loaded modules, RouteModule.forRoot, forChild(). routeProvide
-4. lazy load routs its own context.
-5. eagerly load module using loadChildren (lazy format).
+1. Eagerly loaded modules are directly imported, while lazy loaded one is not imported at all, only referred using loadChildren.  
 
+2. All the providers in all eagerly (direct/indirect) loaded modules are merged into root injector, so are available application wide. However all the providers declared or imported in lazy loaded modules are not available outside of the lazy module itself, although there is feature request mentioned in ref. 15 to address this issue. Therefore any entryComponent declared in lazy load modules is not available, and can not be dynamically created outside of its module.  
+
+3. For eagerly loaded modules, RouterModule.forRoot, RouterModule.forChild() are used in root module and feature modules respectively. Except loading router related singleton providers, forRoot() basically does same thing as forChild() by calling provideRoutes(routes) as provider, which basically provide both ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS tokens (see details in DynamicContent.md). ROUTES will add routes to router configuration, and ANALYZE_FOR_ENTRY_COMPONENTS will declare entryComponents, both of which take an object of type Routes.   
+
+The routes declared by ROUTES token in either forRoot() or forChild() are refer to the root of router configuration. So a full path of routing is needed when configure a child route. So a root module and feature module independently add their routes to the router configuration using forRoot() or forChild(), if they are not related. However for nested parent/child routes, it is a common practice to write routing configure in parent component including nested child routes in one location to maintain the correct tree structure. The bad thing about this is that the parent component need to know all the details of routing in child components, when define the route configuration. Although one can configure nested routes in different modules, but one have to make sure to have right route path starting from root.  
+
+However the lazy loaded module behave differently as show below:
+
+4. Lazy load module maintains its own context starting from parent component. That means you can define route configuration in lazy loaded module using forChild() as itself as root. The routing tree is then appended to its parent routing tree after the module is lazy loaded. This way parent and child route configuration are completely isolated with each other. There is a common practice in lazy loaded module using a empty path for the host component in lazy loaded module, and define its children underneath it (see ref 12 for example). 
+
+Obviously the lazy loaded module has a better route configuration setup. There is a trick to use the same route configuration setup for eagerly loaded module, which is a preferred way suggested in ref 13.
+
+5. Eagerly load module using loadChildren (lazy format).
+A module can also be loaded eagerly using lazy loading syntax in order to take advantage of the isolated, append-able sub-route tree (see ref 12, 13, and 14).
+```
+
+import { DashboardModule } from '../dashboard/dashboard.module';
+
+export const ROUTES: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+  { path: 'dashboard', loadChildren: () => DashboardModule },
+  {
+    path: 'settings',
+    loadChildren: '../settings/settings.module#SettingsModule',
+  },
+  { path: 'reports', loadChildren: '../reports/reports.module#ReportsModule' },
+];
+
+```
+where DashboardModule is imported at the beginning, and `{ path: 'dashboard', loadChildren: () => DashboardModule },` in route configuration, while DashboardModule can define its own nested routes internally just like any lazy loaded module.
+
+6. Add routes to route configuration programmatically.
+Besides configure route using ROUTES token (which RouterModule.forRoot/forChild use internally), Router interface can be used to add routes to the configuration.
+
+## Setting module implementation with dynamic routing
+
+## The related references for dynamic Setting components
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
 
 Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
