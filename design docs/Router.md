@@ -43,6 +43,11 @@ Besides configure route using ROUTES token (which RouterModule.forRoot/forChild 
 
 ## Setting module implementation with dynamic routing
 
+### Goal of settings page implementation
+The settings page is designed to host setting pages from different modules. The settings page acts as a container for setting page from any module without any existing knowledge. When a new module with setting page is created, it should be able to add its setting page to settings container without changing the settings container.
+
+
+
 ## The related references for dynamic Setting components
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
 
