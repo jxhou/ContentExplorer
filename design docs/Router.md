@@ -46,7 +46,84 @@ Besides configure route using ROUTES token (which RouterModule.forRoot/forChild 
 ### Goal of settings page implementation
 The settings page is designed to host setting pages from different modules. The settings page acts as a container for setting page from any module without any existing knowledge. When a new module with setting page is created, it should be able to add its setting page to settings container without changing the settings container.
 
+### implementation 1: see dynamicSetting/v1 branch
+setting.component.ts uses material tab control (<nav mat-tab-nav-bar>), which tab behavior using <router-outlet>.
+The SettingsModule
+src/app/settings/settings.module.ts
+```
+export class SettingsModule {
+  static withRoutes(routes: Routes): ModuleWithProviders {
+    return {
+        ngModule: SettingsModule,
+        providers: [
+          provideRoutes(routes)
+        ]
+    }
+  }
 
+```
+where withRoutes() static method takes a "routes" parameter, which contains dynamic components to be navigated in Routes format.
+
+Check out app/routing/routing.module.ts to see how withRoutes() is invoked.  
+Basically any module which want its setting component to display in settings container, just call SettingsModule.withRoutes(), which in turn call Angular's provideRoutes() to declare entryComponents and add routes to router configuration as discussed above.
+
+The point here is to show how to use provideRoutes() to dynamic register routing components.
+
+### implementation 2: 
+The current implementation separates the entryComponents and router configuration registration.
+
+The SettingsModule
+src/app/settings/settings.module.ts
+
+```
+static withSettingRoutes(routes: Routes) {
+    return {
+      ngModule: SettingsModule,
+      providers: [
+        {
+          provide: ANALYZE_FOR_ENTRY_COMPONENTS,
+          useValue: routes, multi: true
+        },
+        {
+          provide: SETTINGS_ROUTES,
+          useValue: routes, multi: true
+        },
+      ]
+    }
+  }
+
+```
+withSettingRoutes() still takes routes, which is relative route, but could be just array of component types.  
+ 
+Use ANALYZE_FOR_ENTRY_COMPONENTS token to register entry component, and use SETTINGS_ROUTES custom token to register a sub-routes, which then will be added dynamically to router configuration by settings.component.
+
+Any module which expose it setting page can import SettingsModule.withSettingRoutes() to register its setting page.
+
+src/app/settings/settings.component.ts
+```
+export class SettingsComponent implements OnInit {
+  tabs: {label: string, link: string}[];
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, @Inject(SETTINGS_ROUTES) private settingRoutes: Routes[]) {
+    // flatten array of Routes, and then dynamically add to current children
+    activatedRoute.routeConfig.children = [].concat.apply([], settingRoutes);
+    this.tabs = activatedRoute.routeConfig.children.map(child => {
+      return {label: child.data.title, link: child.path};
+    });
+  }
+
+  ngOnInit() {
+  }
+}
+
+```
+where SETTINGS_ROUTES is injected, and dynamically added to router configuration.  
+
+However this solution only works with eagerly loaded modules. For the lazy loaded module, all the providers registered are only available whithin its module as discussed above.
+
+### implementation 3: 
+Allow lazy loaded module to contribute its setting page to settings container.
+To be implemented, or wait till angular's support as discussed above.
 
 ## The related references for dynamic Setting components
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e

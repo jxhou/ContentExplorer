@@ -1,46 +1,57 @@
 
 # Angular animation summary[^1]
 [^1] This doc is currently based on angular 4.2.X
+
+## Overall View
+The "Animations" metadata is defined inside @Component decorator. The "Animations" metadata can include an array of "trigger"(s). Each trigger can include multiple states, and multiple transitions between those states. And each transition can include a sequence of animates, each of which animate different style properties, different part of dom elements, or even coordination between animations. 
+
+After the "Animations" metadata is in place, one can apply the trigger to any DOM tag, and assign value to the trigger by binding an expression, which is evaluated to one of states defined in the "Animations" metadata. Basically upates state of a dom element via the trigger which initiate a state transition.
+
+Besides the custom state defined using state() function, there are default states such as void and '*' wildcard. The custom state has to be explicitly triggered using trigger expression. But the default state such as 'void' can be automatically triggered when an element is attach/detached from dom. So a transition can be triggered when an element is explicitly/implicitly enter a state. 
+
+The visual effect of a transition depends on the styles used for from/to states. All the style information in "Animations" metadata tries to define styles for from/end states in variety of locations. Some styles are state style which will be persistent after animation, some styles are transition style which is only applied during transition.
+
 ## The general animation meta data structure with possible combination of elements:
+### an example:
 ```
 @Component({
    selector: 'example-app',
    styles: '...'
-   animations:                                                                    <--[1]--->
+   animations:                                                           <--[1]--->
+      [
+          trigger(
+            'my-trigger1',                                               <--[2]--->
             [
-               trigger(
-                  'my-trigger1',                                                  <--[2]--->
-                  [
-                        state('my-state1', style(...)),
-                        state('my-state2', style(...)),
-                        ...
-                        transition('my-state1 <=> my-state2',                     <--[3]--->
-                                    [
-                                          style(...),
-                                          animate(500, style({height: '250px'})), 
-                                          animate(500),
-                                          group([
-                                                style(...),
-                                                animate(...),
-                                                animate(...)
-                                          ]),
-                                          query(':enter', [                       <--[4]--->
-                                                style(...),
-                                                stagger(100, [
-                                                   animate('0.5s', style(...))
-                                                ])
-                                          ])
-                                    ]
-                              ),
-                        transition(...)
-                  ]
-               ),
-               ...
-               trigger(
-                  'my-trigger2',
-               ),
-               ....
-            ],
+                  state('my-state1', style(...)),
+                  state('my-state2', style(...)),
+                  ...
+                  transition('my-state1 <=> my-state2',                  <--[3]--->
+                    [
+                          style(...),
+                          animate(500, style({height: '250px'})), 
+                          animate(500),
+                          group([
+                                style(...),
+                                animate(...),
+                                animate(...)
+                          ]),
+                          query(':enter', [                             <--[4]--->
+                                style(...),
+                                stagger(100, [
+                                    animate('0.5s', style(...))
+                                ])
+                          ])
+                    ]
+                  ),
+                  transition(...)
+            ]
+          ),
+          ...
+          trigger(
+            'my-trigger2',
+          ),
+          ....
+      ],
    template: `
        <div [@my-trigger1]="stateExpression"><div>
    '
@@ -51,26 +62,27 @@ export class MyExpandoCmp {
   collapse() { this.stateExpression = 'collapsed'; }
 }
 ```
-
+### notation for the example:
 1. The "animations" section of component decorator includes an array of trigger: [trigger:, trigger], as shown above: my-trigger1 and my-trigger2.
 2. Each trigger has its trigger name, which is used in template as trigger binding, and an array of AnimationMetadata: state(s) and transition(s).
-3. Each transition has its stateChangeExpr such as 'my-state1 <=> my-state2', along with a step, or an array of steps. A step could be just:
+3. Each transition has its stateChangeExpr such as 'my-state1 <=> my-state2', along with a step, or an array of steps. A transition with one animate() step is as follow:
 transition("on <=> off", animate(500)),
-Or as complicated as the content in above animation structure.  
+Or complicated steps as shown in above animation structure.  
 When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequence function. The step in the array could be a [group](https://angular.io/api/animations/group), which a list of animations run in parallel.  
 A step could be a [query](https://angular.io/api/animations/query) function call.
 4. a [query](https://angular.io/api/animations/query) has a selector, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger), which can only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay
 
 
-## **state**
-## Custom state, declared using state function  
+## **State**
+### **Custom state, declared using state function:**  
 ```
 // user-defined states
 state("closed", style({ height: 0 }))
 state("open, visible", style({ height: "*" }))
 ```
 Each state has its name and associated styles, which will persist on the element after animation.  
-## predefined states
+
+### **predefined states**
 There are angular predefined states: "void" (detached from DOM), and "*", which mean any states included any defined states.   
 
 Those two predefined states make two popular state transitions: :enter and :leave values which are aliases for the void => * and * => void state changes. *=>* can also be used as catch-all transition.
@@ -79,15 +91,15 @@ It is not necessary to declare state using state function. The declared state us
 
 Animation state transition (:leave/:enter) can be triggered by attach/detach element to/from DOM; or *=>* by updating trigger binding.
 
-## **style function**
-Style function can used in a variety of places as shown above.
-1. Used in state function such as: state('my-state1', style(...)), which defines styles for start/end states. Then a simple animate() can be applied to a transition between the start/end states without specifying any style info. This is mostly used when apply simple animation to targeted element. When apply sophisticated animation to target component such as coordinating animations among sub-elements of targeted component using query, group function etc., usually state function is not used at all. The animation style defining is delayed in other locations as below:
+## **Style function**
+Style function can be applied in a variety of places as shown above.
+1. Used in state function such as: state('my-state1', style(...)), which defines styles for start/end states. Then a simple animate() can be applied to a transition between the start/end states without specifying any style info. This is mostly used when apply a simple animation to targeted element. When apply sophisticated animation to target component such as coordinating animations among sub-elements of targeted component using query, group function etc., usually state function is not used at all. The animation style defining is delayed in other locations as below:
 2. Define style in transition as first step in sequence:  
 transition('my-state1 <=> my-state2',                     
-            [
-                style(...),
-                animate(500, style({height: '250px'}))
-            ])  
+  [
+      style(...),
+      animate(500, style({height: '250px'}))
+  ])  
 where the 1st style is used as starting style during animation. 
 And similarly style defined in group, query function used as starting style.
 3. style used within animate function as above, which is used as ending style for animation. All the styles defined other than in state function are only used during animation. The style defined in state function will be persistent after animation ends. 
@@ -116,10 +128,11 @@ There are two types of styles:
    ])
 ```
 
-In order for animation to work, an initial and final states have to be defined. If we apply enter animation to an element, we’ll see that nothing happens. That is because in the ‘void’ state the element is not present in the view, so it doesn’t have any style to transition from. Therefore transition styles are needed for the void state. For other default state, by default, the Final State is the element naturally placed in the view, with the properties we have applied to it in CSS. Sometimes, you will see element animating between transition styles, and at the end abruptly show the state style.
+In order for animation to work, the styles of an initial and final states have to be defined. If we apply enter animation to an element, we’ll see that nothing happens. That is because in the ‘void’ state the element is not present in the view, so it doesn’t have any style to transition from. Therefore transition styles are needed for the void state. For other default state, by default, the Final State is the state of the element naturally placed in the view, with the properties we have applied to it in CSS. Sometimes, you will see element animating between transition styles, and at the end abruptly show the state style.
+
 
 ## Binding animation to element
-1. Place an animation trigger on an element within the template in the form of [@triggerName]="expression", where "expression" is from the component definition.
+1. Place an animation trigger on an element within the template in the form of [@triggerName]="expression", where "expression" is from the component definition. The expression will be evaluated to a state to trigger a state transition.
 2. Binding to the host element of current component  
 export class MyComponent {
   @HostBinding('@profileAnimation')
