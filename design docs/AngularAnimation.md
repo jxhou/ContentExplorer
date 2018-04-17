@@ -37,7 +37,7 @@ The visual effect of a transition depends on the styles used for from/to states.
                           ]),
                           query(':enter', [                             <--[4]--->
                                 style(...),
-                                stagger(100, [
+                                stagger(100, [                          <--[5]--->
                                     animate('0.5s', style(...))
                                 ])
                           ])
@@ -69,8 +69,13 @@ export class MyExpandoCmp {
 transition("on <=> off", animate(500)),
 Or complicated steps as shown in above animation structure.  
 When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequence function. The step in the array could be a [group](https://angular.io/api/animations/group), which a list of animations run in parallel.  
-A step could be a [query](https://angular.io/api/animations/query) function call.
-4. a [query](https://angular.io/api/animations/query) has a selector, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger), which can only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay
+4. A step could be a [query](https://angular.io/api/animations/query) function call. A query has a selector to find one or more elements within the element that’s being animated, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger).
+5. Stagger only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay.
+
+and some other animation functions:
+- animation() can be used to create reusable animations with input parameters
+- useAnimation() invokes reusable animations created with animation()
+- animateChild() will invoke child animations which are normally blocked
 
 
 ## **State**
