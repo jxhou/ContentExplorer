@@ -165,9 +165,9 @@ baz = "foz";
 0. [Animations (angular doc)](https://angular.io/guide/animations)
 1. [ANGULAR ANIMATIONS - FOUNDATION CONCEPTS](https://blog.thoughtram.io/angular/2016/09/16/angular-2-animation-important-concepts.html) by Thomas Burleson   
 2. [A WEB ANIMATIONS DEEP DIVE WITH ANGULAR](https://blog.thoughtram.io/angular/2017/07/26/a-web-animations-deep-dive-with-angular.html) by Dominic Elm  
-3. [Angular — Supercharge your Router transitions using new animation features (v4.3+)](https://medium.com/google-developer-experts/angular-supercharge-your-router-transitions-using-new-animation-features-v4-3-3eb341ede6c8) by Gerard Sans  
-4. [A New Wave of Animation Features in Angular](https://www.yearofmoo.com/2017/06/new-wave-of-animation-features.html)  (The most comprehensive introduction)  
-5. [ng4-animations-preview, github project](https://github.com/matsko/ng4-animations-preview) used in 4.
+3. [Angular — Supercharge your Router transitions using new animation features (v4.3+)](https://medium.com/google-developer-experts/angular-supercharge-your-router-transitions-using-new-animation-features-v4-3-3eb341ede6c8) by Gerard Sans  about routing animation
+4. [A New Wave of Animation Features in Angular](https://www.yearofmoo.com/2017/06/new-wave-of-animation-features.html)  (The most comprehensive introduction by Matias starting from Angular 4.2)  
+5. [ng4-animations-preview, github project](https://github.com/matsko/ng4-animations-preview) github example project referenced in reference 4.
 6. [ng4-animations-preview, demo site](http://slides.yearofmoo.com/ng4-animations-preview/demo/)
 7. [Angular 2/4 Animations Example](http://www.concretepage.com/angular-2/angular-2-4-animations-example) by Arvind Rai  
 8. [Angular — Applying Motion principles to a listing](https://medium.com/@gerard.sans/angular-applying-motion-principles-to-a-list-d5cdd35c899e) by Gerard Sans
@@ -176,6 +176,6 @@ baz = "foz";
 [matsko/AnimationMovieWebsite source code](https://github.com/matsko/AnimationMovieWebsite)  
 The most recent comprehensive animation demo code example using ng5.0.0 rc8 by Motias.
 10. [How To Style Angular Application Loading With Angular CLI Like a Boss](https://medium.com/@tomastrajan/how-to-style-angular-application-loading-with-angular-cli-like-a-boss-cdd4f5358554)  
-About loading animation to be implemented.
+About app loading animation: to be implemented.
 11. [Angular & Animations: bring life to your apps](https://medium.com/@aleixsuau/angular-animations-bring-life-to-your-apps-ca122e5db647) The best explanation about the animation syntax.
 12. [Angular Animations — Stagger Over Static and Async Data](https://itnext.io/angular-animations-stagger-over-static-and-async-data-3907c4889479)
