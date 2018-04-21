@@ -15,3 +15,5 @@ may build breadcrumb into ngrx's router state(?).
 8. [Getting to Know the @Attribute Decorator in Angular](https://netbasal.com/getting-to-know-the-attribute-decorator-in-angular-4f7c9fb61243) use @Attribute instead of @input for static data
 9. [Inactivity Auto-Logout w/ Angular and Ngrx](https://itnext.io/inactivity-auto-logout-w-angular-and-ngrx-3bcb2fd7983f)  
 A neat trick to implement inactivity timeout using ngrx.
+10. [introducing  xplat, multi-platform tools for Nx workspaces](https://nstudio.io/blog/introducing-xplat/)  
+will have electron support, yet to try.
