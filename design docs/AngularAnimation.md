@@ -30,17 +30,18 @@ The visual effect of a transition depends on the styles used for from/to states.
                           style(...),
                           animate(500, style({height: '250px'})), 
                           animate(500),
-                          group([
+                          group([                                        <--[4]--->
                                 style(...),
                                 animate(...),
                                 animate(...)
                           ]),
-                          query(':enter', [                             <--[4]--->
+                          query(':enter', [                             <--[5]--->
                                 style(...),
-                                stagger(100, [                          <--[5]--->
+                                stagger(100, [                          <--[6]--->
                                     animate('0.5s', style(...))
                                 ])
-                          ])
+                          ]),
+                          AnimateChild()
                     ]
                   ),
                   transition(...)
@@ -63,14 +64,43 @@ export class MyExpandoCmp {
 }
 ```
 ### notation for the example:
+0. animation DSL function or the step-based animation function such as 
+```
+sequence([...], { /* options */ })
+group([...], { /* options */ })
+trigger([...], { /* options */ })
+transition([...], { /* options */ })
+query([...], { /* options */ })
+```
+Each function takes an AnimationMetadata or an array of AnimationMetadata, along with an optional option parameter for some of the functions. The array of AnimationMetadata are the sequence of steps of actions or animations. Each step could potentially be one of the animation types:
+
+```
+enum AnimationMetadataType {
+  State: 0
+  Transition: 1
+  Sequence: 2
+  Group: 3
+  Animate: 4
+  Keyframes: 5
+  Style: 6
+  Trigger: 7
+  Reference: 8
+  AnimateChild: 9
+  AnimateRef: 10
+  Query: 11
+  Stagger: 12
+}
+```
+Potentially there could be many combination of nested animation DSL function, although some of the combinations are common and valid.
+
 1. The "animations" section of component decorator includes an array of trigger: [trigger:, trigger], as shown above: my-trigger1 and my-trigger2.
-2. Each trigger has its trigger name, which is used in template as trigger binding, and an array of AnimationMetadata: state(s) and transition(s).
+2. Each trigger has its trigger name, which is used in template as trigger binding, and an array of AnimationMetadata: state(s) and transition(s). Using state() function to define custom state; using transition() function to define transition between defined states.
 3. Each transition has its stateChangeExpr such as 'my-state1 <=> my-state2', along with a step, or an array of steps. A transition with one animate() step is as follow:
 transition("on <=> off", animate(500)),
-Or complicated steps as shown in above animation structure.  
-When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequence function. The step in the array could be a [group](https://angular.io/api/animations/group), which a list of animations run in parallel.  
-4. A step could be a [query](https://angular.io/api/animations/query) function call. A query has a selector to find one or more elements within the element that’s being animated, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger).
-5. Stagger only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay.
+Or complicated steps as shown in above animation structure. The possible steps: style(), animate(), group(), query(), and AnimateChild(). When an array of steps is used, it is actually a simplified version of [sequence](https://angular.io/api/animations/sequence) function call, which means the all the steps are executed in sequence as defined by sequence function. 
+4. [group](https://angular.io/api/animations/group), which a list of animations run in parallel.  
+5. A step could be a [query](https://angular.io/api/animations/query) function call. A query has a selector to find one or more elements within the element that’s being animated, along with an animation or an array of steps run in sequence, as shown above. A special step is [stagger](https://angular.io/api/animations/stagger).
+6. Stagger only be used in the context of query. The stagger can apply animation to each of the selected elements in sequence with specified delay.
 
 and some other animation functions:
 - animation() can be used to create reusable animations with input parameters
@@ -135,6 +165,19 @@ There are two types of styles:
 
 In order for animation to work, the styles of an initial and final states have to be defined. If we apply enter animation to an element, we’ll see that nothing happens. That is because in the ‘void’ state the element is not present in the view, so it doesn’t have any style to transition from. Therefore transition styles are needed for the void state. For other default state, by default, the Final State is the state of the element naturally placed in the view, with the properties we have applied to it in CSS. Sometimes, you will see element animating between transition styles, and at the end abruptly show the state style.
 
+
+## More about styles again, when/where do we specify styles for animation
+As mentioned in above, there are state styles, and transition styles, which also can be classified as from or to styles. The state style is more about the persistent styles which will stay after animation. The state style can be defined explicitly by state function, but also implicitly exist as default style which is whatever style applied to an element when no animation is involved. Therefore during animation, there could be four styles involved in transition:  
+
+starting persistent style -> starting transition style --animation--> ending transition style -> ending persistent style  
+
+Based on different scenarios, sometimes all four styles are specified, and sometimes only parts of styles are specified.   
+
+When starting and ending persistent styles are different, which can be used as starting and ending styles in animation directly without introducing transition styles. However when starting and ending persistent styles are same or not defined such as void state, we do have to specify different starting/ending transition styles for animation.  
+
+The transition between starting persistent style and starting transition styles, and transition between ending transition style and ending persistent style are abrupt, while the transition between starting transition style and ending transition style are animated.
+
+The persistent styles always exist except for void state. It is a good practice to use the corresponding persistent styles as transition style to avoid abrupt style jumping at begin or end of animation.
 
 ## Binding animation to element
 1. Place an animation trigger on an element within the template in the form of [@triggerName]="expression", where "expression" is from the component definition. The expression will be evaluated to a state to trigger a state transition.

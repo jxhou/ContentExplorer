@@ -90,3 +90,7 @@ May add breadcrumb into router state (?).
 9. [NGRX Store: Actions versus Action Creators](https://toddmotto.com/ngrx-store-actions-versus-action-creators)
 10. [Todd Motto - Angular Architecture: From Patterns to Implementation](https://www.youtube.com/watch?v=vGKRKDPGUSs) container component handles state, while presentational component use input/output to communicate state.
 11. [Object.assign() vs Object Spread { … } In Angular Ngrx Reducers🥊](https://medium.com/@tomastrajan/object-assign-vs-object-spread-in-angular-ngrx-reducers-3d62ecb4a4b0)
+12. [Authentication in Angular with NGRX](http://mherman.org/blog/2018/04/17/authentication-in-angular-with-ngrx/#.Wtz7mYjwbIU)
+13. [Angular Reactive (ngrx) Authentication](http://brianflove.com/2017/04/10/angular-reactive-authentication/)
+14. [ngrx-ngconf-2018, brandonroberts](https://github.com/brandonroberts/ngrx-ngconf-2018/commits/master)
+15. [platform/example-app/app/auth/](https://github.com/ngrx/platform/tree/master/example-app/app/auth)
