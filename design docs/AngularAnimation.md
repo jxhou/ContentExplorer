@@ -138,6 +138,26 @@ transition('my-state1 <=> my-state2',
 where the 1st style is used as starting style during animation. 
 And similarly style defined in group, query function used as starting style.
 3. style used within animate function as above, which is used as ending style for animation. All the styles defined other than in state function are only used during animation. The style defined in state function will be persistent after animation ends. 
+4. A starting style can also defined by using query() function:
+```
+animations: [
+  trigger('statsAnimation', [
+    transition('* => *', group([
+      query('.stats-icon', style({ opacity: 0, transform: 'scale(0.8) translateY(10px)' })),  <=== set initial style
+      query('.stats-text', style({ opacity: 0 })),    <========== set initial style
+
+      query('.stats-icon', stagger('100ms', [
+        animate('200ms 250ms ease-out', style('*'))
+      ])),
+
+      query('.stats-text', stagger('100ms', [
+        animate('200ms 250ms ease-out', style('*'))
+      ])),
+    ])
+  ])
+]
+```
+The first two query() without calling animate() set the starting styles.
 
 ## More about styles
 There are two types of styles:
@@ -178,6 +198,10 @@ When starting and ending persistent styles are different, which can be used as s
 The transition between starting persistent style and starting transition styles, and transition between ending transition style and ending persistent style are abrupt, while the transition between starting transition style and ending transition style are animated.
 
 The persistent styles always exist except for void state. It is a good practice to use the corresponding persistent styles as transition style to avoid abrupt style jumping at begin or end of animation.
+
+Auto-styles (using *), a way to specify whatever the state style will be.
+
+When specify animation using from/to styles, an easing function is used in animate() function to control how css properties will animate. Angular animation also allows using keyframes() function to define a sequence of css styles, which gives full control over more sophisticated animation. Check out the ng-animate reusable library (ref: #13) which uses keyframes() extensively instead of using easing function.
 
 ## Binding animation to element
 1. Place an animation trigger on an element within the template in the form of [@triggerName]="expression", where "expression" is from the component definition. The expression will be evaluated to a state to trigger a state transition.
@@ -222,3 +246,5 @@ The most recent comprehensive animation demo code example using ng5.0.0 rc8 by M
 About app loading animation: to be implemented.
 11. [Angular & Animations: bring life to your apps](https://medium.com/@aleixsuau/angular-animations-bring-life-to-your-apps-ca122e5db647) The best explanation about the animation syntax.
 12. [Angular Animations — Stagger Over Static and Async Data](https://itnext.io/angular-animations-stagger-over-static-and-async-data-3907c4889479)
+13. [jiayihu/ng-animate](https://github.com/jiayihu/ng-animate) cool reusable ng-animations
+14. [demo site](https://jiayihu.github.io/ng-animate/)
