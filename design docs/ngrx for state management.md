@@ -94,3 +94,4 @@ May add breadcrumb into router state (?).
 13. [Angular Reactive (ngrx) Authentication](http://brianflove.com/2017/04/10/angular-reactive-authentication/)
 14. [ngrx-ngconf-2018, brandonroberts](https://github.com/brandonroberts/ngrx-ngconf-2018/commits/master)
 15. [platform/example-app/app/auth/](https://github.com/ngrx/platform/tree/master/example-app/app/auth)
+16. [A scalable Angular 2 architecture](https://blog.strongbrew.io/A-scalable-angular2-architecture/), an idea about a sandbox to decouple state management from container (Rule number TWO: Components should not know about the state management layer). Sounds good, need further exploration to wrap ngrx. Also sample github project: **[brechtbilliet/reactive_apps_workshop](https://github.com/brechtbilliet/reactive_apps_workshop)**

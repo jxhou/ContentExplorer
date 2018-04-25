@@ -246,3 +246,6 @@ About app loading animation: to be implemented.
 12. [Angular Animations — Stagger Over Static and Async Data](https://itnext.io/angular-animations-stagger-over-static-and-async-data-3907c4889479)
 13. [jiayihu/ng-animate](https://github.com/jiayihu/ng-animate) cool reusable ng-animations
 14. [demo site](https://jiayihu.github.io/ng-animate/)
+15. [Angular in motion: 4 approaches to animation by Tomek Sułkowski](https://medium.com/@tomsu/angular-in-motion-4-approaches-to-animation-1aa7426aae5a)
+Discussed different animation approaches including angular animation, also routing animation. 
+15. [Angular Router Animations: the tricky bits by Tomek Sułkowski](https://medium.com/@tomsu/angular-router-animations-what-they-dont-tell-you-3d2737a7f20b) A more advanced routing animation, which can slide routing components in/out in both directions based on its position.
