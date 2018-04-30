@@ -218,8 +218,17 @@ Good examples of using @HostBinding: a Component participating angular route, or
 See references 2, 3, and 4.
 https://angular.io/guide/router
 Component uses @HostBinding to animate itself with translateX and opacity properties when :enter and :leave occur.  
-The better option is to animate routing in outlet container component.
+The better option is to animate routing in outlet container component as shown in ref. 3, ref. 4, and ref. 15. It is the container component to control the animation of its child route.  
+Need to wrap a div element around the router outlet so we can have a parent element that handles all the animations based on the state of the router such as:
+```
+<div [@routeAnimation]="prepRouteState(routerOutlet)">
+  <!-- make sure to keep the ="outlet" part -->
+  <router-outlet #routerOutlet="outlet"></div>
+<div>
 
+```
+## reusable animation:
+use animation option
 
 ## Child Animation
 [Angular Animation Code example](https://jxhou.wordpress.com/2017/08/05/angular-animation/)

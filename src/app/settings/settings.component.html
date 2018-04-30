@@ -9,3 +9,7 @@
 </nav>
  
 <router-outlet></router-outlet>
+<div [@routeAnimation]="prepRouteState(routerOutlet)">
+  <!-- make sure to keep the ="outlet" part -->
+  <router-outlet #routerOutlet="outlet"></router-outlet>
+<div>

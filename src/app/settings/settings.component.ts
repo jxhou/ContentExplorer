@@ -22,4 +22,9 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
   }
 
+  // return trigger value, in case we need to animate differently between different routes
+  prepRouteState(outlet: any) {
+    return outlet.activatedRouteData['title'] || 'theme';
+  }
+
 }
