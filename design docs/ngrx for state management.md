@@ -35,7 +35,7 @@ All modules including the root app.module, core.module, and feature modules can 
 
 Each module can have multiple sub-module states.   
 
-The selectors can be defined in each *.reducer.ts, or in a separate *.selectors.ts file residing in selectors folder if complicated selector composition is needed. The basic selectors are still defined in *.selectors.ts, while composite selectors using createSelector() utility are defined in *.selectors.ts.
+The selectors can be defined in each *.reducer.ts, or in a separate *.selectors.ts file residing in selectors folder if complicated selector composition is needed. The basic selectors are still defined in *.reducer.ts, while composite selectors using createSelector() utility are defined in *.selectors.ts.
 
 4. reducer content:
 Each *.reducer.ts file define a sub-module state interface, and an initial state for the sub-module along with reducer function.  Basic element selectors of the state are also defined.
@@ -71,10 +71,13 @@ is used instead, which make it dependent on root implementation.
 This state definition can then be used in any component constructor where the store with the specific state of the sub-module is injected.
 
 5. routerStore
-@ngrx/router-store supports router state in the store. With StoreRouterConnectingModule imported, this module will be able to update router state in store. But the app has to register pre-defined routerReducers, in order for router state to be available in store. One can define custom serializer for the router state, also define custom actions such as GO, BACK, FORWARD. All those can be wrapped in module. See details in router_store_ext module.
+@ngrx/router-store supports router state in the store. With StoreRouterConnectingModule imported, this module will be able to update router state in store. But the app has to register pre-defined routerReducers, in order for router state to be available in store. One can define custom serializer for the router state, also define custom actions such as GO, BACK, FORWARD. All those can be wrapped in module. See details in src/app/router_store_ext module.
 May add breadcrumb into router state (?).
 
 6. Use a combination of Action Constant, Action Creator, TypeScript, and the Action interface to enable strict  type checking (see reference 9).
+
+7. meta-reducer
+A way of middleware, a function takes a reducer and return a new reducer which wraps around the original one, such as logger. see app.module.ts in this project, and also see ref. 17.
 
 ## **References**:
 1. [ngrx github](https://github.com/ngrx/platform)
@@ -95,3 +98,4 @@ May add breadcrumb into router state (?).
 14. [ngrx-ngconf-2018, brandonroberts](https://github.com/brandonroberts/ngrx-ngconf-2018/commits/master)
 15. [platform/example-app/app/auth/](https://github.com/ngrx/platform/tree/master/example-app/app/auth)
 16. [A scalable Angular 2 architecture](https://blog.strongbrew.io/A-scalable-angular2-architecture/), an idea about a sandbox to decouple state management from container (Rule number TWO: Components should not know about the state management layer). Sounds good, need further exploration to wrap ngrx. Also sample github project: **[brechtbilliet/reactive_apps_workshop](https://github.com/brechtbilliet/reactive_apps_workshop)**
+17. [Implementing a Meta-Reducer in ngrx/store](https://netbasal.com/implementing-a-meta-reducer-in-ngrx-store-4379d7e1020a)
