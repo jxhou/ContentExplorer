@@ -99,3 +99,5 @@ A way of middleware, a function takes a reducer and return a new reducer which w
 15. [platform/example-app/app/auth/](https://github.com/ngrx/platform/tree/master/example-app/app/auth)
 16. [A scalable Angular 2 architecture](https://blog.strongbrew.io/A-scalable-angular2-architecture/), an idea about a sandbox to decouple state management from container (Rule number TWO: Components should not know about the state management layer). Sounds good, need further exploration to wrap ngrx. Also sample github project: **[brechtbilliet/reactive_apps_workshop](https://github.com/brechtbilliet/reactive_apps_workshop)**
 17. [Implementing a Meta-Reducer in ngrx/store](https://netbasal.com/implementing-a-meta-reducer-in-ngrx-store-4379d7e1020a)
+18. [NgRx — Best Practices for Enterprise Angular Applications](https://itnext.io/ngrx-best-practices-for-enterprise-angular-applications-6f00bcdf36d7)
+19. [Angular + Redux — The lesson we’ve learned for you](https://medium.com/supercharges-mobile-product-guide/angular-redux-the-lesson-weve-learned-for-you-93bc94391958)
