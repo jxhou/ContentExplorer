@@ -152,3 +152,5 @@ Angular component demo project with theme switch options
 [Angular component demo site](https://tina-material-tree.firebaseapp.com/)
 6. [Creating Themeable Components in Angular 2+ ](http://anasfirdousi.com/creating-theamable-components-in-angular.html)  
 A non-angular material theme method
+7. [Theming Components with CSS Variables](https://medium.com/@realTomaszKula/theming-components-with-css-variables-a952273fa9a4)
+8. [Angular 2+ Classes with NgClass and NgStyle](https://scotch.io/tutorials/angular-2-classes-with-ngclass-and-ngstyle)Angular style in general.
