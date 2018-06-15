@@ -101,3 +101,4 @@ A way of middleware, a function takes a reducer and return a new reducer which w
 17. [Implementing a Meta-Reducer in ngrx/store](https://netbasal.com/implementing-a-meta-reducer-in-ngrx-store-4379d7e1020a)
 18. [NgRx — Best Practices for Enterprise Angular Applications](https://itnext.io/ngrx-best-practices-for-enterprise-angular-applications-6f00bcdf36d7)
 19. [Angular + Redux — The lesson we’ve learned for you](https://medium.com/supercharges-mobile-product-guide/angular-redux-the-lesson-weve-learned-for-you-93bc94391958)
+20. [Angular NgRx Entity - Complete Practical Guide](https://blog.angular-university.io/ngrx-entity/)

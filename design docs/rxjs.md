@@ -40,3 +40,4 @@ Ref 7 demonstrates a sophisticated way of using rxjs to achieve the caching impl
 6. [Your NGRX Effects are Probably Wrong](https://medium.com/@amcdnl/your-ngrx-effects-are-probably-wrong-574460868005)
 7. [ADVANCED CACHING WITH RXJS](https://blog.thoughtram.io/angular/2018/03/05/advanced-caching-with-rxjs.html)
 8. [COLD VS HOT OBSERVABLES](https://blog.thoughtram.io/angular/2016/06/16/cold-vs-hot-observables.html)
+9. [RxJS: How to Observe an Object](https://blog.angularindepth.com/rxjs-how-to-observe-an-object-20c47cf51571)
