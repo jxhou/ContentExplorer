@@ -153,4 +153,5 @@ Angular component demo project with theme switch options
 6. [Creating Themeable Components in Angular 2+ ](http://anasfirdousi.com/creating-theamable-components-in-angular.html)  
 A non-angular material theme method
 7. [Theming Components with CSS Variables](https://medium.com/@realTomaszKula/theming-components-with-css-variables-a952273fa9a4)
-8. [Angular 2+ Classes with NgClass and NgStyle](https://scotch.io/tutorials/angular-2-classes-with-ngclass-and-ngstyle)Angular style in general.
+8. [Theming Angular with CSS Variables](https://medium.com/@amcdnl/theming-angular-with-css-variables-3c78a5b20b24)
+9. [Angular 2+ Classes with NgClass and NgStyle](https://scotch.io/tutorials/angular-2-classes-with-ngclass-and-ngstyle)Angular style in general.
