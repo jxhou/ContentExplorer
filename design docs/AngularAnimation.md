@@ -228,6 +228,44 @@ Need to wrap a div element around the router outlet so we can have a parent elem
 
 ```
 ## reusable animation:
+1. Define entire animation (a trigger) in a file under a share folder, then export the const: (ref 16)
+
+```
+export const grow = trigger {'grow', [
+  state('one', style(...)),
+  state('two', style(...)),,
+  transition(...)
+]}
+
+import {grow} from ...
+
+@component(
+  selector: ...
+  ...
+  animation[grow],
+  ...
+)
+
+```
+The animation definition is just imported and inserted in place.
+The definition can also be configured with parameters by function call:
+
+export const grow2 = (duration = 200, easing = 'linear')
+  return trigger {'grow', [
+    state('one', style(...)),
+    state('two', style(...)),,
+    transition('*' => '*', animate(`${duration}ms ${easing}`))
+  ]}
+
+import {grow2} from ...
+
+@component(
+  selector: ...
+  ...
+  animation[grow(3000)],
+  ...
+)
+
 use animation option
 
 ## Child Animation
@@ -258,3 +296,6 @@ About app loading animation: to be implemented.
 15. [Angular in motion: 4 approaches to animation by Tomek Sułkowski](https://medium.com/@tomsu/angular-in-motion-4-approaches-to-animation-1aa7426aae5a)
 Discussed different animation approaches including angular animation, also routing animation. 
 15. [Angular Router Animations: the tricky bits by Tomek Sułkowski](https://medium.com/@tomsu/angular-router-animations-what-they-dont-tell-you-3d2737a7f20b) A more advanced routing animation, which can slide routing components in/out in both directions based on its position.
+16. [Reusable Animations - Sam Brennan](https://www.youtube.com/watch?v=nLRP8Uhx-Qo) the rudimental reuse of animation.
+17. [Reactive Sticky Header in Angular](https://netbasal.com/reactive-sticky-header-in-angular-12dbffb3f1d3) Animate a sticky header.
+18. [A Fun Introduction to Angular Animations](http://onehungrymind.com/angular-animations-intro/) Using predefined state transitions :increment and :decrement to determine sliding animation direction, good example.
