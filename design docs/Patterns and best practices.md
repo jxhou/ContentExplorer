@@ -13,7 +13,7 @@
 -------------  
 * Angular loading animation (AngularAnimation.md, ref 10).
 * full animation playground.
-* ngrx based authentication (ngrx for state management.md, technology.md, ref.3).
+* ngrx based authentication (ngrx for state management.md, technology.md, ref.3, and ref.12).
 * decouple container from ngrx (ngrx for state management.md).
 * build breadcrumb into ngrx's router state (technology.md, ref.4)
 * backend mocking (technology.md, ref.6).

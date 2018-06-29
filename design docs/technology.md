@@ -17,3 +17,5 @@ may build breadcrumb into ngrx's router state(?).
 A neat trick to implement inactivity timeout using ngrx.
 10. [introducing  xplat, multi-platform tools for Nx workspaces](https://nstudio.io/blog/introducing-xplat/)  
 will have electron support, yet to try.
+11. [Increasing rendering performance in Angular with Lazy Render *ngFor](https://medium.com/@vyakymenko/increasing-rendering-performance-in-angular-with-lazy-render-ngfor-ae8c5d16e194) a trick to lazy render a large list of data, maybe useful when this scenario arises. 
+12. [manfredsteyer/angular-oauth2-oidc](https://github.com/manfredsteyer/angular-oauth2-oidc?utm_source=mybridge&utm_medium=blog&utm_campaign=read_more)
