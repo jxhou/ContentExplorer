@@ -228,7 +228,7 @@ Need to wrap a div element around the router outlet so we can have a parent elem
 
 ```
 ## reusable animation:
-1. Define entire animation (a trigger) in a file under a share folder, then export the const: (ref 16)
+1. Define entire animation (a trigger) in a file under a shared folder, then export the const: (ref 16)
 
 ```
 export const grow = trigger {'grow', [
@@ -266,7 +266,94 @@ import {grow2} from ...
   ...
 )
 
-use animation option
+2. 
+use animation options
+[AnimationOptions](https://angular.io/api/animations/AnimationOptions)
+```
+interface AnimationOptions {
+  delay?: number | string
+  params?: {...}
+}
+
+```The following animation functions accept AnimationOptions data:
+
+transition()
+sequence()
+group()
+query()
+animation()
+useAnimation()
+animateChild()
+Programmatic animations built using the AnimationBuilder service also make use of AnimationOptions.
+
+```
+animations: [
+    trigger('flip', [
+      state('front', style({
+        transform: 'rotateY(0deg)',
+      })),
+      state('back', style({
+        transform: 'rotateY(180deg)',
+      })),
+      transition('back <=> front', [
+        animate('{{ time }}')
+      ], { params: { time: '500ms' } })
+    ])
+  ]
+
+```  
+This is an example where transition() takes an AnimationOptions. Input parameters are just substitutions of data that can be applied to style properties and timing values anywhere in an animation sequence (depending on where the params are assigned). If a param key/value entry is set in the options.params object then it can be "echoed" using the oh-so-familiar {{ binding }} syntax.
+
+Options and input params can also be passed into an animation binding value when the animation kicks off.
+
+When you bind a value to an animation trigger ([@myTrigger]="someValue") this value may be either a string that represents specific state (“opened”, “closed”, “active”, etc) or an object.
+
+If you pass an object, it must have a value property and can also have params property. Everything that you define on the props will be made available by Angular Animations in the animation definition.
+
+So in the case described in the article what we really do is:
+[@routeSlide]="{value: 1, params: {offsetEnter:100, offsetLeave:-100}}" and Angular takes care of the rest :-)
+
+This is equivalent to apply AnimationOptions to a trigger animation method (see ref. 15 and ref. 4).
+
+3. use animation() and useAnimation() for reusable animation.
+The options and input parameters (options.params) provide a way to substitute/construct animation in advance. It does not make sense to use both variables, and options in an animation definition. But can use variables in animation, and binding an option to trigger in html for substitution reuse. But if you fail to pass correct option to trigger, probably the animation will fall apart.
+
+At this point you may be wondering what's the real advantage in having these input parameter substitution mechanisms when we can only place them in animations that exist directly within the component source code. 
+
+animation() and useAnimation() provide a complete reuse animation code construction based on the AnimationOptions function.
+
+```
+// animations.ts
+import {animation, style, animate} from "@angular/animations";
+export var fadeAnimation = animation([
+  style({ opacity: "{{ from }}" }),
+  animate("{{ time }}", style({ opacity: "{{ to }}" }))
+], { time: "1s" })
+
+```
+The reusable fadeAnimation animation can now be imported into our application and invoked using the useAnimation method.
+```
+// inside of @Component.animations...
+import {useAnimation, transition} from "@angular/animations";
+import {fadeAnimation} from "./animations";
+trigger('fade', [
+  transition('* => *', [
+    useAnimation(fadeAnimation, {
+      from: 0,
+      to: 1,
+      time: '1s'
+    })
+  ])
+])
+```
+
+Here the reuse part is within transition function. The same substitution reuse can be applied in any one of transition(), sequence(), group() or query().
+
+The options is passed in as parameter of useAnimation() without accessing component context. The option can also be passed in in template binding as discussed above. In this case, the option can use the values from the component context, which make it more dynamic.
+
+<div [@fade]="{ value: bounce, params: { from: myFrom || 0, to: myTo: || 1, time: myTime || '1s' } }"></div>
+
+ref. 13 is a good example using this approach to build a reuse animation library.
 
 ## Child Animation
 [Angular Animation Code example](https://jxhou.wordpress.com/2017/08/05/angular-animation/)
