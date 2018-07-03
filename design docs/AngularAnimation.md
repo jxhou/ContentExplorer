@@ -315,6 +315,56 @@ So in the case described in the article what we really do is:
 
 This is equivalent to apply AnimationOptions to a trigger animation method (see ref. 15 and ref. 4).
 
+More examples about binding from ref. 5:
+```
+@Component({
+  selector: 'card',
+  template: `
+    <div class="wrapper" [@flip]="data">
+      <div class="front" *ngIf="data.value === 'front'">
+        <ng-content select=".front"></ng-content> 
+      </div>
+      <div class="back" *ngIf="data.value === 'back'">
+        <ng-content select=".back"></ng-content> 
+      </div>
+    </div>
+  `,
+  animations: [
+    trigger('flip', [
+      state('front', style({
+        transform: 'rotateY(0deg)',
+      })),
+      state('back', style({
+        transform: 'rotateY(180deg)',
+      })),
+      transition('back <=> front', [
+        animate('{{ time }}')
+      ], { params: { time: '500ms' } })
+    ])
+  ]
+})
+export class CardComponent {
+  public data = { value: 'front', time: null };
+
+  @Input('timing')
+  public timing: string;
+
+  public toggle() {
+    this.data = {
+      value: this.data.value === 'front' ? 'back' : 'front',
+      time: this.timing || '1000ms'
+    };
+  }
+}
+
+```
+where option is passed in transition() method, but also trigger binding is used as well. The end result probably will that the binding value will override internal option. The trigger binding probably uses old syntax, may need to use params input, or maybe an alternative syntax.
+
+If there are multiple step based animation functions, the binding option may be able to apply to all as long as property name matches.
+
+The binding option seems having advantage to use context variable from component.
+
+
 3. use animation() and useAnimation() for reusable animation.
 The options and input parameters (options.params) provide a way to substitute/construct animation in advance. It does not make sense to use both variables, and options in an animation definition. But can use variables in animation, and binding an option to trigger in html for substitution reuse. But if you fail to pass correct option to trigger, probably the animation will fall apart.
 
@@ -353,11 +403,12 @@ The options is passed in as parameter of useAnimation() without accessing compon
 
 <div [@fade]="{ value: bounce, params: { from: myFrom || 0, to: myTo: || 1, time: myTime || '1s' } }"></div>
 
+It looks like combining both useAnimation and trigger binding can achieve dynamic animation configuration.
+
 ref. 13 is a good example using this approach to build a reuse animation library.
 
 ## Child Animation
 [Angular Animation Code example](https://jxhou.wordpress.com/2017/08/05/angular-animation/)
-
 
 
 ## **References**:
