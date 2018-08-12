@@ -20,3 +20,4 @@ Starting from angular 6.0, Angular cli supports workspace natively (ref 1, 2).
 14. [The Angular Library Series - Creating a Library with the Angular CLI](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5)
 15. [The Angular Library Series - Building and Packaging](https://blog.angularindepth.com/creating-a-library-in-angular-6-part-2-6e2bc1e14121) using npm install local-libray-file.tgz
 16. [Angular 6 Library — The CLI Way!](https://medium.com/@zaheeer1/angular-6-library-the-cli-way-9777f1505882)
+17. [Getting Started Building Component Libraries with Angular CLI](https://itnext.io/angular-cli-libraries-79b0a32a1443)
