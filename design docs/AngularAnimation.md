@@ -434,6 +434,6 @@ About app loading animation: to be implemented.
 15. [Angular in motion: 4 approaches to animation by Tomek Sułkowski](https://medium.com/@tomsu/angular-in-motion-4-approaches-to-animation-1aa7426aae5a)
 Discussed different animation approaches including angular animation, also routing animation. 
 15. [Angular Router Animations: the tricky bits by Tomek Sułkowski](https://medium.com/@tomsu/angular-router-animations-what-they-dont-tell-you-3d2737a7f20b) A more advanced routing animation, which can slide routing components in/out in both directions based on its position.
-16. [Reusable Animations - Sam Brennan](https://www.youtube.com/watch?v=nLRP8Uhx-Qo) the rudimental reuse of animation.
+16. [Reusable Animations - Sam Brennan](https://www.youtube.com/watch?v=nLRP8Uhx-Qo) the rudimentary reuse of animation.
 17. [Reactive Sticky Header in Angular](https://netbasal.com/reactive-sticky-header-in-angular-12dbffb3f1d3) Animate a sticky header.
 18. [A Fun Introduction to Angular Animations](http://onehungrymind.com/angular-animations-intro/) Using predefined state transitions :increment and :decrement to determine sliding animation direction, good example.
