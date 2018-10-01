@@ -186,5 +186,4 @@ Point out eagerly load a module configured in lazy loading is a better way than 
 Stackoverflow issue about eagerly load module with lazy format.  
 15. [Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
 A toolbar example dynamically add components embedded in lazy loaded module.
-
-
+16. [Angular Routing — A Better Pattern For Large Scale Apps](https://medium.com/@shairez/angular-routing-a-better-pattern-for-large-scale-apps-f2890c952a18)
