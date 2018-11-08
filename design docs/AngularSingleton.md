@@ -119,3 +119,4 @@ A similar trick is used to detect a undesired behavior of importing certain modu
 2. [Avoiding common confusions with modules in Angular](https://blog.angularindepth.com/avoiding-common-confusions-with-modules-in-angular-ada070e6891f) by Maxim Koretskyi
 3. [Shared Modules In Angular Apps: Providers Best Practices And What Does `forRoot()` Do?](https://www.gurustop.net/blog/2017/02/14/shared-modules-in-angular-apps-providers-best-practices-and-what-does-forroot-do/)
 4. [Understanding Angular modules (NgModule) and their scopes](https://medium.com/@cyrilletuzi/understanding-angular-modules-ngmodule-and-their-scopes-81e4ed6f7407)
+5. [Total Guide To Angular 6+ Dependency Injection — providedIn vs providers:[ ]](https://medium.com/@tomastrajan/total-guide-to-angular-6-dependency-injection-providedin-vs-providers-85b7a347b59f) Summarize the provider configurations
