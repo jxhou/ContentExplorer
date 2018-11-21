@@ -22,3 +22,4 @@ will have electron support, yet to try.
 13. [Logging with Angular](https://christianlydemann.com/logging-with-angular/)
 14. [APP_INITIALIZER – Tapping into Initialization Process in Angular](https://theinfogrid.com/tech/developers/angular/app_initializer-in-angular/)
 15. [Pro Tip: With Angular 7 you can import json files directly into typescript (no more http requests!](https://old.reddit.com/r/Angular2/comments/9phvw1/pro_tip_with_angular_7_you_can_import_json_files/) [example] (https://stackblitz.com/edit/json-import-example)
+[Mocking with Angular: More than just unit testing](https://medium.com/@amcdnl/mocking-with-angular-more-than-just-unit-testing-cbb7908c9fcc) in-memory-web-api along with sample project using it.
