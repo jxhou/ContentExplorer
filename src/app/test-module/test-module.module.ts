@@ -18,6 +18,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    // Here we register this module's setting page with SettingsModule, which results in the setting page 
+    // (TestModuleSettingComponent) automatically surfaces in settings container.
     SettingsModule.withSettingRoutes(routes),
   ],
   declarations: [TestModuleSettingComponent]

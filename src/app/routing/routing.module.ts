@@ -9,8 +9,24 @@ import { SettingsModule } from '../settings/settings.module';
 
 @NgModule({
   imports: [
-    // Router: any other routes have to go before RouterModule.forRoot(routes). Otherwise wiild card route will match.
-    // SettingsModule.withRoutes(SETTING_ROUTES),
+    // Router: any other routes have to go before RouterModule.forRoot(routes). Otherwise wild card route will match.
+    /*
+    // Option 1, still ask SettingsModule to register its child routes. But here SETTING_ROUTES as defined 
+    // in app.route.ts specifies the full path from settings page to its children exposed by the app module.
+    // Internally SettingsModule.withRoutes will call the standard provideRoutes() implementation to 
+    // register the passed in route configuration, which should be full route path, and also declare 
+    // entryComponent for dynamic instantiation at same time.
+    // However it does not feel right for this module to know the settings page's route. The option 2 seems better.
+    SettingsModule.withRoutes(SETTING_ROUTES),
+    */
+
+    // Option 2:
+    // Also ask SettingsModule to register its child route page.
+    // Here SETTING_CHILD_ROUTES as defined in app.route.ts list only the components (ThemeSettingsComponent and TestSettingComponent)
+    // to be added to the settings page, without knowledge of the route path for the settings page.
+    // Internally SettingsModule.withSettingRoutes will delare all the setting components as entryComponents 
+    // using ANALYZE_FOR_ENTRY_COMPONENTS, also allow settings page to dynamically add the setting components
+    // as child routes under settings page container uisng route api.
     SettingsModule.withSettingRoutes(SETTING_CHILD_ROUTES),
     RouterModule.forRoot(routes),
   ],
