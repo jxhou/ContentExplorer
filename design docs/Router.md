@@ -125,9 +125,16 @@ However this solution only works with eagerly loaded modules. For the lazy loade
 Allow lazy loaded module to contribute its setting page to settings container.
 To be implemented, or wait till angular's support as discussed above.
 
+Ref 15 shows an example to dynamically create an instance of component defined in lazy loaded module from outside of lazy loaded module. The idea is to pass the componentFactoryResolver and injector from within the lazy loaded module to external service. Then the componentFactoryResolver and injector can be used outside of lazy loaded module to dynamically create the component.
+
+However in my case, I do not create the component directly but via router. I still could not customize router to use the above trick.
+
+Ref 17 outlines another manual lazy loading module using SystemJsNgModuleLoader, which could be used as my own method of lazy loading module. Then expose its setting's page from there.
+
+
 ## The related references for dynamic Setting components
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e
-
+ 
 Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
 This only works if both components are defined in the same module or if a module with a resolved component factory is imported.
 
@@ -187,3 +194,4 @@ Stackoverflow issue about eagerly load module with lazy format.
 15. [Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
 A toolbar example dynamically add components embedded in lazy loaded module.
 16. [Angular Routing — A Better Pattern For Large Scale Apps](https://medium.com/@shairez/angular-routing-a-better-pattern-for-large-scale-apps-f2890c952a18)
+17. [How to manually lazy load a module?](https://stackoverflow.com/questions/40293240/how-to-manually-lazy-load-a-module) use SystemJsNgModuleLoader to lazy load a module without router. https://github.com/alexzuza/angular-cli-lazy, example project.
