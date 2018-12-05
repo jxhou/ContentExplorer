@@ -224,6 +224,44 @@ Injector.create(providers: StaticProvider[], parentInjector)
 All the other higher level api(s) such as ViewContainerRef, ngComponentOutlet, and PortalOutlet for dynamic component creation expose the injector option.
 Reference 8 shows an overlay example using customized injector to pass data to dynamic created component via DI in Portal/PortalOutlet environment. Material dialog uses the same method passing data to component shown in dialog window, I believe.
 
+## Manual lazy loading module
+As ref 12 described, 
+app.module.ts
+
+```
+providers: [
+  SystemJsNgModuleLoader,
+  provideRoutes([
+     { loadChildren: 'app/lazy/lazy.module#LazyModule' }
+  ])
+],
+```
+app.component.ts
+
+```
+export class AppComponent implements  OnInit {
+    title = 'Angular cli Example SystemJsNgModuleLoader.load';
+
+    @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+
+    constructor(private loader: SystemJsNgModuleLoader, private inj: Injector) {}
+
+    ngOnInit() {
+        this.loader.load('app/lazy/lazy.module#LazyModule').then((moduleFactory: NgModuleFactory<any>) => {
+            const entryComponent = (<any>moduleFactory.moduleType).entry;
+            const moduleRef = moduleFactory.create(this.inj);
+
+            const compFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(entryComponent);
+            this.container.createComponent(compFactory);
+        });
+    }
+}
+```
+
+The trick is to use SystemJsNgModuleLoader to manually load the module. Also use "loadChildren" (the syntax of lazy load route) to trigger webpack to generate separate bundle for lazy loading.
+
+This actually is the internal implementation lazy loading of routing.
+
 ## **References**: 
 1. [Angular CDK Portals](https://blog.angularindepth.com/angular-cdk-portals-b02f66dd020c)  
 [code demo](https://stackblitz.com/edit/angular-material2-portal-tools?embed=1&file=app/services/tool-options.service.ts)
@@ -240,3 +278,4 @@ Reference 8 shows an overlay example using customized injector to pass data to d
 10. [Angular2: Binding an observable to an immutable child component input.](http://almerosteyn.com/2016/03/immutable-component-input-from-observable)
 11. [Entry Components of a Lazy Loaded NgModule are not available outside the Module #14324](https://github.com/angular/angular/issues/14324)  
 A toolbar example dynamically add components embedded in lazy loaded module. And also a feature request for angular.
+12. [How to manually lazy load a module?](https://stackoverflow.com/questions/40293240/how-to-manually-lazy-load-a-module) use SystemJsNgModuleLoader to lazy load a module without router. https://github.com/alexzuza/angular-cli-lazy, example project.

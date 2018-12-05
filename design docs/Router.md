@@ -129,7 +129,7 @@ Ref 15 shows an example to dynamically create an instance of component defined i
 
 However in my case, I do not create the component directly but via router. I still could not customize router to use the above trick.
 
-Ref 17 outlines another manual lazy loading module using SystemJsNgModuleLoader, which could be used as my own method of lazy loading module. Then expose its setting's page from there.
+Ref 17 outlines another manual lazy loading module using SystemJsNgModuleLoader, which could be used as my own method of lazy loading module. Then expose its setting's page from there. More details in DynamicContent.md.
 
 
 ## The related references for dynamic Setting components
