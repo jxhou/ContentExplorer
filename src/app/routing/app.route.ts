@@ -46,6 +46,7 @@ export const routes: Routes = [
 
 // This extra routes can be merged in routes above.
 // But just show another way to configure routes
+// This is route with full path used with option 1
 export const SETTING_ROUTES: Routes =
 [
   {
@@ -74,7 +75,8 @@ export const SETTING_ROUTES: Routes =
 ]
 
 // This extra routes can be merged in routes above.
-// But just show another way to configure routes
+// But just show another way to configure routes.
+// Relative path without parent, can be used using router api, used in option 2
 export const SETTING_CHILD_ROUTES: Routes =
 [
   {
