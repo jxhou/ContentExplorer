@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '@app/shared';
 import { SettingsComponent, SETTINGS_ROUTES } from './settings.component';
+import { SettingHostService } from './setting-host.service'
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { SettingsComponent, SETTINGS_ROUTES } from './settings.component';
   exports: [
     SettingsComponent
   ],
-  providers: []
+  providers: [SettingHostService]
 })
 export class SettingsModule {
   // Option 1.
