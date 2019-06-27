@@ -15,7 +15,7 @@ import { CustomRouterStateSerializer, routerReducerName } from './store/reducers
 
 @NgModule({
   imports: [
-    StoreRouterConnectingModule,
+    StoreRouterConnectingModule.forRoot(),
     StoreModule.forFeature(routerReducerName, routerReducer),
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }
