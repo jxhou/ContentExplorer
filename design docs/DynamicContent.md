@@ -280,3 +280,4 @@ This actually is the internal implementation lazy loading of routing.
 A toolbar example dynamically add components embedded in lazy loaded module. And also a feature request for angular.
 12. [How to manually lazy load a module?](https://stackoverflow.com/questions/40293240/how-to-manually-lazy-load-a-module) use SystemJsNgModuleLoader to lazy load a module without router. https://github.com/alexzuza/angular-cli-lazy, example project.
 13. [The Need for Speed: Lazy Load Non-Routable Modules in Angular ](https://netbasal.com/the-need-for-speed-lazy-load-non-routable-modules-in-angular-30c8f1c33093)
+14. [Asynchronous modules and components in Angular Ivy](https://blog.angularindepth.com/asynchronous-modules-and-components-in-angular-ivy-1c1d79d45bd3) The latest dynamic loading with Ivy.
