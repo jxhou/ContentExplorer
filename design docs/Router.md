@@ -9,7 +9,7 @@ There are two types of routes: eagerly loaded or lazy loaded.
 
 2. All the providers in all eagerly (direct/indirect) loaded modules are merged into root injector, so are available application wide. However all the providers declared or imported in lazy loaded modules are not available outside of the lazy module itself, although there is feature request mentioned in ref. 15 to address this issue. Therefore any entryComponent declared in lazy load modules is not available, and can not be dynamically created outside of its module.  
 
-3. For eagerly loaded modules, RouterModule.forRoot(), RouterModule.forChild() are used in root module and feature modules respectively. Except loading router related singleton providers, forRoot() basically does same thing as forChild() by calling provideRoutes(routes) to define providers, which basically provide both ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS tokens (see details in DynamicContent.md). ROUTES will add routes to router configuration, and ANALYZE_FOR_ENTRY_COMPONENTS will declare entryComponents, both of which take an object of type Routes.   
+* 3. For eagerly loaded modules, RouterModule.forRoot(), RouterModule.forChild() are used in root module and feature modules respectively. Except loading router related singleton providers, forRoot() basically does same thing as forChild() by calling provideRoutes(routes) to define providers, which basically provide both ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS tokens (see details in DynamicContent.md). ROUTES will add routes to router configuration, and ANALYZE_FOR_ENTRY_COMPONENTS will declare entryComponents, both of which take an object of type Routes.   
 
 The routes declared by ROUTES token in either forRoot() or forChild() are referred to the root of router configuration. So a full path of routing is needed when configure a child route. So a root module and feature module independently add their routes to the router configuration using forRoot() or forChild(), if they are not related. However for nested parent/child routes, it is a common practice to write routing configure in parent component including nested child routes in one location to maintain the correct tree structure. The bad thing about this is that the parent component need to know all the details of routing in child components, when define the route configuration. Although one can configure nested routes in different child modules, but one have to make sure to have right route path starting from root, which unnecessarily makes child module know its parent. 
 
@@ -36,7 +36,7 @@ export const ROUTES: Routes = [
 ];
 
 ```
-where DashboardModule is imported at the beginning, and `{ path: 'dashboard', loadChildren: () => DashboardModule },` in route configuration, while DashboardModule can define its own nested routes internally just like any lazy loaded module.
+where DashboardModule is imported at the beginning, and `{ path: 'dashboard', loadChildren: () => DashboardModule },` in route configuration, while DashboardModule can define its own nested routes internally just like any lazy loaded module.  'settings' and 'report' are real lazy loading modules.
 
 6. Add routes to route configuration programmatically.
 Besides configure route using ROUTES token (which RouterModule.forRoot/forChild use internally), Router interface can be used to add routes to the configuration, which is what used in settings page implementation below.
