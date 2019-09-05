@@ -20,5 +20,7 @@
 * Inactivity Auto-Logout w/ Angular and Ngrx (technology.md, ref.9).
 * Runtime configuration of your Angular App (technology.md, ref.7).
 * mono-repo, Nx, xPlat, or cli workspace? (technology.md, ref.7).
-* [Show loader on every request in Angular 2](https://medium.com/beautiful-angular/show-loader-on-every-request-in-angular-2-9a0fca86afef)
-*[ Angular Routing: How to Display a Loading Indicator When Navigating Between Routes](https://www.amadousall.com/angular-routing-how-to-display-a-loading-indicator-when-navigating-between-routes/)
+* [Show loader on every request in Angular 2](https://medium.com/beautiful-angular/show-loader-on-every-request-in-angular-2-9a0fca86afef)  
+* [ Angular Routing: How to Display a Loading Indicator When Navigating Between Routes](https://www.amadousall.com/angular-routing-how-to-display-a-loading-indicator-when-navigating-between-routes/)
+* [Stop Repeating Yourself in Angular: How to Create Abstract Components](https://medium.com/@ozak/stop-repeating-yourself-in-angular-how-to-create-abstract-components-9726d43c99ab) A practice to use component inheritance, more specifically targeting form control implementations.
+* [a form control library using the component inheritance](https://simontonsoftware.github.io/s-ng-utils/typedoc/classes/formcontrolsuperclass.html) 
