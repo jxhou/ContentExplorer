@@ -4,6 +4,7 @@ import { SettingsComponent } from '../settings/settings.component';
 import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from '@app/components/not-found.component';
+import { BarDialogComponent } from '../bar/dialog/dialog.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,14 @@ export const routes: Routes = [
    path: '',
    redirectTo: '/dashboard',
    pathMatch: 'full'
+ },
+ {
+  path: 'bar',
+  loadChildren: '../bar/bar.module#BarModule'
+ },
+ {
+  path: 'barComp',
+  component: PageNotFoundComponent
  },
  { path: '**', component: PageNotFoundComponent }
 ];

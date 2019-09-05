@@ -23,6 +23,8 @@ import { ThemeSettingsComponent } from './components/theme-settings/theme-settin
 import { TestSettingComponent } from './components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './test-module/test-module.module';
+import { CoalescingComponentFactoryResolver } from './coalescing-component-factory-resolver.service';
+import { ModalModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,9 +57,15 @@ import { TestModuleModule } from './test-module/test-module.module';
     // StoreRouterConnectingModule,
     RouteStoreExtModule,
 
+    ModalModule.forRoot(),
+
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [],
+  providers: [CoalescingComponentFactoryResolver],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(coalescingResolver: CoalescingComponentFactoryResolver) {
+    coalescingResolver.init();
+  }
+}

@@ -7,13 +7,22 @@
         <button mat-icon-button class="hidden-md-up">
           <mat-icon>menu2</mat-icon>
         </button>
+       
         <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
         <!-- This fills the remaining space of the current row -->
         <span class="spacer"></span>
-        
+        <button mat-icon-button routerLink="bar" class="hidden-sm-down">
+          lazy module
+        </button>
+        <button mat-icon-button routerLink="barComp" class="hidden-sm-down">
+          loadBarComponent
+        </button>
+
         <button mat-icon-button routerLink="settings" class="hidden-sm-down">
           <mat-icon>settings</mat-icon>
         </button>
+
+       
 
         <!--ntity
         <span routerLink="" class="branding spacer hidden-md-up text-center"><img [src]="logo" /> Angular Starter</span>

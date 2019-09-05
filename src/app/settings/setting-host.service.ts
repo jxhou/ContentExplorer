@@ -1,12 +1,14 @@
 import {Injectable, TemplateRef} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SettingHostService {
     contextReceivedSource = new BehaviorSubject<any>([]);
     contextReceived$ = this.contextReceivedSource.asObservable();
 
-    receiveContext({}) {
-        this.contextReceivedSource.next({});
+    addSettingRoute(route) {
+        this.contextReceivedSource.next(route);
     }
 }

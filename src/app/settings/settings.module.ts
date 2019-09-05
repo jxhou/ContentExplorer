@@ -17,7 +17,7 @@ import { SettingHostService } from './setting-host.service'
   exports: [
     SettingsComponent
   ],
-  providers: [SettingHostService]
+  providers: []
 })
 export class SettingsModule {
   // Option 1.
