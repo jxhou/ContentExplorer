@@ -44,7 +44,7 @@ export const routes: Routes = [
  },
  {
   path: 'bar',
-  loadChildren: '../bar/bar.module#BarModule'
+  loadChildren: () => import('../bar/bar.module').then(m => m.BarModule)
  },
  {
   path: 'barComp',
