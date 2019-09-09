@@ -114,6 +114,14 @@ There is still a shortcoming of this solution: if there are two lazy loading mod
 
 A similar trick is used to detect a undesired behavior of importing certain module such as CoreModule multiple times using @Optional() @SkipSelf() decorators. See more details in core.module.ts and module-import-guard.ts
 
+## The new provider mechanism since angular 6: “Tree-shakable providers”
+A way to configure provider:
+```
+providedIn: 'root' | SomeModule
+```
+The Tree-shakable providers defined in ngModule do not to be (ng) imports(ed) like ones configured in ngModule's providers: []. One can simply (js) import the type, and declare it in class's constructor, the service will be magically injected.
+See more details in [5] about the pros and cons for provider configurations.
+
 ## **References**:
 1. [My NgModule Summaries](https://jxhou.wordpress.com/2016/12/25/ngmodule/)
 2. [Avoiding common confusions with modules in Angular](https://blog.angularindepth.com/avoiding-common-confusions-with-modules-in-angular-ada070e6891f) by Maxim Koretskyi

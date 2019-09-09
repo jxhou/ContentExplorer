@@ -9,6 +9,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
+//@Injectable()
 export class CoalescingComponentFactoryResolver extends ComponentFactoryResolver {
   private rootResolve: (component: Type<any>) => ComponentFactory<any>;
 

@@ -24,6 +24,7 @@ import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './test-module/test-module.module';
 import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
 import { ModalModule } from 'ngx-bootstrap';
+import { CoreModule } from 'app/core/core.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { ModalModule } from 'ngx-bootstrap';
     RoutingModule,
     LayoutModule,
     TestModuleModule,
+    CoreModule,
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

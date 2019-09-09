@@ -15,6 +15,8 @@ The type of injected services always need to be ES6 import(ed) in the file where
 
 Angular components can be either indirectly loaded via imports another ngModule in the host ngModule, or implemented and declared (declaration section) in current/host ngModule. However the loaded component type does not need to be ES import(ed) in the file where is referenced, if it is used as html tags in component's ngTemplate, while angular compiler actually make the connection between the html tag and the component type. However if a component is dynamically instantiated, the component type has to be ES6 imported before referencing of course, and also added in entryComponents list from the host ngModule. 
 
+See also AngularSingleton.md for more about new tree-shakable provider, which does not need 'imports' the hosting ngModule.
+
 ## core and shared modules 
 By convention, a project has core and shared modules. In general, core module single used, while shared module is multiple used. With core, shared, and feature modules, the app.module should be clean and small.
 
