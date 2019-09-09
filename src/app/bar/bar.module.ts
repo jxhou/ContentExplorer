@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BarRoutingModule } from './bar-routing.module';
 import { MainComponent } from './main/main.component';
 import { BarDialogComponent } from './dialog/dialog.component';
-import { CoalescingComponentFactoryResolver } from '../coalescing-component-factory-resolver.service';
+import { CoalescingComponentFactoryResolver } from '../core/coalescing-component-factory-resolver.service';
 import { SettingHostService } from '../settings/setting-host.service';
 import { Routes } from '@angular/router';
 

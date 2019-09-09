@@ -2,10 +2,13 @@ import {
   Injectable,
   ComponentFactoryResolver,
   Type,
-  ComponentFactory
+  ComponentFactory,
+  RootRenderer
 } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CoalescingComponentFactoryResolver extends ComponentFactoryResolver {
   private rootResolve: (component: Type<any>) => ComponentFactory<any>;
 

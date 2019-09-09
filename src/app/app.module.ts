@@ -17,18 +17,16 @@ import { LayoutModule } from './layout/layout.module'
 import { reducers, metaReducers } from './store/reducers';
 import { RouteStoreExtModule } from './router_store_ext'
 import { environment } from '../environments/environment';
-// import { SettingsComponent } from './containers/settings/settings.component';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ThemeSettingsComponent } from './components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from './components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './test-module/test-module.module';
-import { CoalescingComponentFactoryResolver } from './coalescing-component-factory-resolver.service';
+import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
 import { ModalModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    // SettingsComponent,
     PageNotFoundComponent,
     DashboardComponent,
     ThemeSettingsComponent,
@@ -61,7 +59,6 @@ import { ModalModule } from 'ngx-bootstrap';
 
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [CoalescingComponentFactoryResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

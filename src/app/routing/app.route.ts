@@ -18,25 +18,6 @@ export const routes: Routes = [
       title: 'Settings'
     },
   },
- /*
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    data: {
-      title: 'Settings'
-    },
-    children: [
-      {
-        path: 'theme',
-        component: ThemeSettingsComponent,
-      },
-      {
-        path: 'test',
-        component: TestSettingComponent,
-      }
-    ]
-  }
- */
  {
    path: '',
    redirectTo: '/dashboard',
