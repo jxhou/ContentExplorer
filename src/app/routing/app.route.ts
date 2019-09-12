@@ -24,10 +24,6 @@ export const routes: Routes = [
    pathMatch: 'full'
  },
  {
-  path: 'bar',
-  loadChildren: () => import('../bar/bar.module').then(m => m.BarModule)
- },
- {
   path: 'lazy',
   loadChildren: () => import('../lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule)
  },

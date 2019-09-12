@@ -23,7 +23,6 @@ import { TestSettingComponent } from './components/test-setting/test-setting.com
 import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './test-module/test-module.module';
 import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
-import { ModalModule } from 'ngx-bootstrap';
 import { CoreModule } from 'app/core/core.module';
 @NgModule({
   declarations: [
@@ -56,8 +55,6 @@ import { CoreModule } from 'app/core/core.module';
      */
     // StoreRouterConnectingModule,
     RouteStoreExtModule,
-
-    ModalModule.forRoot(),
 
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
