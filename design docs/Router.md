@@ -142,6 +142,7 @@ I don't think any workaround is viable if it requires the code you're integratin
 
 With that in mind, here's my "solution": CoalescingComponentFactoryResolver. This is a service that should be provided by the app module and initialised in its constructor, like so:
 
+```
 @NgModule({
  providers: [CoalescingComponentFactoryResolver]
 })
@@ -161,12 +162,38 @@ export class LazyModule {
     coalescingResolver.registerResolver(localResolver);
   }
 }
+```
+
 When this is done, entry components in the lazy-loaded module should be available from non-lazy loaded services.
 
 How it works: When initialised, it injects the root app's ComponentFactoryResolver and monkey patches the resolveComponentFactory method to call its own implementation. This implementation first tries resolving the component factory on all the registered lazy-module resolvers, then falls back to the root app resolver (there's a bit of extra logic to avoid cyclic calls, but that's the gist).
 
 So, yeah, a pretty gross hack. But it works, right now, in Angular 7. Maybe it will be of use to someone.
 ------------------
+
+The implementation of dynamic setting's pages based on the ref 8 (CoalescingComponentFactoryResolver) CoalescingComponentFactoryResolver actually makes the provider of ENTRY_COMPONENTS declared in the lazy loaded module available to all the modules outside of the lazy loaded one. Therefore one should be able to create a component from lazy loaded module using standard component factory method. However in my previous implementation, I also use SETTINGS_ROUTES provider to pass route information to setting page host. But CoalescingComponentFactoryResolver can not help with SETTINGS_ROUTES provider. So create a new serice of setting-host.service  in settings module:
+C:\Users\jxhou_000\Documents\GitHub\ContentExplorer\src\app\settings\setting-host.service.ts
+
+So every lazy loade module can call:
+```
+SettingHostService.addSettingRoute(route)
+```
+to register itself with settings module
+
+In nutshell, every lazy loaded module should inject both CoalescingComponentFactoryResolver and settingHostService, and then call:
+```
+  coalescingResolver.registerResolver(localResolver);
+  settingHostService.addSettingRoute(setting);
+```
+to register its ComponentFactoryResolver and setting page route.
+
+See detailed implementation from:
+C:\Users\jxhou_000\Documents\GitHub\ContentExplorer\src\app\lazy-loaded\lazy-loaded.module.ts
+which shows an example of lazy loaded module with its setting page which will be dynamically added to settings host.
+
+This implementation is based on monkey patching ComponentFactoryResolver. A similar way can also be implemented by patching injector. Actually ComponentFactoryResolver is retrieved from injector.
+
+The solution is good with angular 8 (before ivy). However coalescingResolver trick might not be needed any more when ivy is out (angular 9 and later). The ivy may make entry component declaration obsolete. Before ivy, angular compiler has to create component factory in a seperate file based on the declaration of entry component. With ivy, the component factory is embedded inside of component definition. If you have a component type, you should be able to create it without relying on a component factory define some where else. That means that when ivy is available, the dynamic setting page should work without coalescingResolver.
 
 
 ## The related references for dynamic Setting components
