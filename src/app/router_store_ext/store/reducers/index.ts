@@ -6,6 +6,7 @@ import {
 import { createFeatureSelector } from '@ngrx/store';
 
 import * as fromRouter from '@ngrx/router-store';
+import { Injectable } from "@angular/core";
 
 // define a reducer name for router state
 export const routerReducerName = 'routerReducer';
@@ -29,6 +30,7 @@ export const getRouterState = createFeatureSelector<
  * need the URL and query parameters from the snapshot in the store. Other items could be
  * returned such as route parameters and static route data.
  */
+@Injectable()
 export class CustomRouterStateSerializer
   implements fromRouter.RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {

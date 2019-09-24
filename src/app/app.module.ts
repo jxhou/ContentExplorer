@@ -62,6 +62,6 @@ import { CoreModule } from 'app/core/core.module';
 })
 export class AppModule { 
   constructor(coalescingResolver: CoalescingComponentFactoryResolver) {
-    coalescingResolver.init();
+    // coalescingResolver.init();
   }
 }

@@ -22,7 +22,7 @@ export class LazyLoadedModule {
     localResolver: ComponentFactoryResolver,
     settingHostService:SettingHostService,
   ) {
-    coalescingResolver.registerResolver(localResolver);
+    // coalescingResolver.registerResolver(localResolver);
     settingHostService.addSettingRoute(setting);
   }
 }
