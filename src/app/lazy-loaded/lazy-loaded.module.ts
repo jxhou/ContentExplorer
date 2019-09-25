@@ -14,7 +14,8 @@ import { setting } from './lazy-loaded-routing.module'
     CommonModule,
     LazyLoadedRoutingModule
   ],
-  entryComponents: [MainComponent, SettingComponent]
+  // ivy does not need entry component any more
+  // entryComponents: [MainComponent, SettingComponent]
 })
 export class LazyLoadedModule { 
   constructor(
@@ -22,6 +23,7 @@ export class LazyLoadedModule {
     localResolver: ComponentFactoryResolver,
     settingHostService:SettingHostService,
   ) {
+    // do not need the coalescingResolver any more for ivy
     // coalescingResolver.registerResolver(localResolver);
     settingHostService.addSettingRoute(setting);
   }

@@ -193,8 +193,16 @@ which shows an example of lazy loaded module with its setting page which will be
 
 This implementation is based on monkey patching ComponentFactoryResolver. A similar way can also be implemented by patching injector. Actually ComponentFactoryResolver is retrieved from injector.
 
-The solution is good with angular 8 (before ivy). However coalescingResolver trick might not be needed any more when ivy is out (angular 9 and later). The ivy may make entry component declaration obsolete. Before ivy, angular compiler has to create component factory in a seperate file based on the declaration of entry component. With ivy, the component factory is embedded inside of component definition. If you have a component type, you should be able to create it without relying on a component factory define some where else. That means that when ivy is available, the dynamic setting page should work without coalescingResolver.
+The solution is good with angular 8 (before ivy). However coalescingResolver trick might not be needed any more when ivy is out (angular 9 and later). The ivy may make entry component declaration obsolete. Before ivy, angular compiler has to create component factory in a separate file based on the declaration of entry component. With ivy, the component factory is embedded inside of component definition. If you have a component type, you should be able to create it without relying on a component factory define some where else. That means that when ivy is available, the dynamic setting page should work without coalescingResolver.
 
+### implementation 4 with Ivy > v9.0.0: 
+With Ivy (angular 9.0.0 +), component declared within a lazy loaded module can be dynamically created outside of the lazy module without any tricks as discussed above. Also the dynamic components do not need to be declared as entry component. This can be applied to all scenarios based on dynamic component creation, such as dialog displayed component, and routing components.
+
+This behavior probably is due to that Ivy does not generate a separate ng_factory file anymore, but inline the factory information as a static field such as ngComponentDef inside of the component def after compiling. Before Ivy, component factory of dynamic components are declared as ANALYZE_FOR_ENTRY_COMPONENTS providers. With Ivy, the component factory info is embedded within component definition. Once you have a component type, you should be able to get hold of its factory and create an instance of it.
+
+The new behavior is due to that Ivy does not separate component and its factory def any more, so does not rely on ENTRY_COMPONENT provider any more.
+
+It probably still the case that any providers declared in a lazy-loaded module are local, and not available to modules outside of the lazy module.
 
 ## The related references for dynamic Setting components
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e

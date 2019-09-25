@@ -7,10 +7,11 @@
     {{ tab.label }}
   </a>
 </nav>
-<!--
 <router-outlet></router-outlet>
--->
+
+<!-- make sure to keep the ="outlet" part -->
+<!--
 <div [@routeAnimation]="prepRouteState(routerOutlet)">
-  <!-- make sure to keep the ="outlet" part -->
   <router-outlet #routerOutlet="outlet"></router-outlet>
 <div>
+-->
