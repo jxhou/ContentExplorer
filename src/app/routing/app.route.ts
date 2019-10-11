@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from '../containers';
-import { SettingsComponent } from '../settings/settings.component';
+import { SettingsComponent } from '../features/settings/settings.component';
 import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from '@app/components/not-found.component';
@@ -24,7 +24,7 @@ export const routes: Routes = [
  },
  {
   path: 'lazy',
-  loadChildren: () => import('../lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule)
+  loadChildren: () => import('../features/lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule)
  },
  {
   path: 'barComp',

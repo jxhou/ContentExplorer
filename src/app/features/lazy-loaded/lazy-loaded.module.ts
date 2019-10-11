@@ -5,7 +5,7 @@ import { LazyLoadedRoutingModule } from './lazy-loaded-routing.module';
 import { MainComponent } from './main/main.component';
 import { SettingComponent } from './setting/setting.component';
 import { SettingHostService } from '../settings/setting-host.service';
-import { CoalescingComponentFactoryResolver } from '../core/coalescing-component-factory-resolver.service';
+// import { CoalescingComponentFactoryResolver } from '../core/coalescing-component-factory-resolver.service';
 import { setting } from './lazy-loaded-routing.module'
 
 @NgModule({
@@ -19,7 +19,7 @@ import { setting } from './lazy-loaded-routing.module'
 })
 export class LazyLoadedModule { 
   constructor(
-    coalescingResolver: CoalescingComponentFactoryResolver,
+    // coalescingResolver: CoalescingComponentFactoryResolver,
     localResolver: ComponentFactoryResolver,
     settingHostService:SettingHostService,
   ) {

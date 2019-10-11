@@ -17,8 +17,31 @@ Angular components can be either indirectly loaded via imports another ngModule 
 
 See also AngularSingleton.md for more about new tree-shakable provider, which does not need 'imports' the hosting ngModule.
 
+## Architecture - Layers (ref. 6)
+The architecture describes two layers: Components Layer and Services Layer:
+
+Components Layer encapsulates components which present the current application state. Components are separated into Smart and Dumb Components. The only logic present is view logic inside Smart Components.
+
+Services Layer is more or less what we call 'business logic layer' on the server side. The layer defines the applications state, the transitions between state and classic business logic. Stores contain application state over time to which Smart Components subscribe to. Adapters are used to perform XHRs, WebSocket connections, etc. The business model is described inside the module. Use case services perform business logic needed for use cases. A use case services interacts with the store and adapters. Methods of use case services are the API for Smart Components. Those methods are Actions in reactive terminology.
+
+## Smart and Dumb Components (ref.6)
+The architecture applies the concept of Smart and Dumb Components (syn. Containers and Presenters). The concept means that components are divided into Smart and Dumb Components.
+
+A Smart Component typically is a toplevel dialog inside the component tree.
+
+- a component, that can be routed to
+- a modal dialog
+- a component, which is placed inside AppComponent
+
+A Dumb Component can be used by one to many Smart Components. Inside the component tree a Dumb Component is a child of a Smart Component.
+
+## Angular Modules
+There are feature modules and special modules described by the Angular Styleguide - core and shared.
+
 ## core and shared modules 
 By convention, a project has core and shared modules. In general, core module single used, while shared module is multiple used. With core, shared, and feature modules, the app.module should be clean and small.
+
+A feature module is basically a vertical cut through both layers (component and service). The shared module consists of components shared across feature modules. The core module holds services shared across modules. So core module is a module only having a services layer and shared module is a module only having a components layer.
 
 Considerations for core module:
 1. Singleton services are hosted in core module.
@@ -37,9 +60,85 @@ Considerations for feature module:
 1. Try to create feature module which don’t depend on any other feature modules just on services provided by CoreModule and components provided by SharedModule. [1].
 2. if a feature module need service from another feature module consider move the service to core module.
 
+## File Structure (ref. 6)
+### Toplevel
+ /src
+    └── /app
+        ├── /account-management
+        ├── /billing
+        ├── /booking
+        ├── /core
+        ├── /shared
+        ├── /status
+        |
+        ├── app.module.ts
+        ├── app.component.spec.ts
+        ├── app.component.ts
+        └── app.routing-module.ts
+### Feature Modules
+A feature module contains the modules definition and two folders representing both layers.
+  /src
+    └── /app
+        └── /account-management
+            ├── /components
+            ├── /services
+            |
+            ├── account-management.module.ts
+            ├── account-management.component.spec.ts
+            ├── account-management.component.ts
+            └── account-management.routing-module.ts
+### Components Layer      
+Listing 3. Components layer file structure shows Smart Components on toplevel
+    /src
+    └── /app
+        └── /account-management
+            └── /components
+                ├── /account-overview
+                ├── /confirm-modal
+                ├── /create-account
+                ├── /forgot-password
+                └── /shared
+Listing 4. Smart components contain Dumb components
+    /src
+    └── /app
+        └── /account-management
+            └── /components
+                └── /account-overview
+                    ├── /user-info-panel
+                    |   ├── /address-tab
+                    |   ├── /last-activities-tab
+                    |   |
+                    |   ├── user-info-panel.component.html
+                    |   ├── user-info-panel.component.scss
+                    |   ├── user-info-panel.component.spec.ts
+                    |   └── user-info-panel.component.ts
+                    |
+                    ├── /user-header
+                    ├── /user-toolbar
+                    |
+                    ├── account-overview.component.html
+                    ├── account-overview.component.scss
+                    ├── account-overview.component.spec.ts
+                    └── account-overview.component.ts
+
+ If a Dumb Component is used by multiple Smart Components inside the components layer it is put inside the /shared folder inside the components layer. 
+ 
+ With this way of thinking the shared module makes a lot of sense. If a Dumb Component is used by multiple Smart Components from different feature modules, the Dumb Component is placed into the shared module.
+
+   /src
+    └── /app
+        └── /shared
+            └── /user-panel
+                |
+                ├── user-panel.component.html
+                ├── user-panel.component.scss
+                ├── user-panel.component.spec.ts
+                └── user-panel.component.ts
+
 ## **References**
 1. [6 Best Practices & Pro Tips when using Angular CLI](https://medium.com/@tomastrajan/6-best-practices-pro-tips-for-angular-cli-better-developer-experience-7b328bc9db81)  
 2. [Angular.io style guide](https://angular.io/guide/styleguide)
 3. github project: [tomastrajan/angular-ngrx-material-starter](https://github.com/tomastrajan/angular-ngrx-material-starter) 
 4. [ngrx open source and demo-example](https://github.com/ngrx/platform)
 5. [rwa-trivia github project](https://github.com/anihalaney/rwa-trivia) 
+6. [devon4ng/documentation](https://github.com/devonfw/devon4ng/tree/develop/documentation)

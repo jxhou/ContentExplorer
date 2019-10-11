@@ -21,7 +21,7 @@ import { DashboardComponent } from './containers/dashboard/dashboard.component';
 import { ThemeSettingsComponent } from './components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from './components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from './components/not-found.component';
-import { TestModuleModule } from './test-module/test-module.module';
+import { TestModuleModule } from './features/test-module/test-module.module';
 import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
 import { CoreModule } from 'app/core/core.module';
 @NgModule({

@@ -5,7 +5,7 @@ import { routes, SETTING_ROUTES, SETTING_CHILD_ROUTES } from './app.route';
 // import { SettingsComponent, DashboardComponent } from '../containers';
 // import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
-import { SettingsModule } from '../settings/settings.module';
+import { SettingsModule } from '../features/settings/settings.module';
 
 @NgModule({
   imports: [
