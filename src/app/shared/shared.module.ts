@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SharedMaterialModule } from './shared-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -22,14 +23,15 @@ import { FormsModule } from '@angular/forms';
     // Flex
     FlexLayoutModule,
 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
 
+    LayoutModule
   ],
   providers: [
   ],
   exports:  [
-              CommonModule, ReactiveFormsModule, FormsModule,
-              FlexLayoutModule, BrowserAnimationsModule,
-              SharedMaterialModule ]
+    CommonModule, ReactiveFormsModule, FormsModule,
+    FlexLayoutModule, BrowserAnimationsModule,
+    SharedMaterialModule, LayoutModule ]
 })
 export class SharedModule { }

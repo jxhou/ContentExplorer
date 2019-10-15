@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +8,11 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 export class AppNavBarComponent implements OnInit {
   @Input()
   leftContentTemplate: TemplateRef<any>;
-  //logo = require('@app/assets/logo.png');
+/*
+  @ViewChild('defaultTabButtons', {static: false} )
+  private defaultTabButtonsTpl: TemplateRef<any>;
+  */
+
   constructor() { }
 
   ngOnInit() {

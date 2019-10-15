@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared';
 import { RoutingModule } from './routing/routing.module';
-import { LayoutModule } from './layout/layout.module'
+// import { LayoutModule } from './layout/layout.module'
 import { reducers, metaReducers } from './store/reducers';
 import { RouteStoreExtModule } from './router_store_ext'
 import { environment } from '../environments/environment';
@@ -37,7 +37,7 @@ import { CoreModule } from 'app/core/core.module';
     BrowserAnimationsModule,  // enable animation functionality of some material components
     SharedModule,
     RoutingModule,
-    LayoutModule,
+    // LayoutModule,
     TestModuleModule,
     CoreModule,
     /**

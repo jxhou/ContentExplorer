@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule  } from '@angular/router';
 import { AppNavBarComponent } from './components/navbar/navbar.component';
-import { SharedModule } from '../shared/shared.module'
+import { SharedMaterialModule } from '../shared-material.module'
 
 @NgModule({
   imports: [
-    SharedModule,
+    SharedMaterialModule,
     RouterModule.forChild([])
   ],
   declarations: [AppNavBarComponent],
