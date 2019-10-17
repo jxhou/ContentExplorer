@@ -22,5 +22,5 @@ import { CustomRouterStateSerializer, routerReducerName } from './store/reducers
   ],
   exports: [
   ]
-  })
+})
 export class RouteStoreExtModule { }

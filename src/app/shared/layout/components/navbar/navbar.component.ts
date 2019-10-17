@@ -12,6 +12,9 @@ export class AppNavBarComponent implements OnInit {
   @Input()
   rightContentTemplate: TemplateRef<any>;
 
+  @Input()
+  title: String;
+
   constructor() { }
 
   ngOnInit() {

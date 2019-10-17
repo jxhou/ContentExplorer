@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.lastTheme = value;
       }
     );
+    this.title = 'test title 3';
     // do a test
     // this.store.dispatch(new fromStore.SetThemeAction('purple-theme'));
   }
