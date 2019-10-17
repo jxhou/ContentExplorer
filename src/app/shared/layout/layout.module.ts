@@ -7,6 +7,7 @@ import { SharedMaterialModule } from '../shared-material.module'
 @NgModule({
   imports: [
     SharedMaterialModule,
+    CommonModule,
     RouterModule.forChild([])
   ],
   declarations: [AppNavBarComponent],

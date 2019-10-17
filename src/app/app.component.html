@@ -1,10 +1,19 @@
 <div class = "mat-app-background">
-  <ng-template #customContent>
+  <ng-template #leftContent>
       <button mat-icon-button class="hidden-md-up">
         <mat-icon>menu</mat-icon>
       </button>
   </ng-template>
-  <app-navbar [leftContentTemplate]="customContent"></app-navbar>
+  
+  <ng-template #rightContent>
+    <button mat-icon-button routerLink="settings" class="hidden-sm-down">
+      <mat-icon>settings</mat-icon>
+    </button>
+  </ng-template>
+
+  <app-navbar [leftContentTemplate]="leftContent" [rightContentTemplate]="rightContent">
+  </app-navbar>
+
   <router-outlet></router-outlet>
 </div>
 

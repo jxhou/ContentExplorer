@@ -8,10 +8,9 @@ import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 export class AppNavBarComponent implements OnInit {
   @Input()
   leftContentTemplate: TemplateRef<any>;
-/*
-  @ViewChild('defaultTabButtons', {static: false} )
-  private defaultTabButtonsTpl: TemplateRef<any>;
-  */
+
+  @Input()
+  rightContentTemplate: TemplateRef<any>;
 
   constructor() { }
 
