@@ -18,6 +18,7 @@ import * as fromRouter from '@ngrx/router-store';
  */
 
 import * as fromTheme from './theme';
+import * as fromRouterEx from '../../router_store_ext';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
@@ -25,7 +26,7 @@ import * as fromTheme from './theme';
  */
 export interface State {
   theme: fromTheme.State;
-  // routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
+  routerReducer: fromRouter.RouterReducerState<fromRouterEx.State>;
 }
 
 /**
@@ -35,7 +36,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
   theme: fromTheme.reducer,
-  // routerReducer: fromRouter.routerReducer,
+  routerReducer: fromRouter.routerReducer,
 };
 
 // console.log all actions

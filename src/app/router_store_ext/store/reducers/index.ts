@@ -12,14 +12,14 @@ import { Injectable } from "@angular/core";
 export const routerReducerName = 'routerReducer';
 
 // Custom router state
-export interface RouterStateUrl {
+export interface State {
   url: string;
   queryParams: Params;
   params: Params;
 }
 
 export const getRouterState = createFeatureSelector<
-  fromRouter.RouterReducerState<RouterStateUrl>
+  fromRouter.RouterReducerState<State>
 >(routerReducerName);
 
 /**
@@ -32,8 +32,8 @@ export const getRouterState = createFeatureSelector<
  */
 @Injectable()
 export class CustomRouterStateSerializer
-  implements fromRouter.RouterStateSerializer<RouterStateUrl> {
-  serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+  implements fromRouter.RouterStateSerializer<State> {
+  serialize(routerState: RouterStateSnapshot): State {
     const { url } = routerState;
     const { queryParams } = routerState.root;
 
