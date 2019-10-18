@@ -20,6 +20,8 @@ import * as fromRouter from '@ngrx/router-store';
 import * as fromTheme from './theme';
 import * as fromRouterEx from '../../router_store_ext';
 
+export {fromRouterEx};
+
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
@@ -27,7 +29,7 @@ import * as fromRouterEx from '../../router_store_ext';
 export interface State {
   theme: fromTheme.State;
   routerReducer: fromRouter.RouterReducerState<fromRouterEx.State>;
-}
+};
 
 /**
  * Our state is composed of a map of action reducer functions.
@@ -47,7 +49,7 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 
     return reducer(state, action);
   };
-}
+};
 
 /**
  * By default, @ngrx/store uses combineReducers with the reducer map to compose

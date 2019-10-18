@@ -6,7 +6,7 @@ const LocalStorageServiceInst = new LocalStorageService();
 
 export interface State {
   themeName: string;
-}
+};
 
 // get theme status from local storage
 const themeLocalStorage = LocalStorageServiceInst.getItem('theme');
@@ -28,6 +28,6 @@ export function reducer(state = initialState, action: theme.Actions): State {
     default:
       return state;
   }
-}
+};
 
 export const getThemeName = (state: State) => state.themeName;
