@@ -22,7 +22,7 @@ import { ThemeSettingsComponent } from './components/theme-settings/theme-settin
 import { TestSettingComponent } from './components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './features/test-module/test-module.module';
-import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
+// import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
 import { CoreModule } from 'app/core/core.module';
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ import { CoreModule } from 'app/core/core.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor(coalescingResolver: CoalescingComponentFactoryResolver) {
+  constructor(/*coalescingResolver: CoalescingComponentFactoryResolver*/) {
     // coalescingResolver.init();
   }
 }
