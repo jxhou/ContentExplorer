@@ -18,15 +18,10 @@ export interface RouteState {
   queryParams: Params;
   params: Params;
 }
-export interface State  extends fromRoot.State {
+export interface State{
   [routerReducerName]: RouteState;
 }
 
-/*
-export const getRouterState = createFeatureSelector<
-  fromRouter.RouterReducerState<RouteState>
->(routerReducerName);
-*/
 
 export const getRouterState = createFeatureSelector<State, RouteState>(
   routerReducerName

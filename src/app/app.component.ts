@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     public overlayContainer: OverlayContainer,
-    private store: Store<fromStore.State>,
+    private store: Store<fromStore.State & fromStore.fromRouterEx.State>,
   ) {}
 
   ngOnInit() {
@@ -41,12 +41,12 @@ export class AppComponent implements OnInit, OnDestroy {
     );
     this.title = 'test title 3';
 
-    this.routeStatus$ = this.store.select(fromStore.fromRouterEx.selectRouterState);
+    this.routeStatus$ = this.store.select(fromStore.fromRouterEx.getRouterState);
     // this.store.pipe(select(fromStore.fromRouterEx.selectRouterState));
     this.routeStatus$.pipe(takeUntil(this.unsubscribe$)).subscribe(
       value => {
         if (value) {
-          this.title = value.state.url;
+          this.title = value.url;
         }
       }
     );
