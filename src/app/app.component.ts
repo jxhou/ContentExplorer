@@ -1,11 +1,10 @@
 import { Component, HostBinding, OnInit, OnDestroy} from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable ,  Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import * as fromStore from './store';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +13,7 @@ import * as fromStore from './store';
 export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   selectedTheme$: Observable<string>;
-  routeStatus$: Observable<any>;
+  routeStatus$: Observable<fromStore.fromRouterEx.RouteState>;
   title = 'ContentExplorer';
   lastTheme = '';
   // Theme implementation by binding/updating the host's class attribute.
@@ -42,11 +41,12 @@ export class AppComponent implements OnInit, OnDestroy {
     );
     this.title = 'test title 3';
 
-    this.routeStatus$ = this.store.select(fromStore.fromRouterEx.getRouterState);
+    this.routeStatus$ = this.store.select(fromStore.fromRouterEx.selectRouterState);
+    // this.store.pipe(select(fromStore.fromRouterEx.selectRouterState));
     this.routeStatus$.pipe(takeUntil(this.unsubscribe$)).subscribe(
       value => {
         if (value) {
-          this.title = value.routerReducer.state.url;
+          this.title = value.state.url;
         }
       }
     );

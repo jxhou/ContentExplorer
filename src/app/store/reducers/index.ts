@@ -28,7 +28,7 @@ export {fromRouterEx};
  */
 export interface State {
   theme: fromTheme.State;
-  routerReducer: fromRouter.RouterReducerState<fromRouterEx.State>;
+  router: fromRouter.RouterReducerState<fromRouterEx.RouteState>;
 };
 
 /**
@@ -38,7 +38,7 @@ export interface State {
  */
 export const reducers: ActionReducerMap<State> = {
   theme: fromTheme.reducer,
-  routerReducer: fromRouter.routerReducer,
+  router: fromRouter.routerReducer,
 };
 
 // console.log all actions

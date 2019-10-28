@@ -3,25 +3,39 @@ import {
   RouterStateSnapshot,
   Params,
 } from '@angular/router';
-import { createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as fromRouter from '@ngrx/router-store';
 import { Injectable } from "@angular/core";
+import * as fromRoot from '@app/store';
 
 // define a reducer name for router state
 export const routerReducerName = 'routerReducer';
 
 // Custom router state
-export interface State {
+export interface RouteState {
   url: string;
   queryParams: Params;
   params: Params;
 }
+export interface State  extends fromRoot.State {
+  [routerReducerName]: RouteState;
+}
 
+/*
 export const getRouterState = createFeatureSelector<
-  fromRouter.RouterReducerState<State>
+  fromRouter.RouterReducerState<RouteState>
 >(routerReducerName);
+*/
 
+export const getRouterState = createFeatureSelector<State, RouteState>(
+  routerReducerName
+);
+
+export const selectRouterState = createSelector(
+  getRouterState,
+  (state: RouteState) => state
+);
 /**
  * The RouterStateSerializer takes the current RouterStateSnapshot
  * and returns any pertinent information needed. The snapshot contains
@@ -32,8 +46,8 @@ export const getRouterState = createFeatureSelector<
  */
 @Injectable()
 export class CustomRouterStateSerializer
-  implements fromRouter.RouterStateSerializer<State> {
-  serialize(routerState: RouterStateSnapshot): State {
+  implements fromRouter.RouterStateSerializer<RouteState> {
+  serialize(routerState: RouterStateSnapshot): RouteState {
     const { url } = routerState;
     const { queryParams } = routerState.root;
 
