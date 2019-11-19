@@ -10,7 +10,7 @@ import { Injectable } from "@angular/core";
 import * as fromRoot from '@app/store';
 
 // define a reducer name for router state
-export const routerReducerName = 'routerReducer';
+export const routerReducerName = 'router';
 
 // Custom router state
 export interface RouteState {

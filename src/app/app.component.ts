@@ -21,7 +21,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     public overlayContainer: OverlayContainer,
-    private store: Store<fromStore.State & fromStore.fromRouterEx.State>,
+    // The generic Store<T> need to have a compatibles state type of T in order to select state without syntax error,
+    // use <type1 & type2> as below to specify strict type or use "any" to allow any type of state 
+    // private store: Store<fromStore.State & fromStore.fromRouterEx.State>,
+    private store: Store<any>,
   ) {}
 
   ngOnInit() {
@@ -46,7 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.routeStatus$.pipe(takeUntil(this.unsubscribe$)).subscribe(
       value => {
         if (value) {
-          this.title = value.url;
+          // for some reason the custome state is wrapped inside of state property.
+          const fullState: any = value;
+          this.title = fullState.state.url;
         }
       }
     );
