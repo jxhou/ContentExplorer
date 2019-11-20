@@ -43,7 +43,39 @@ Each *.reducer.ts file define a sub-module state interface, and an initial state
 Best practice for reducer function: Each reducer function should have type definitions for each input parameters, and return type. When create new immutable states, using spread operator instead of Object.assign to enable strict type checking to prevent any invalid property of state (see reference 11) and example in \src\app\store\reducers\theme.ts. 
 
 The barrel store/reducers/index.ts will define a composite state interface and a composite reducers for the entire module, besides roll up the exports from children. The best practice for defining the composite reducers is to use ActionReducerMap with state interface to make sure the reducers matching with state interface. e.g.
+from ngrx platform source example-app
+
 ```
+export const booksFeatureKey = 'books';
+
+export interface BooksState {
+  [fromSearch.searchFeatureKey]: fromSearch.State;
+  [fromBooks.booksFeatureKey]: fromBooks.State;
+  [fromCollection.collectionFeatureKey]: fromCollection.State;
+}
+
+export interface State extends fromRoot.State {
+  [booksFeatureKey]: BooksState;
+}
+
+/** Provide reducer in AoT-compilation happy way */
+export function reducers(state: BooksState | undefined, action: Action) {
+  return combineReducers({
+    [fromSearch.searchFeatureKey]: fromSearch.reducer,
+    [fromBooks.booksFeatureKey]: fromBooks.reducer,
+    [fromCollection.collectionFeatureKey]: fromCollection.reducer,
+  })(state, action);
+}
+```
+
+The interface definition should match with reducers function exactly in its tree structure, which guarantee that the returned state has the defined state tree.
+
+Note also use combineReducers helper to create a combined reducers, which is used in:
+StoreModule.forFeature(fromBooks.booksFeatureKey, fromBooks.reducers),
+=====
+old version
+====
+``` 
 
 export interface ProductsState {
   pizzas: fromPizzas.PizzaState;
@@ -69,6 +101,28 @@ interface State extends fromRoot.State
 is used instead, which make it dependent on root implementation.
 
 This state definition can then be used in any component constructor where the store with the specific state of the sub-module is injected.
+
+```
+export class CollectionPageComponent implements OnInit {
+  books$: Observable<Book[]>;
+
+  constructor(private store: Store<fromBooks.State>) {
+    this.books$ = store.pipe(select(fromBooks.selectBookCollection));
+  }
+
+  ngOnInit() {
+    this.store.dispatch(CollectionPageActions.loadCollection());
+  }
+}
+```
+The generic type in constructor: Store<fromBooks.State>) has to match the selector used in same context. If you want to use a selector with state not match the "fromBooks.State", you will see typescript error.
+
+As described above, the overall state of a module does not need to derived from the state defined in root module. If the feature state is only used in the same module, you do not need to care about other states from other modules including root module.
+
+if the module state is used outside of the module, you do need to specified using "&":
+  private store: Store<fromStore.State & fromStore.fromRouterEx.State>,
+  or 
+  private store: Store<any>,
 
 5. routerStore
 @ngrx/router-store supports router state in the store. With StoreRouterConnectingModule imported, this module will be able to update router state in store. But the app has to register pre-defined routerReducers, in order for router state to be available in store. One can define custom serializer for the router state, also define custom actions such as GO, BACK, FORWARD. All those can be wrapped in module. See details in src/app/router_store_ext module.
