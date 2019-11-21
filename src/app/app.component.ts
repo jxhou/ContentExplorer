@@ -23,8 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
     public overlayContainer: OverlayContainer,
     // The generic Store<T> need to have a compatibles state type of T in order to select state without syntax error,
     // use <type1 & type2> as below to specify strict type or use "any" to allow any type of state 
-    // private store: Store<fromStore.State & fromStore.fromRouterEx.State>,
-    private store: Store<any>,
+    private store: Store<fromStore.State & fromStore.fromRouterEx.State>,
+    // private store: Store<any>,
   ) {}
 
   ngOnInit() {
