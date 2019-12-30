@@ -7,7 +7,7 @@ In ES6, one file can be a module, each module can import/export multiple types. 
 
 When an eagerly loaded ngModule imports other ngModules with service exposed with 'provider', all the service providers are merged into root Di injector, making it available to entire application. Therefore in the scenario of eagerly loaded ngModules, the services exposed in ngModule's 'providers' section are always singleton, even related ngModules are imports(ed) in multiple locations, due to the fact that the providers are merged in root injector.  For non-singleton service, declare services in component's providers section. However for lazy loaded ngModules, the services declared in imported ngModule's providers section will not be merged in root DI injector, therefore create its own instance of service locally, even the lazy loaded ngModule can still access its parent injector. This behavior of lazy loaded ngModule can create problem if imports ngModule with service which suppose to be singleton. Therefore the ngModule with singleton service should only be imports(ed) in root component, not in lazy loaded modules, the lazy loaded modules will get access to the singleton service via parent injector.
 
-There are solutions to address the singleton issue when lazy loaded ngModules may involve: such as singleton gurad, forRoot/forChild pattern, and "smart module" as decribed in Angularsingleton.md.  
+There are solutions to address the singleton issue when lazy loaded ngModules may involve: such as singleton guard, forRoot/forChild pattern, and "smart module" as described in Angularsingleton.md.  
 
 In general, Angular's ngModel, imports, and exports are used on top of the ES6's module, import, and export. A ngModule type has to be ES6 import(ed) first, before it can be Angular 'imports(ed)'. As always in javascript world, a type has to be imported first before it can be referenced.
 
@@ -27,7 +27,7 @@ Services Layer is more or less what we call 'business logic layer' on the server
 ## Smart and Dumb Components (ref.6)
 The architecture applies the concept of Smart and Dumb Components (syn. Containers and Presenters). The concept means that components are divided into Smart and Dumb Components.
 
-A Smart Component typically is a toplevel dialog inside the component tree.
+A Smart Component typically is a top level dialog inside the component tree.
 
 - a component, that can be routed to
 - a modal dialog
@@ -142,3 +142,10 @@ Listing 4. Smart components contain Dumb components
 4. [ngrx open source and demo-example](https://github.com/ngrx/platform)
 5. [rwa-trivia github project](https://github.com/anihalaney/rwa-trivia) 
 6. [devon4ng/documentation](https://github.com/devonfw/devon4ng/tree/develop/documentation)
+   More in depth discussion about project structures.
+7. Another angular-folder-structure by mathisGarberg:
+   [Angular Folder Structure Doc](https://angular-folder-structure.readthedocs.io/en/latest/overview.html#);
+   [git source project](https://github.com/mathisGarberg/angular-folder-structure);
+   [How to define a highly scalable folder structure for your Angular project (older version)](https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7)
+   [Angular Folder Structure (a related article)](https://medium.com/@motcowley/angular-folder-structure-d1809be95542).
+   There is a layout implementation using route.
