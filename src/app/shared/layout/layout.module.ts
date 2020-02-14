@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule  } from '@angular/router';
 import { AppNavBarComponent } from './components/navbar/navbar.component';
-import { SharedMaterialModule } from '../shared-material.module'
+import { SharedMaterialModule } from '../shared-material.module';
+import { LayoutComponent } from './containers/layout/layout.component'
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { SharedMaterialModule } from '../shared-material.module'
     CommonModule,
     RouterModule.forChild([])
   ],
-  declarations: [AppNavBarComponent],
+  declarations: [AppNavBarComponent, LayoutComponent],
   exports: [AppNavBarComponent]
 })
 export class LayoutModule { }

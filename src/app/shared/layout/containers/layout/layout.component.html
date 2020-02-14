@@ -1,0 +1,18 @@
+<p>layout works!</p>
+<ng-template #leftContent>
+    <button mat-icon-button class="hidden-md-up" (click)="sidebar.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+</ng-template>
+
+<app-navbar [leftContentTemplate]="leftContent" [title] ="title"></app-navbar>
+
+<!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+<mat-sidenav-container>
+    <mat-sidenav #sidebar [opened]="opened">Start</mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
