@@ -4,6 +4,7 @@
         *ngTemplateOutlet="leftContentTemplate">
       </ng-container>
       <div>{{title}}</div>
+      <!-- #region
           <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
           <button mat-icon-button routerLink="lazy" class="hidden-sm-down">
             lazy
@@ -11,6 +12,7 @@
           <button mat-icon-button routerLink="barComp" class="hidden-sm-down">
             Bar
           </button>
+       -->
           <!-- This fills the remaining space of the current row -->
           <span class="spacer"></span>
 
@@ -18,7 +20,7 @@
       *ngTemplateOutlet="rightContentTemplate">
     </ng-container>
    </mat-toolbar-row>
-   <mat-toolbar-row>
+   <mat-toolbar-row *ngif="false">
      <button>Second Row</button>
    </mat-toolbar-row>
  </mat-toolbar>

@@ -1,18 +1,42 @@
-<p>layout works!</p>
 <ng-template #leftContent>
     <button mat-icon-button class="hidden-md-up" (click)="sidebar.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
 </ng-template>
 
-<app-navbar [leftContentTemplate]="leftContent" [title] ="title"></app-navbar>
+<ng-template #rightContent>
+    <button mat-icon-button routerLink="settings" class="hidden-sm-down">
+      <mat-icon>settings</mat-icon>
+    </button>
+</ng-template>
 
+
+<app-navbar [leftContentTemplate]="leftContent" [rightContentTemplate]="rightContent" [title] ="title"></app-navbar>
 <!-- Creates a layout with a left-positioned sidenav and explicit content. -->
 <mat-sidenav-container>
-    <mat-sidenav #sidebar [opened]="opened">Start</mat-sidenav>
+    <mat-sidenav #sidebar [opened]="opened" mode="side">
+        <mat-list>
+            <mat-list-item> 
+                <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
+            </mat-list-item>
+            <mat-list-item> 
+                <button mat-icon-button routerLink="lazy" class="hidden-sm-down">
+                    lazy
+                </button>
+            </mat-list-item>
+            <mat-list-item> 
+                <button mat-icon-button routerLink="barComp" class="hidden-sm-down">
+                    Bar
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+
 
 

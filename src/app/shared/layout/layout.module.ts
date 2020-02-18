@@ -12,6 +12,6 @@ import { LayoutComponent } from './containers/layout/layout.component'
     RouterModule.forChild([])
   ],
   declarations: [AppNavBarComponent, LayoutComponent],
-  exports: [AppNavBarComponent]
+  exports: [AppNavBarComponent, LayoutComponent]
 })
 export class LayoutModule { }

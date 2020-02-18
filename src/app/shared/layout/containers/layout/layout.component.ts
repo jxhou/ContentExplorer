@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { throwIfEmpty } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
   opened: boolean;
+  title: string;
 
   constructor() { 
-    this.opened = true;
+    this.opened = false;
+    this.title = 'test';
   }
 
   toggleSideBar() {
