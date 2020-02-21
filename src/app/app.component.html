@@ -1,7 +1,4 @@
 <div class = "mat-app-background">
-  <!--
-
-  
   <ng-template #leftContent>
       <button mat-icon-button class="hidden-md-up">
         <mat-icon>menu</mat-icon>
@@ -14,12 +11,34 @@
     </button>
   </ng-template>
 
+  <!--
   <app-navbar [leftContentTemplate]="leftContent" [rightContentTemplate]="rightContent" [title] ="title">
   </app-navbar>
-
   <router-outlet></router-outlet>
   -->
-  <app-layout></app-layout>
+
+  
+  
+  <app-layout [navBarRightContent]="rightContent">
+    <div class="layout-sidenav">
+      <mat-list>
+        <mat-list-item> 
+            <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
+        </mat-list-item>
+        <mat-list-item> 
+            <button mat-icon-button routerLink="lazy" class="hidden-sm-down">
+                lazy
+            </button>
+        </mat-list-item>
+        <mat-list-item> 
+            <button mat-icon-button routerLink="barComp" class="hidden-sm-down">
+                Bar
+            </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+   
+  </app-layout>
 </div>
 
 

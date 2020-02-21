@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { throwIfEmpty } from 'rxjs/operators';
 
 @Component({
@@ -7,6 +7,12 @@ import { throwIfEmpty } from 'rxjs/operators';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
+  @Input()
+  navBarLeftContent: TemplateRef<any>;
+
+  @Input()
+  navBarRightContent: TemplateRef<any>;
+  
   opened: boolean;
   title: string;
 
