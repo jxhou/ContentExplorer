@@ -2,7 +2,7 @@ import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { throwIfEmpty } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
@@ -12,9 +12,11 @@ export class LayoutComponent implements OnInit {
 
   @Input()
   navBarRightContent: TemplateRef<any>;
+
+  @Input()
+  title: string;
   
   opened: boolean;
-  title: string;
 
   constructor() { 
     this.opened = false;

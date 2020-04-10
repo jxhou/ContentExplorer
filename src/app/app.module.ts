@@ -24,13 +24,15 @@ import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './features/test-module/test-module.module';
 // import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
 import { CoreModule } from 'app/core/core.module';
+import { AppLayoutComponent } from './containers/app-layout/app-layout.component';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
     DashboardComponent,
     ThemeSettingsComponent,
-    TestSettingComponent
+    TestSettingComponent,
+    AppLayoutComponent
   ],
   imports: [
     BrowserModule,

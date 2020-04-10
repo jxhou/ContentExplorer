@@ -8,13 +8,18 @@ import { PageNotFoundComponent } from '@app/components/not-found.component';
 export const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    data: {
+      location: 'SideNav',
+      title: 'Dashboard'
+    },
   },
   {
     path: 'settings',
     component: SettingsComponent,
     data: {
-      title: 'Settings'
+      location: 'ToolBarRight',
+      title: 'settings'
     },
   },
  {
@@ -23,12 +28,20 @@ export const routes: Routes = [
    pathMatch: 'full'
  },
  {
-  path: 'lazy',
-  loadChildren: () => import('../features/lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule)
+   path: 'lazy',
+   loadChildren: () => import('../features/lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule),
+   data: {
+     location: 'SideNav',
+     title: 'Lazy'
+   },
  },
  {
-  path: 'barComp',
-  component: PageNotFoundComponent
+   path: 'barComp',
+   component: PageNotFoundComponent,
+   data: {
+     location: 'SideNav',
+     title: 'BarComp'
+   },
  },
  { path: '**', component: PageNotFoundComponent }
 ];

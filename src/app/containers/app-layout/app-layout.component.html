@@ -1,0 +1,32 @@
+<ng-template #rightContent>
+  <button mat-icon-button 
+    *ngFor="let route of toolBarRightRoutes" 
+    [routerLink]="route.path" class="hidden-sm-down">
+    <mat-icon>{{route.title}}</mat-icon>
+  </button>
+</ng-template>
+
+<layout [title]="title" [navBarRightContent]="rightContent">
+    <div class="layout-sidenav">
+      <mat-list>
+        <!-- #region 
+        <mat-list-item> 
+            <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
+        </mat-list-item>
+        <mat-list-item> 
+            <button mat-icon-button routerLink="lazy" class="hidden-sm-down">
+                lazy
+            </button>
+        </mat-list-item>
+        <mat-list-item> 
+            <button mat-icon-button routerLink="barComp" class="hidden-sm-down">
+                Bar
+            </button>
+        </mat-list-item>
+        -->
+        <mat-list-item *ngFor="let route of sideBarRoutes"> 
+          <a [routerLink]="route.path" class="branding hidden-md-up text-center">{{ route.title }}</a>
+        </mat-list-item>
+      </mat-list>
+    </div>
+</layout>
