@@ -4,13 +4,23 @@ import { SettingsComponent } from '../features/settings/settings.component';
 import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
 import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
 import { PageNotFoundComponent } from '@app/components/not-found.component';
+// import { LazyLoadedModule } from '@app/features/lazy-loaded/lazy-loaded.module';
+import { WithChildRoutesModule } from '@app/features/with-child-routes/with-child-routes.module';
+
+// data.location in route definition can have values of 'SideNav', 'ToolBarRight' etc, which configure the location,
+// where the the link will be displayed.
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
     data: {
-      location: 'SideNav',
+      location: 'SideNav',   // show up in side navigation bar.
       title: 'Dashboard'
     },
   },
@@ -18,32 +28,38 @@ export const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     data: {
-      location: 'ToolBarRight',
+      location: 'ToolBarRight', // show up in right of tool bar
       title: 'settings'
     },
   },
- {
-   path: '',
-   redirectTo: '/dashboard',
-   pathMatch: 'full'
- },
- {
-   path: 'lazy',
-   loadChildren: () => import('../features/lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule),
-   data: {
-     location: 'SideNav',
-     title: 'Lazy'
-   },
- },
- {
-   path: 'barComp',
-   component: PageNotFoundComponent,
-   data: {
-     location: 'SideNav',
-     title: 'BarComp'
-   },
- },
- { path: '**', component: PageNotFoundComponent }
+
+  {
+    path: 'lazy',
+    loadChildren: () => import('../features/lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule),
+    data: {
+      location: 'SideNav',
+      title: 'Lazy'
+    },
+  },
+  {
+    path: 'Not-found',
+    component: PageNotFoundComponent,
+    data: {
+      location: 'SideNav',
+      title: 'not found'
+    },
+  },
+  {
+    // eagerly load a module using the syntax of lazy-loading.
+    path: 'eagerlyLoaded',
+    loadChildren: () => WithChildRoutesModule,
+    data: {
+      location: 'SideNav',
+      title: 'EagerlyLoaded',
+      message: 'eagerly loaded using lazy loading style'
+    },
+  },
+  { path: '**', redirectTo:'not-found' }
 ];
 
 // This extra routes can be merged in routes above.

@@ -20,11 +20,12 @@ import { setting } from './lazy-loaded-routing.module'
 export class LazyLoadedModule { 
   constructor(
     // coalescingResolver: CoalescingComponentFactoryResolver,
-    localResolver: ComponentFactoryResolver,
-    settingHostService:SettingHostService,
+    // localResolver: ComponentFactoryResolver,
+    settingHostService:SettingHostService,  // inject SettingHostService for registering setting page
   ) {
     // do not need the coalescingResolver any more for ivy
     // coalescingResolver.registerResolver(localResolver);
+    // Let's register our setting's page with SettingHostService, which is a bridge to SettingsModule
     settingHostService.addSettingRoute(setting);
   }
 }

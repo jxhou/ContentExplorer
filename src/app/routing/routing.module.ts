@@ -22,7 +22,8 @@ import { SettingsModule } from '../features/settings/settings.module';
 
     // Option 2:
     // Also ask SettingsModule to register its child route page.
-    // Here SETTING_CHILD_ROUTES as defined in app.route.ts list only the components (ThemeSettingsComponent and TestSettingComponent)
+    // Here SETTING_CHILD_ROUTES as defined in app.route.ts list only the components 
+    // (ThemeSettingsComponent and TestSettingComponent)
     // to be added to the settings page, without knowledge of the route path for the settings page.
     // Internally SettingsModule.withSettingRoutes will declare all the setting components as entryComponents 
     // using ANALYZE_FOR_ENTRY_COMPONENTS, also allow settings page to dynamically add the setting components

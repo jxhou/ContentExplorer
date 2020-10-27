@@ -6,27 +6,11 @@
 </ng-template>
 
 <app-navbar [leftContentTemplate]="leftContent" [rightContentTemplate]="navBarRightContent" [title] ="title"></app-navbar>
-<!-- Creates a layout with a left-positioned sidenav and explicit content. -->
+<!-- Creates a layout with a left-positioned sidenav. -->
 <mat-sidenav-container>
     <mat-sidenav #sidebar [opened]="opened" mode="side">
+        <!-- pick up the content projected from outside of the component with the selector: div.layout-sidenav -->
         <ng-content select="div.layout-sidenav"></ng-content>
-        <!-- 
-        <mat-list>
-            <mat-list-item> 
-                <a routerLink="" class="branding hidden-md-up text-center"><img style="height:25px" src="../assets/logo.png" /> Angular Content</a>
-            </mat-list-item>
-            <mat-list-item> 
-                <button mat-icon-button routerLink="lazy" class="hidden-sm-down">
-                    lazy
-                </button>
-            </mat-list-item>
-            <mat-list-item> 
-                <button mat-icon-button routerLink="barComp" class="hidden-sm-down">
-                    Bar
-                </button>
-            </mat-list-item>
-        </mat-list>
-        -->
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="container">

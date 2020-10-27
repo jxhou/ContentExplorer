@@ -3,21 +3,40 @@
 ## Summery
 Angular routing is based on dynamic component creation (see more detailed discussion in DynamicContent.md). Any routed components are implicitly declared as entryComponents which will be compiled by Angular to generate componentFactory, which can then be used to dynamically create a component. The route declaration actually results in two provider declarations: ANALYZE_FOR_ENTRY_COMPONENTS, and ROUTES, the former of which is the provider for entryComponents (declaring route components as entryComponents), the later is the provider of routing tree (adding components to the route tree). Both RouterModule.forRoot() and RouterModule.forChild() actually declare those two providers along with importing RouterModule.
 
+Notes: 10/24/2020
+The entryComponent declaration is obsolete since angular 9+ (Ivy render engine). Therefore ANALYZE_FOR_ENTRY_COMPONENTS probably has been dropped in route declaration.
+
+
 There are two types of routes: eagerly loaded or lazy loaded.
 
 1. Eagerly loaded modules are directly imported, while lazy loaded one is not imported at all, only referred using loadChildren.  
 
 2. All the providers in all eagerly (direct/indirect) loaded modules are merged into root injector, so are available application wide. However all the providers declared or imported in lazy loaded modules are not available outside of the lazy module itself, although there is feature request mentioned in ref. 15 to address this issue. Therefore any entryComponent declared in lazy load modules is not available, and can not be dynamically created outside of its module.  
 
+Note: 10/24/20202
+With Angular 9+ (Ivy), entryComponent declaration is not required any more. As long as the you get a reference to the type of a component, you should be able to create it dynamically outside of the lazy loaded module. See setting implementation for details in DynamicContent.md.
+
 * 3. For eagerly loaded modules, RouterModule.forRoot(), RouterModule.forChild() are used in root module and feature modules respectively. Except loading router related singleton providers, forRoot() basically does same thing as forChild() by calling provideRoutes(routes) to define providers, which basically provide both ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS tokens (see details in DynamicContent.md). ROUTES will add routes to router configuration, and ANALYZE_FOR_ENTRY_COMPONENTS will declare entryComponents, both of which take an object of type Routes.   
 
-The routes declared by ROUTES token in either forRoot() or forChild() are referred to the root of router configuration. So a full path of routing is needed when configure a child route. So a root module and feature module independently add their routes to the router configuration using forRoot() or forChild(), if they are not related. However for nested parent/child routes, it is a common practice to write routing configure in parent component including nested child routes in one location to maintain the correct tree structure. The bad thing about this is that the parent component need to know all the details of routing in child components, when define the route configuration. Although one can configure nested routes in different child modules, but one have to make sure to have right route path starting from root, which unnecessarily makes child module know its parent. 
+The routes declared by ROUTES token in either forRoot() or forChild() are referred to the root of router configuration. So a full path of routing is needed when configure a child route. So both root module and feature module independently add their routes to the router configuration using forRoot() or forChild(), if they are not related (not parent-children routes). However for nested parent/child routes, it is a common practice to write routing configure in parent component including nested child routes in one location to maintain the correct tree structure. The bad thing about this is that the parent component need to know all the details of routing in child components, when define the route configuration. It is not too bad, if the nested parent-child routes are in a same module. But if nested routes involve multiple modules, it introduce too much coupling. Although one can configure nested routes in different child modules, but one have to make sure to have right route path starting from root, which unnecessarily makes child module know its parent. 
 
 However the lazy loaded module behaves differently as show below:
 
-4. Lazy load module maintains its own context starting from parent component. That means you can define route configuration in lazy loaded module using forChild() as itself as root. The routing tree is then appended to its parent routing tree after the module is lazy loaded. This way parent and child route configuration are completely isolated with each other. There is a common practice in lazy loaded module using a empty path for the host component in lazy loaded module, and define its children underneath it (see ref 12 for example). 
+4. Lazy load module maintains its own context starting from parent component. That means you can define route configuration in lazy loaded module using forChild(), treating itself as root. The routing tree is then appended to its parent routing tree after the module is lazy loaded. In this way, the route configurations in parent and child modules are completely isolated with each other. It is a common practice in lazy loaded module to use a empty path for the host component in lazy loaded module, and define its children underneath it (see ref 12 for example). 
 
-Obviously the lazy loaded module has a better route configuration setup. There is a trick to use the same route configuration setup for eagerly loaded module, which is a preferred way suggested in ref 13.
+// app.module.ts
+export const ROUTES: Routes = [
+  { path: 'reports', loadChildren: '../reports/reports.module#ReportsModule' },
+];
+
+// reports.module.ts
+export const ROUTES: Routes = [
+  { path: '', component: ReportsComponent }
+];
+
+This module (reports.module) can then be used together with loadChildren and path in a parent module, letting AppModule dictate the URL. This creates a flexible module structure where your feature modules such as reports.module are “unaware” of their absolute path, they become relative paths based on the AppModule paths.
+
+Obviously the lazy loaded module has a better route configuration setup. There is a trick to use the same route configuration setup for eagerly loaded module, which is a preferred way suggested in ref 12, 14.
 
 5. Eagerly load module using loadChildren (lazy format).
 A module can also be loaded eagerly using lazy loading syntax in order to take advantage of the isolated, append-able sub-route tree (see ref 12, 13, and 14).
@@ -38,16 +57,23 @@ export const ROUTES: Routes = [
 ```
 where DashboardModule is imported at the beginning, and `{ path: 'dashboard', loadChildren: () => DashboardModule },` in route configuration, while DashboardModule can define its own nested routes internally just like any lazy loaded module.  'settings' and 'report' are real lazy loading modules.
 
+See also the same implementation of this app
+  path: 'EagerlyLoaded',
+in \ContentExplorer\src\app\routing\app.route.ts
+
 6. Add routes to route configuration programmatically.
-Besides configure route using ROUTES token (which RouterModule.forRoot/forChild use internally), Router interface can be used to add routes to the configuration, which is what used in settings page implementation below.
+Besides configuring route using ROUTES token (which RouterModule.forRoot/forChild use internally), Router interface can be used to add routes to the configuration, which is what used in settings page implementation below.
 
 ## Settings module implementation with dynamic routing
 
 ### Goal of settings page implementation
-The settings page is designed to host setting pages from different modules. The settings page acts as a container for setting page from any module without any existing knowledge. When a new module with setting page is created, it should be able to add its setting page to settings container without changing the settings container.
+The settings page is designed to host setting pages from different modules. The settings page acts as a container for setting pages from any module without any existing knowledge. Whenever we create a new module, we can also create a setting's page. Then we can register with the settings container the setting's page, which will surface in the setting's container.
 
 ### implementation 1: see dynamicSetting/v1 branch
-setting.component.ts uses material tab control (<nav mat-tab-nav-bar>), which tab behavior using <router-outlet>.
+setting.component.ts uses material tab control (<nav mat-tab-nav-bar>), with its own children routing using an embedded <router-outlet>.
+
+In this implementation, SettingsModule expose a method (withRoutes) to register a list of routes for setting's pages.
+
 The SettingsModule
 src/app/settings/settings.module.ts
 ```
@@ -62,15 +88,23 @@ export class SettingsModule {
   }
 
 ```
-where withRoutes() static method takes a "routes" parameter, which contains dynamic components to be navigated in Routes format. The SettingsModule.withRoutes() is equivalent to Angular's RouterModule.forRoot() and RouterModule.forChild().
+where withRoutes() static method takes a "routes" parameter, which contains dynamic components to be navigated in Routes format. The SettingsModule.withRoutes() is equivalent to Angular's RouterModule.forChild(). 
 
 Check out app/routing/routing.module.ts to see how withRoutes() is invoked.  
 Basically any module which want its setting component to display in settings container, just call SettingsModule.withRoutes(), which in turn call Angular's provideRoutes() to declare entryComponents and add routes to router configuration as discussed above. However the default Angular's provideRoutes() requires a configuration with full path of route, which is against the design goal of decoupled and plugin fashion. 
 
-The point here is to show how to use provideRoutes() to dynamic register routing components. This could be implemented by just using RouterModule.forChild().
+The point here is to show how to use provideRoutes() to dynamically register routing components, which can be replaced by just calling RouterModule.forChild().
+
+To avoid the drawback of the absolute route path, we have the next implementation.
 
 ### implementation 2: 
-The current implementation separates the entryComponents and router configuration registration, which allows passed in "routes" as relative route path without parent information.
+This implementation separates the entryComponents and router configuration registration.
+Also with this implementation, the "routes" are relative route path without parent information.
+
+Here the routes are not registered with Angular Router yet, but register a provider for the custom SETTINGS_ROUTES token. The SettingModule will be injected with the SETTINGS_ROUTES, and the programmatically register the routes.
+
+Note: 10/26/2020. entryComponents is deprecated since v9+. ANALYZE_FOR_ENTRY_COMPONENTS provide is not needed any more.
+
 
 The SettingsModule
 src/app/settings/settings.module.ts
@@ -133,7 +167,7 @@ However in my case, I do not create the component directly but via router. I sti
 
 Ref 17 outlines another manual lazy loading module using SystemJsNgModuleLoader, which could be used as my own method of lazy loading module. Then expose its setting's page from there. More details in DynamicContent.md.
 
-Ref 18 propose a best solution for (Ref 15) the availability of entry components defined in a lazy loaded module so far, along with github project os sample implementation. This solution monkey patch root ComponentFactoryResolver to search component factories in lazy loaded local ComponentFactoryResolvers as well, which is transparent to any dynamic component creation. With the patched root ComponentFactoryResolver, any module in the app can dynamically create a component from any module including lazy loaded module magically.
+Ref 18 propose the best solution for (Ref 15) the availability of entry components defined in a lazy loaded module so far, along with github project os sample implementation. This solution monkey patch root ComponentFactoryResolver to search component factories in lazy loaded local ComponentFactoryResolvers as well, which is transparent to any dynamic component creation. With the patched root ComponentFactoryResolver, any module in the app can dynamically create a component from any module including lazy loaded module magically.
 
 Below is a brief description about the solution from the author, Jon Rimmer:
 
@@ -171,7 +205,7 @@ How it works: When initialised, it injects the root app's ComponentFactoryResolv
 So, yeah, a pretty gross hack. But it works, right now, in Angular 7. Maybe it will be of use to someone.
 ------------------
 
-The implementation of dynamic setting's pages based on the ref 8 (CoalescingComponentFactoryResolver) CoalescingComponentFactoryResolver actually makes the provider of ENTRY_COMPONENTS declared in the lazy loaded module available to all the modules outside of the lazy loaded one. Therefore one should be able to create a component from lazy loaded module using standard component factory method. However in my previous implementation, I also use SETTINGS_ROUTES provider to pass route information to setting page host. But CoalescingComponentFactoryResolver can not help with SETTINGS_ROUTES provider. So create a new serice of setting-host.service  in settings module:
+The implementation of dynamic setting's pages based on the ref 8 (CoalescingComponentFactoryResolver) CoalescingComponentFactoryResolver actually makes the provider of ENTRY_COMPONENTS declared in the lazy loaded module available to all the modules outside of the lazy loaded one. Therefore one should be able to create a component from lazy loaded module using standard component factory method. However in my previous implementation, I also use SETTINGS_ROUTES provider to pass route information to setting page host. But CoalescingComponentFactoryResolver can not help with SETTINGS_ROUTES provider. So create a new service of setting-host.service  in settings module:
 C:\Users\jxhou_000\Documents\GitHub\ContentExplorer\src\app\settings\setting-host.service.ts
 
 So every lazy loade module can call:
@@ -203,6 +237,32 @@ This behavior probably is due to that Ivy does not generate a separate ng_factor
 The new behavior is due to that Ivy does not separate component and its factory def any more, so does not rely on ENTRY_COMPONENT provider any more.
 
 It probably still the case that any providers declared in a lazy-loaded module are local, and not available to modules outside of the lazy module.
+
+After upgrade to v9+ with Ivy,  coalescingResolver can be removed completely.
+
+Currently, eagerly loaded modules will register their setting's pages using the SETTINGS_ROUTES token, and lazy loaded modules will use settingHostService to register its setting's page.
+
+
+
+## Overall Routing implementation in this project
+AppComponent
+    AppLayoutComponent (\src\app\containers\app-layout\app-layout.component.ts)
+      LayoutComponent (E:\src\app\shared\layout\containers\layout\layout.component.ts)
+        |----<router-outlet></router-outlet>
+        |----DashboardComponent
+        |----LazyLoadedModule
+        |----WithChildRoutesModule  (eagerly loaded module using lazy loading format)
+               |-----<router-outlet></router-outlet>
+               |----Child1Component
+               |----Child2Component
+        |----SettingsComponent
+               |-----<router-outlet></router-outlet>
+               |-----setting's page 1 from feature module 1
+               |    ....
+               |-----setting's page n from feature moudle n 
+
+Each module with setting's page can register their setting's page with SettingsComponent.
+
 
 ## The related references for dynamic Setting components
 https://blog.angularindepth.com/here-is-what-you-need-to-know-about-dynamic-components-in-angular-ac1e96167f9e

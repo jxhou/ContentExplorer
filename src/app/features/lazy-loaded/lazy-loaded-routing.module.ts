@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { SettingComponent } from './setting/setting.component';
 
+// The route to be registered to SettingComponent's router-outlet
 export const setting: Routes = [
   {
     path: 'SettingComponent',
@@ -13,6 +14,7 @@ export const setting: Routes = [
   },
 ];
 
+// routes to be appended to the root of parent routing tree
 const routes: Routes = [{
     path: '',
     component: MainComponent,

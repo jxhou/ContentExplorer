@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { throwIfEmpty } from 'rxjs/operators';
 
+// Dynamic contents:
+// a. navBarLeftContent: ng-template instance, flush to left of the navigation bar
+// b. navBarRightContent: ng-template instance, flush to right of the navigation bar
+// c. navigation panel content: projected using ng-content (see in layout.component.html)
 @Component({
   selector: 'layout',
   templateUrl: './layout.component.html',
@@ -19,7 +23,7 @@ export class LayoutComponent implements OnInit {
   opened: boolean;
 
   constructor() { 
-    this.opened = false;
+    this.opened = true;
     this.title = 'test';
   }
 
