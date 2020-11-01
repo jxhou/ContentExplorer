@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { Child1Component } from './main/child1/child1.component';
 import { Child2Component } from './main/child2/child2.component';
+import { SharedModule } from '@app/shared';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
   declarations: [MainComponent, Child1Component, Child2Component],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })

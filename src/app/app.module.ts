@@ -18,13 +18,14 @@ import { reducers, metaReducers } from './store/reducers';
 import { RouteStoreExtModule } from './router_store_ext'
 import { environment } from '../environments/environment';
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
-import { ThemeSettingsComponent } from './components/theme-settings/theme-settings.component';
-import { TestSettingComponent } from './components/test-setting/test-setting.component';
+import { ThemeSettingsComponent } from './containers/theme-settings/theme-settings.component';
+import { TestSettingComponent } from './containers/test-setting/test-setting.component';
 import { PageNotFoundComponent } from './components/not-found.component';
 import { TestModuleModule } from './features/test-module/test-module.module';
 // import { CoalescingComponentFactoryResolver } from './core/coalescing-component-factory-resolver.service';
 import { CoreModule } from 'app/core/core.module';
 import { AppLayoutComponent } from './containers/app-layout/app-layout.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +58,7 @@ import { AppLayoutComponent } from './containers/app-layout/app-layout.component
      */
     // StoreRouterConnectingModule,
     RouteStoreExtModule,
+    HttpClientModule,
 
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],

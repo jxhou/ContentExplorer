@@ -7,12 +7,20 @@ import { SharedModule } from '@app/shared';
 import { SettingsComponent, SETTINGS_ROUTES } from './settings.component';
 import { SettingHostService } from './setting-host.service'
 
+const routes: Routes = [
+  {
+    path: '',
+    component: SettingsComponent
+  }
+];
+
+export const SETTINGS_ROUTES_TOKEN = SETTINGS_ROUTES;
 
 @NgModule({
   declarations: [SettingsComponent],
   imports: [
     SharedModule,
-    RouterModule,
+    RouterModule.forChild(routes),
   ],
   exports: [
     SettingsComponent
@@ -41,26 +49,36 @@ export class SettingsModule {
   // The difference here from Option 1 is that we dynamically add child routes ourself instead of 
   // registering routes using router's default ROUTES token.
   // Option 2: a better way to register its child setting page.
-// Here we use ANALYZE_FOR_ENTRY_COMPONENTS to register entryComponents, and use a custom token 
-// SETTINGS_ROUTES to provide setting page components, which will be injected into SettingsComponent
-// as a dependency, and will be dynamically added as child routes using router api.
-// The difference here from Option 1 is that we dynamically add child routes ourself instead of 
-// registering routes using router's default ROUTES token.
-static withSettingRoutes(routes: Routes): ModuleWithProviders<SettingsModule> {
-    return {
-        ngModule: SettingsModule,
-        providers: [
-            {
-                provide: ANALYZE_FOR_ENTRY_COMPONENTS,
-                useValue: routes, multi: true
-            },
-            {
-                provide: SETTINGS_ROUTES,
-                useValue: routes, multi: true
-            },
-        ]
-    };
-}
+  // Here we use ANALYZE_FOR_ENTRY_COMPONENTS to register entryComponents, and use a custom token 
+  // SETTINGS_ROUTES to provide setting page components, which will be injected into SettingsComponent
+  // as a dependency, and will be dynamically added as child routes using router api.
+  // The difference here from Option 1 is that we dynamically add child routes ourself instead of 
+  // registering routes using router's default ROUTES token.
+  static withSettingRoutes(routes: Routes): ModuleWithProviders<SettingsModule> {
+      return {
+          ngModule: SettingsModule,
+          providers: [
+              {
+                  provide: ANALYZE_FOR_ENTRY_COMPONENTS,
+                  useValue: routes, multi: true
+              },
+              {
+                  provide: SETTINGS_ROUTES,
+                  useValue: routes, multi: true
+              },
+          ]
+      };
+  }
+
+  // Option 3: An helper for any module to register their route as SETTINGS_ROUTES_TOKEN's provider.
+  // Then the SettingsComponent will pick all registered routes up as child routes in setting's container.
+  // This is a cleaner solution than ones listed above.
+  static registerRoutesProvider(routes: Routes) {
+    return { 
+      provide: SETTINGS_ROUTES_TOKEN,
+      useValue: routes, multi: true
+    }
+  }
 
   constructor() {
   }

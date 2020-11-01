@@ -23,15 +23,13 @@ import { LayoutModule } from './layout/layout.module';
     // Flex
     FlexLayoutModule,
 
-    BrowserAnimationsModule,
-
     LayoutModule
   ],
   providers: [
   ],
   exports:  [
     CommonModule, ReactiveFormsModule, FormsModule,
-    FlexLayoutModule, BrowserAnimationsModule,
+    FlexLayoutModule,
     SharedMaterialModule, LayoutModule ]
 })
 export class SharedModule { }

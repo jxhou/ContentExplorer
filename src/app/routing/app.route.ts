@@ -1,11 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from '../containers';
 import { SettingsComponent } from '../features/settings/settings.component';
-import { ThemeSettingsComponent } from '@app/components/theme-settings/theme-settings.component';
-import { TestSettingComponent } from '@app/components/test-setting/test-setting.component';
+import { ThemeSettingsComponent } from '@app/containers/theme-settings/theme-settings.component';
+import { TestSettingComponent } from '@app/containers/test-setting/test-setting.component';
 import { PageNotFoundComponent } from '@app/components/not-found.component';
 // import { LazyLoadedModule } from '@app/features/lazy-loaded/lazy-loaded.module';
 import { WithChildRoutesModule } from '@app/features/with-child-routes/with-child-routes.module';
+import { TestModuleModule } from '@app/features/test-module/test-module.module';
+import { SettingsModule } from '@app/features/settings/settings.module';
 
 // data.location in route definition can have values of 'SideNav', 'ToolBarRight' etc, which configure the location,
 // where the the link will be displayed.
@@ -25,14 +27,23 @@ export const routes: Routes = [
     },
   },
   {
+    // eagerly loading a module using lazy loading format
+    // load the container for all setting's pages
     path: 'settings',
-    component: SettingsComponent,
+    loadChildren: () => SettingsModule,
     data: {
       location: 'ToolBarRight', // show up in right of tool bar
       title: 'settings'
     },
   },
-
+  {
+    path: 'test-module',
+    loadChildren: () => TestModuleModule,
+    data: {
+      location: 'SideNav',
+      title: 'TestModule'
+    },
+  },
   {
     path: 'lazy',
     loadChildren: () => import('../features/lazy-loaded/lazy-loaded.module').then(m => m.LazyLoadedModule),

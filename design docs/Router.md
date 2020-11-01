@@ -240,8 +240,42 @@ It probably still the case that any providers declared in a lazy-loaded module a
 
 After upgrade to v9+ with Ivy,  coalescingResolver can be removed completely.
 
-Currently, eagerly loaded modules will register their setting's pages using the SETTINGS_ROUTES token, and lazy loaded modules will use settingHostService to register its setting's page.
+Currently, eagerly loaded modules will register their setting's pages by calling SettingsModule.withSettingRoutes(SETTING_CHILD_ROUTES), and lazy loaded modules will use settingHostService to register its setting's page. There are total 4 setting pages: 3 from eagerly loaded modules, and one from lazy loaded module:
 
+AppModule registers two setting pages; theme and test;
+
+`
+export const SETTING_CHILD_ROUTES: Routes =
+[
+  {
+    path: 'theme',
+    component: ThemeSettingsComponent,
+    data: {
+      title: 'theme'
+    },
+  },
+  {
+    path: 'test',
+    component: TestSettingComponent,
+    data: {
+      title: 'test'
+    },
+  }
+]
+`
+
+TestModuleModule registers its own setting's page by calling SettingsModule.withSettingRoutes(routes).
+`
+const routes: Routes = [
+  {
+    path: 'TestModuleSetting',
+    component: TestModuleSettingComponent,
+    data: {
+      title: 'TestModuleSetting'
+    },
+  },
+]
+`
 
 
 ## Overall Routing implementation in this project

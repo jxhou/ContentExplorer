@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { SettingsModule } from '../settings/settings.module';
 import { TestModuleSettingComponent } from './test-module-setting/test-module-setting.component';
+import { MainComponent } from './main/main.component';
 
-
-const routes: Routes = [
+const childRoutesToSettings: Routes = [
   {
     path: 'TestModuleSetting',
     component: TestModuleSettingComponent,
@@ -14,14 +14,28 @@ const routes: Routes = [
       title: 'TestModuleSetting'
     },
   },
+];
+
+const routRoutes: Routes = [
+  {
+    path: '',
+    component: MainComponent,
+    data: {
+      title: 'TestModule'
+    },
+  },
 ]
+
 @NgModule({
   imports: [
     CommonModule,
-    // Here we register this module's setting page with SettingsModule, which results in the setting page 
-    // (TestModuleSettingComponent) automatically surfaces in settings container.
-    SettingsModule.withSettingRoutes(routes),
+    RouterModule.forChild(routRoutes),
   ],
-  declarations: [TestModuleSettingComponent]
+  declarations: [TestModuleSettingComponent, MainComponent],
+  // Here we register this module's setting page with SETTINGS_ROUTES_TOKEN, which will be picked up by
+  // settings container.
+  providers: [
+    SettingsModule.registerRoutesProvider(childRoutesToSettings),
+  ]
 })
 export class TestModuleModule { }
