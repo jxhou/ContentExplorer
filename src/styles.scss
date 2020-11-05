@@ -1,5 +1,8 @@
 //@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+// We can also import bootstrap directly from web
+// @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
 @import '~@angular/material/theming';
 
 @include mat-core();

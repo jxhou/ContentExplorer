@@ -20,7 +20,8 @@ export const SETTINGS_ROUTES_TOKEN = SETTINGS_ROUTES;
   declarations: [SettingsComponent],
   imports: [
     SharedModule,
-    RouterModule.forChild(routes),
+    // RouterModule.forChild(routes),
+    RouterModule
   ],
   exports: [
     SettingsComponent

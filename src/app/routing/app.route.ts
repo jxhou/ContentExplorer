@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from '@app/components/not-found.component';
 import { WithChildRoutesModule } from '@app/features/with-child-routes/with-child-routes.module';
 import { TestModuleModule } from '@app/features/test-module/test-module.module';
 import { SettingsModule } from '@app/features/settings/settings.module';
+import { AuthComponent } from '@app/core/components/auth/auth.component';
 
 // data.location in route definition can have values of 'SideNav', 'ToolBarRight' etc, which configure the location,
 // where the the link will be displayed.
@@ -30,10 +31,21 @@ export const routes: Routes = [
     // eagerly loading a module using lazy loading format
     // load the container for all setting's pages
     path: 'settings',
-    loadChildren: () => SettingsModule,
+    // loadChildren: () => SettingsModule,
+    component: SettingsComponent,
     data: {
       location: 'ToolBarRight', // show up in right of tool bar
       title: 'settings'
+    },
+  },
+  {
+    // eagerly loading a module using lazy loading format
+    // load the container for all setting's pages
+    path: 'auth',
+    component: AuthComponent,
+    data: {
+      location: 'ToolBarRight', // show up in right of tool bar
+      title: 'account_circle'
     },
   },
   {

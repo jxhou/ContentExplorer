@@ -2,14 +2,12 @@ import {
   Injectable,
   ComponentFactoryResolver,
   Type,
-  ComponentFactory,
-  RootRenderer
-} from '@angular/core';
+  ComponentFactory} from '@angular/core';
 
+  // Not used any more, used for dynamic creating component with angular 8 and <
 @Injectable({
   providedIn: 'root',
 })
-//@Injectable()
 export class CoalescingComponentFactoryResolver extends ComponentFactoryResolver {
   private rootResolve: (component: Type<any>) => ComponentFactory<any>;
 

@@ -26,6 +26,9 @@ import { TestModuleModule } from './features/test-module/test-module.module';
 import { CoreModule } from 'app/core/core.module';
 import { AppLayoutComponent } from './containers/app-layout/app-layout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
+// https://github.com/angular/in-memory-web-api
+import { InMemoryDataService } from './core/services/in-memory-data.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +64,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
 
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+
+    // install a mocked api endpoint for dev
+    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }) : [],
   ],
   bootstrap: [AppComponent]
 })
