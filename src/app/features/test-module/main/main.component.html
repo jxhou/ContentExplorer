@@ -1,1 +1,15 @@
 <p>main page of test-module</p>
+<app-alert *ngIf="showDeclaredAlert" 
+    [message]="'This is a declaratively created alert'"
+    (closed)="onCloseDeclarativeAlert()"
+    ></app-alert>
+    <ng-template appPlaceholder></ng-template>
+<div>
+    <button class="btn btn-primary" (click)="onOpenDeclaredAlert()">Open Declarative Alert</button>
+</div>
+<br>
+<div>
+    <button class="btn btn-primary" (click)="onShowAlterImperatively()">Open Alert Imperatively</button>
+</div>
+
+<app-loading-spinner></app-loading-spinner>

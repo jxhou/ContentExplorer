@@ -8,9 +8,12 @@
                     class="form-control"
                     ngModel
                     name="email"
+                    #nameCtrl="ngModel"
+                    placeholder="Input your email address here"
                     required
                     email>
             </div>
+            <p *ngIf="!nameCtrl.valid && nameCtrl.touched">Invalid email</p>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input 
@@ -18,10 +21,13 @@
                     id="password"
                     ngModel
                     name="password" 
+                    #passwordCtl="ngModel"
                     class="form-control"
                     required
+                    placeholder="Type your password here (at least 6 chars)"
                     minlength="6">
             </div>
+            <p *ngIf="!passwordCtl.valid && passwordCtl.touched">Invalid password</p>
             <div>
                 <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">Login</button>
             </div>

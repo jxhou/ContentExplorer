@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SettingsModule } from '../settings/settings.module';
 import { TestModuleSettingComponent } from './test-module-setting/test-module-setting.component';
 import { MainComponent } from './main/main.component';
+import { SharedModule } from '@app/shared';
 
 const childRoutesToSettings: Routes = [
   {
@@ -29,6 +30,7 @@ const routRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routRoutes),
   ],
   declarations: [TestModuleSettingComponent, MainComponent],

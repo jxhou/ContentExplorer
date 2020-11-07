@@ -6,9 +6,15 @@ import { SharedMaterialModule } from './shared-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { LayoutModule } from './layout/layout.module';
+import { AlertComponent } from './alert/alert.component';
+import { PlaceholderDirective } from './placeholder/placeholder.directive';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
+    AlertComponent,
+    PlaceholderDirective,
+    LoadingSpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +36,8 @@ import { LayoutModule } from './layout/layout.module';
   exports:  [
     CommonModule, ReactiveFormsModule, FormsModule,
     FlexLayoutModule,
-    SharedMaterialModule, LayoutModule ]
+    SharedMaterialModule, LayoutModule,
+    AlertComponent, PlaceholderDirective, LoadingSpinnerComponent
+   ]
 })
 export class SharedModule { }
