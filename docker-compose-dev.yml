@@ -1,0 +1,19 @@
+
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: 
+      # Exclude node_modules in volume mapping
+      - /app/node_modules
+      # Map all project files to /app in container.
+      - .:/app
+    ports: 
+      # Map to external port 4200
+      - 4201:4200
+    environment: 
+      # Enable pooling in order for hot reload to work in WSL and docker machine envs.
+      - CHOKIDAR_USEPOLLING=true
+    
