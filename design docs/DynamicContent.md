@@ -1,7 +1,9 @@
 # **Dynamically update navigation pane (toolbar content) based on route selection**
+
 Basically I want to update toolbar content, when different route is selected. Each component of route will have its own menu item in ng-template which will be injected into toolbar when selected.
 
 ## Reference implementations  
+
 Reference 2 discussed a solution to dynamically add route specific content to left navigation pane.  
 ng-template, structural directive, ng-container @ViewChild selected ViewContainerRef, and Left.Nav.Service are the pieces of the solution. Low level dynamic api was used to achieve the dynamic content. The LeftNavComponent has a LeftNav service injected to receive new content, and then dynamically render at specified ng-container location using ViewContainerRef.createEmbeddedView. In this case, the LeftNavComponent, the content receiver, is a smart component.
 
@@ -16,7 +18,9 @@ ngTemplateOutlet is the way I am going to use to implement my toolbar with dynam
 ## My implementation details
 
 --------------------
+
 # Dynamic component, ComponentFactory, and EntryComponents
+
 In angular, every component is created via component factory. The component factories are created by angular compiler by parsing the template in components, which are static and declarative. However the dynamic components are not declared in template. In order for angular to create components dynamically, the component has to be declared in NgModule's entryComponents. Angular can also implicitly declare entry Component, such as bootstrap component, components in route definition, to save extra task for user. So angular will also create component factories for all the components declared as entry component explicitly and implicitly.
 
 Each module provides a convenient service for all its components to get a component factory. This service is ComponentFactoryResolver. So, if you define a BComponent on the module and want to get a hold of its factory you can use this service from a component belonging to this module:
@@ -49,6 +53,7 @@ class ModuleWithRoutes {}
 The dynamic entry components declaration is actually in the format of providers. As the above code example shows how to use ANALYZE_FOR_ENTRY_COMPONENTS token, it is also the implementation of provideRoutes function of Angular, which uses ANALYZE_FOR_ENTRY_COMPONENTS trick internally.
 
 # Dynamically declare routes:
+
 As the example shown above, Angular has provideRoutes function using ANALYZE_FOR_ENTRY_COMPONENTS token to dynamically declare routes. The above code shows that routes are declared using two tokens: ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS. [RouterModule.forRoot()](https://github.com/angular/angular/blob/5298b2bda34a8766b28c8425e447f94598b23901/packages/router/src/router_module.ts#L142), and [RouterModule.forChild()](https://github.com/angular/angular/blob/5298b2bda34a8766b28c8425e447f94598b23901/packages/router/src/router_module.ts#L175) actually use above provideRoutes function to declare routes.  
 
 Therefore provideRoutes function is not much different from either RouterModule.forRoot() or RouterModule.forChild().
@@ -58,6 +63,7 @@ Another approach to deal with routes: we could dynamically add route configurati
 As shown above, the both ROUTES and ANALYZE_FOR_ENTRY_COMPONENTS are tokens for provider declaration, which should get merged as root providers available for all application. However if it is declared in lazy loaded modules, it is only available within its module, as the behavior of any lazy loaded modules.
 
 # **How to create dynamic content (literature survey and summery)**
+
 There are two types of views which can be created dynamically: 
 1. Embedded views created from ng-template;
 2. Hosted views created from Components;
@@ -65,6 +71,7 @@ There are two types of views which can be created dynamically:
 There are also several ways of creating dynamic view from using low to high level api.
 
 ## Creating embedded view
+
 A template reference can be retrieved using @ViewChild such as 
 ```
 @ViewChild("tpl") tpl: TemplateRef<any>;
@@ -75,6 +82,7 @@ or in a directive placed on a <ng-template> element, where a TemplateRef can be 
 tpl.createEmbeddedView() is the most fundamental way to create a view, which returns a ViewRef.
 
 ## Creating host view
+
  A component can be created dynamically using ComponentFactoryResolver:
 ```
  constructor(private injector: Injector,
@@ -124,6 +132,7 @@ export class DomService {
 That is what really happening when dynamically create a component. There some higher level api to make the life a bit easier as below:
 
 ## ViewContainerRef
+
 Represents a container where one or more views can be attached. Any DOM element can be used as a view container. Angular doesn’t insert views inside the element, but appends them after the element bound to ViewContainer. Usually, a good candidate to mark a place where a ViewContainer should be created is ng-container element. It’s rendered as a comment and so it doesn’t introduce redundant html elements into DOM. ng-template can also be used as viewContainer as HostPortal directive attached to. To access a ViewContainerRef of an Element, you can either place a Directive injected with ViewContainerRef on the Element, or you obtain it via a ViewChild query.  
 Both host view and embedded view can be inserted into viewContainer manually as below:
 ```
@@ -164,6 +173,7 @@ class ViewContainerRef {
 These are simply convenient wrappers to what we’ve done manually above. 
 
 ## ngTemplateOutlet and ngComponentOutlet
+
 These are directives which abstracts dynamic creating views even further.  
 **ngTemplateOutlet**
 ```
@@ -225,6 +235,7 @@ All the other higher level api(s) such as ViewContainerRef, ngComponentOutlet, a
 Reference 8 shows an overlay example using customized injector to pass data to dynamic created component via DI in Portal/PortalOutlet environment. Material dialog uses the same method passing data to component shown in dialog window, I believe.
 
 ## Manual lazy loading module
+
 As ref 12 described, 
 app.module.ts
 
@@ -262,7 +273,8 @@ The trick is to use SystemJsNgModuleLoader to manually load the module. Also use
 
 This actually is the internal implementation lazy loading of routing.
 
-## **References**: 
+## **References**
+
 1. [Angular CDK Portals](https://blog.angularindepth.com/angular-cdk-portals-b02f66dd020c)  
 [code demo](https://stackblitz.com/edit/angular-material2-portal-tools?embed=1&file=app/services/tool-options.service.ts)
 2. [Advanced Angular Concepts by Alex Rickabaugh, AngularMIX](https://href.li/?https://www.youtube.com/watch?v=rKbY1t39dHU)   
