@@ -35,7 +35,7 @@ export class MainComponent implements OnInit, OnDestroy{
     this.host.viewContainerRef.clear();
     const alertRef = this.host.viewContainerRef.createComponent(factory);
     
-    // pass imput parameter to the component
+    // pass input parameter to the component
     alertRef.instance.message = " this message is displayed in an imperatively created alert component";
 
     // subscribe the event from the component

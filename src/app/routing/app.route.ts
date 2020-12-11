@@ -8,7 +8,7 @@ import { PageNotFoundComponent } from '@app/components/not-found.component';
 import { WithChildRoutesModule } from '@app/features/with-child-routes/with-child-routes.module';
 import { TestModuleModule } from '@app/features/test-module/test-module.module';
 import { SettingsModule } from '@app/features/settings/settings.module';
-import { AuthComponent } from '@app/core/components/auth/auth.component';
+import { AuthComponent } from '@app/containers/auth/auth.component';
 
 // data.location in route definition can have values of 'SideNav', 'ToolBarRight' etc, which configure the location,
 // where the the link will be displayed.

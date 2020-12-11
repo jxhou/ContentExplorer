@@ -57,4 +57,8 @@ design docs/Mock backend with In Memory Web API.md
 
 ### Angular material
 
+### Template driven form in login page
 
+### theme in Setting's page
+
+### A Simple MessageBox implementation (declarative and imperative)
