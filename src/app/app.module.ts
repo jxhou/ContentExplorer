@@ -28,7 +28,8 @@ import { AppLayoutComponent } from './containers/app-layout/app-layout.component
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 // https://github.com/angular/in-memory-web-api
-import { InMemoryDataService } from './core/services/in-memory-data.service'
+import { InMemoryDataService } from './core/services/in-memory-data.service';
+import { LoginComponent } from './containers/login/login.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { InMemoryDataService } from './core/services/in-memory-data.service'
     DashboardComponent,
     ThemeSettingsComponent,
     TestSettingComponent,
-    AppLayoutComponent
+    AppLayoutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

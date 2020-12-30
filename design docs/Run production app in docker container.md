@@ -32,8 +32,12 @@ See more details in ref.1.
 
 Define a container which host the angular default dev web server in dev mode.
 The critical part is to use:
-ng serve --host 0.0.0.0
+"host": "ng serve --host=0.0.0.0 --disable-host-check"
 to start the web server.
+  --host=0.0.0.0 
+    will make expose port:4200 from the container.
+  --disable-host-check 
+    to allow different HOST header to be used. To mute "Invalid Host header" error when accessed from nginx reverse-proxy.
 
 docker commands:
 

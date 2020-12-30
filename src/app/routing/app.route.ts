@@ -9,6 +9,7 @@ import { WithChildRoutesModule } from '@app/features/with-child-routes/with-chil
 import { TestModuleModule } from '@app/features/test-module/test-module.module';
 import { SettingsModule } from '@app/features/settings/settings.module';
 import { AuthComponent } from '@app/containers/auth/auth.component';
+import { LoginComponent } from '@app/containers/login/login.component';
 
 // data.location in route definition can have values of 'SideNav', 'ToolBarRight' etc, which configure the location,
 // where the the link will be displayed.
@@ -16,7 +17,7 @@ import { AuthComponent } from '@app/containers/auth/auth.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -35,20 +36,30 @@ export const routes: Routes = [
     component: SettingsComponent,
     data: {
       location: 'ToolBarRight', // show up in right of tool bar
-      title: 'settings'
+      title: 'settings'  // mat-icon setting
     },
   },
+  /* the old login page using template driven form
   {
-    // eagerly loading a module using lazy loading format
-    // load the container for all setting's pages
     path: 'auth',
     component: AuthComponent,
+    data: {
+      location: 'ToolBarRight', // show up in right of tool bar
+      title: 'account_circle' // mat-icon account 
+    },
+  },
+  */
+  {
+    path: 'login',
+    component: LoginComponent,
     data: {
       location: 'ToolBarRight', // show up in right of tool bar
       title: 'account_circle'
     },
   },
   {
+    // eagerly loading a module using lazy loading format
+    // load the container for all setting's pages
     path: 'test-module',
     loadChildren: () => TestModuleModule,
     data: {
