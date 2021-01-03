@@ -26,10 +26,11 @@ import { TestModuleModule } from './features/test-module/test-module.module';
 import { CoreModule } from 'app/core/core.module';
 import { AppLayoutComponent } from './containers/app-layout/app-layout.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 // https://github.com/angular/in-memory-web-api
-import { InMemoryDataService } from './core/services/in-memory-data.service';
-import { LoginComponent } from './containers/login/login.component'
+// import { InMemoryDataService } from './core/services/in-memory-data.service';
+import { LoginComponent } from './containers/login/login.component';
+import { SignUpComponent } from './containers/sign-up/sign-up.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { LoginComponent } from './containers/login/login.component'
     ThemeSettingsComponent,
     TestSettingComponent,
     AppLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -68,11 +70,11 @@ import { LoginComponent } from './containers/login/login.component'
     !environment.production ? StoreDevtoolsModule.instrument() : [],
 
     // install a mocked api endpoint for dev
-    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }) : [],
+    // !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }) : [],
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
   constructor(/*coalescingResolver: CoalescingComponentFactoryResolver*/) {
     // coalescingResolver.init();
   }

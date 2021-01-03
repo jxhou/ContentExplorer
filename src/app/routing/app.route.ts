@@ -10,6 +10,8 @@ import { TestModuleModule } from '@app/features/test-module/test-module.module';
 import { SettingsModule } from '@app/features/settings/settings.module';
 import { AuthComponent } from '@app/containers/auth/auth.component';
 import { LoginComponent } from '@app/containers/login/login.component';
+import { SignUpComponent } from '@app/containers/sign-up/sign-up.component';
+import { AuthGuard } from '@app/core/guards/auth.guard';
 
 // data.location in route definition can have values of 'SideNav', 'ToolBarRight' etc, which configure the location,
 // where the the link will be displayed.
@@ -38,6 +40,7 @@ export const routes: Routes = [
       location: 'ToolBarRight', // show up in right of tool bar
       title: 'settings'  // mat-icon setting
     },
+    canActivate: [AuthGuard],
   },
   /* the old login page using template driven form
   {
@@ -45,7 +48,7 @@ export const routes: Routes = [
     component: AuthComponent,
     data: {
       location: 'ToolBarRight', // show up in right of tool bar
-      title: 'account_circle' // mat-icon account 
+      title: 'account_circle' // mat-icon account
     },
   },
   */
@@ -58,6 +61,15 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'signup',
+    component: SignUpComponent,
+    /*
+    data: {
+      location: 'ToolBarRight', // show up in right of tool bar
+      title: 'account_circle'
+    },*/
+  },
+  {
     // eagerly loading a module using lazy loading format
     // load the container for all setting's pages
     path: 'test-module',
@@ -66,6 +78,7 @@ export const routes: Routes = [
       location: 'SideNav',
       title: 'TestModule'
     },
+    canActivate: [AuthGuard]
   },
   {
     path: 'lazy',
@@ -74,6 +87,7 @@ export const routes: Routes = [
       location: 'SideNav',
       title: 'Lazy'
     },
+    canActivate: [AuthGuard],
   },
   {
     path: 'Not-found',
@@ -82,6 +96,7 @@ export const routes: Routes = [
       location: 'SideNav',
       title: 'not found'
     },
+    canActivate: [AuthGuard],
   },
   {
     // eagerly load a module using the syntax of lazy-loading.
@@ -92,6 +107,7 @@ export const routes: Routes = [
       title: 'EagerlyLoaded',
       message: 'eagerly loaded using lazy loading style'
     },
+    canActivate: [AuthGuard],
   },
   { path: '**', redirectTo:'not-found' }
 ];

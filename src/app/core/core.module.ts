@@ -4,6 +4,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { LocalStorageService } from './local-storage/local-storage.service';
 import { AuthComponent } from '../containers/auth/auth.component';
 import { SharedModule } from '@app/shared';
+import { httpInterceptorProviders } from './interceptors';
 // import { CoalescingComponentFactoryResolver } from './coalescing-component-factory-resolver.service';
 
 @NgModule({
@@ -13,7 +14,10 @@ import { SharedModule } from '@app/shared';
   ],
   exports: [AuthComponent],
   declarations: [AuthComponent],
-  providers: [LocalStorageService]
+  providers: [
+    LocalStorageService,
+    httpInterceptorProviders,
+  ]
 })
 export class CoreModule {
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {

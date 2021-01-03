@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="card" style="width: 60%">
+      <div class="card-header text-center">Sign Up</div>
+      <div class="card-body">
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+          <div class="form-group row">
+            <label for="firstName" class="col-md-4 col-form-label">First Name</label>
+            <div class="col-md-6">
+              <input type="text" id="firstName" formControlName="firstName" class="form-control" placeholder="your first name">
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="!signUpForm.controls.firstName.valid && signUpForm.controls.firstName.touched">
+            <div class="col-6 offset-4">
+              First Name required
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="lastName" class="col-md-4 col-form-label">Last Name</label>
+            <div class="col-md-6">
+              <input type="text" id="lastName" formControlName="lastName" class="form-control" placeholder="your last name">
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="!signUpForm.controls.lastName.valid && signUpForm.controls.lastName.touched">
+            <div class="col-6 offset-4">
+              Last Name Required
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4"> Email (Username): </label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" formControlName="email" placeholder="email">
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="!signUpForm.controls.email.valid && signUpForm.controls.email.touched">
+            <div class="col-6 offset-4">
+              Invalid Email
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-4"> password:</label>
+            <div class="col-md-6">
+              <input class="form-control"  type="password" formControlName="password" placeholder="At least 6 chars">
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="!signUpForm.controls.password.valid && signUpForm.controls.password.touched">
+            <div class="col-6 offset-4">
+              Invalid Password (at least 6 chars)
+            </div>
+          </div>
+          <div class="row form-group">
+            <button class="btn btn-primary col-md-6 offset-md-4 form-control" type="submit" [disabled]="!signUpForm.valid">Sign Up</button>
+          </div>
+          <div *ngIf="errorMessage" class="row col-md-6 offset-md-4">
+            {{errorMessage}}
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--
+    <p> Status: {{signUpForm.valid}}</p>
+    <hr>
+    <p> firstname: {{signUpForm.controls.firstName.valid}}</p>
+    <hr>
+    <p> lastname: {{signUpForm.controls.lastName.valid}}</p>
+    <hr>
+    <p> email: {{signUpForm.controls.email.valid}}</p>
+    <hr>
+    <p> password: {{signUpForm.controls.password.valid}}</p>
+    -->
+  </div>
+</div>

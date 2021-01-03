@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private AuthService: AuthService) {
   }
 
   ngOnInit() {
@@ -21,12 +22,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  onLogOut() {
+    this.AuthService.logout();
+  }
+
+  isLoggedIn() {
+    return this.AuthService.isLoggedIn();
+  }
+
   login() {
-    localStorage.setItem('username', this.loginForm.value.username);
-    this.loginForm.reset();
-    // this.router.navigate(['']);
-    // or
-    this.router.navigateByUrl('/dashboard');
+    this.AuthService.login(this.loginForm.value.username, this.loginForm.value.password)
+      .subscribe(() => {
+        localStorage.setItem('username', this.loginForm.value.username);
+        this.loginForm.reset();
+        // this.router.navigate(['']);
+        // or
+        this.router.navigateByUrl('/dashboard');
+      });
+
   }
 
 }
