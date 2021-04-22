@@ -157,3 +157,4 @@ A way of middleware, a function takes a reducer and return a new reducer which w
 19. [Angular + Redux — The lesson we’ve learned for you](https://medium.com/supercharges-mobile-product-guide/angular-redux-the-lesson-weve-learned-for-you-93bc94391958)
 20. [Angular NgRx Entity - Complete Practical Guide](https://blog.angular-university.io/ngrx-entity/)
 21. [NgRx + Facades: Better State Management](https://medium.com/@thomasburleson_11450/ngrx-facades-better-state-management-82a04b9a1e39)
+22. [NgRx Facade Pattern](https://labs.thisdot.co/blog/ngrx-facade-pattern)

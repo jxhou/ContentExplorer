@@ -23,3 +23,4 @@ Starting from angular 6.0, Angular cli supports workspace natively (ref 1, 2).
 17. [Getting Started Building Component Libraries with Angular CLI](https://itnext.io/angular-cli-libraries-79b0a32a1443)
 18. [Angular Libraries and Microservices](https://dzone.com/articles/angular-libraries-and-microservices-1) A client-side UI composition design pattern for server microservices, using angular cli workspace and libraries.
 https://github.com/agoncal/agoncal-sample-angular/tree/master/cdbookstore/projects
+19. DDD, Nx Monorepos and Micro Frontends, ebook by Manfred Steyer
