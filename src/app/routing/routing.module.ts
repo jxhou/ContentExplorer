@@ -29,7 +29,7 @@ import { SettingsModule } from '../features/settings/settings.module';
     // using ANALYZE_FOR_ENTRY_COMPONENTS, also allow settings page to dynamically add the setting components
     // as child routes under settings page container using route api.
     SettingsModule.withSettingRoutes(SETTING_CHILD_ROUTES),
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy' }),
   ],
   exports: [
     RouterModule,
