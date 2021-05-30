@@ -1,11 +1,9 @@
-//@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
+//
 // We can also import bootstrap directly from web
-// @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+@use '~@angular/material' as mat;
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 
-@import '~@angular/material/theming';
-
-@include mat-core();
+@include mat.core();
 
 @import 'themes/deeppurple-amber';
 @import 'themes/indigo-pink';
@@ -18,22 +16,22 @@
 // Each theme can then be selected by modifying the class name of the root html tag.
 .deeppurple-theme {
   // apply the theme to all meterial components
-  @include angular-material-theme($deeppurple-theme);
+  @include mat.all-component-themes($deeppurple-theme);
   // apply the theme to all the custom components in current app
   @include app-theme($deeppurple-theme);
 }
 
 .indigo-theme {
-  @include angular-material-theme($indigo-theme);
+  @include mat.all-component-themes($indigo-theme);
   @include app-theme($indigo-theme);
 }
 
 .pink-theme {
-  @include angular-material-theme($pink-theme);
+  @include mat.all-component-themes($pink-theme);
   @include app-theme($pink-theme);
 }
 
 .purple-theme {
-  @include angular-material-theme($purple-theme);
+  @include mat.all-component-themes($purple-theme);
   @include app-theme($purple-theme);
 }

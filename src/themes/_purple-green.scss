@@ -1,5 +1,6 @@
+@use '~@angular/material' as mat;
 // Define the dark theme.
-$primary: mat-palette($mat-purple);
-$accent:  mat-palette($mat-green, A200, A100, A400);
+$primary: mat.define-palette(mat.$purple-palette);
+$accent:  mat.define-palette(mat.$green-palette, A200, A100, A400);
 
-$purple-theme: mat-dark-theme($primary, $accent);
+$purple-theme: mat.define-dark-theme($primary, $accent);

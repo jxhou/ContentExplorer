@@ -1,5 +1,6 @@
+@use '~@angular/material' as mat;
 // the partial scss defines a deep purple amber theme
 // Define the light theme.
-$primary: mat-palette($mat-deep-purple);
-$accent:  mat-palette($mat-amber, A200, A100, A400);
-$deeppurple-theme: mat-light-theme($primary, $accent);
+$primary: mat.define-palette(mat.$deep-purple-palette);
+$accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$deeppurple-theme: mat.define-light-theme($primary, $accent);
