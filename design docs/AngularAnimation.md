@@ -438,3 +438,6 @@ Discussed different animation approaches including angular animation, also routi
 17. [Reactive Sticky Header in Angular](https://netbasal.com/reactive-sticky-header-in-angular-12dbffb3f1d3) Animate a sticky header.
 18. [A Fun Introduction to Angular Animations](http://onehungrymind.com/angular-animations-intro/) Using predefined state transitions :increment and :decrement to determine sliding animation direction, good example.
 19. [filipows/angular-animations](https://github.com/filipows/angular-animations) an animation library.
+==== new reference yet to be explored 5/30/2021
+20. [Get Better Angular UX Using 4 Animation Techniques](https://auth0.com/blog/get-better-angular-ux-using-animation-techniques/?utm_source=reddit&utm_medium=sc&utm_campaign=angular)
+  https://github.com/auth0-blog/angular-animations-storefront
