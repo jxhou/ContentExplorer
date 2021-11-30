@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 // the partial scss defines a indigo theme
 // Define the light theme.
 $primary: mat.define-palette(mat.$indigo-palette);
