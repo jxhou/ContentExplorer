@@ -3,7 +3,16 @@
 @use '@angular/material' as mat;
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 
-@include mat.core();
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
+@include mat.all-legacy-component-typographies();
+@include mat.legacy-core();
 
 @import 'themes/deeppurple-amber';
 @import 'themes/indigo-pink';
@@ -16,22 +25,22 @@
 // Each theme can then be selected by modifying the class name of the root html tag.
 .deeppurple-theme {
   // apply the theme to all meterial components
-  @include mat.all-component-themes($deeppurple-theme);
+  @include mat.all-legacy-component-themes($deeppurple-theme);
   // apply the theme to all the custom components in current app
   @include app-theme($deeppurple-theme);
 }
 
 .indigo-theme {
-  @include mat.all-component-themes($indigo-theme);
+  @include mat.all-legacy-component-themes($indigo-theme);
   @include app-theme($indigo-theme);
 }
 
 .pink-theme {
-  @include mat.all-component-themes($pink-theme);
+  @include mat.all-legacy-component-themes($pink-theme);
   @include app-theme($pink-theme);
 }
 
 .purple-theme {
-  @include mat.all-component-themes($purple-theme);
+  @include mat.all-legacy-component-themes($purple-theme);
   @include app-theme($purple-theme);
 }
