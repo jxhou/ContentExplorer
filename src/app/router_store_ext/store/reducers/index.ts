@@ -23,7 +23,7 @@ export interface State{
 }
 
 
-export const getRouterState = createFeatureSelector<State, RouteState>(
+export const getRouterState = createFeatureSelector< RouteState>(
   routerReducerName
 );
 
